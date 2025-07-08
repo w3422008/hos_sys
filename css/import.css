@@ -1,0 +1,408 @@
+/* ドラッグアンドドロップエリア */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.mt-3 {
+    margin-top: 1rem;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.p-3 {
+    padding: 1rem;
+}
+
+.rounded {
+    border-radius: 0.25rem;
+}
+
+.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.dashed-border {
+    border: 2px dashed #4CAF50;
+}
+
+.mt-2 {
+    margin-top: 0.5rem;
+}
+
+/* タブメニュー 文字サイズ変更 */
+.uk-tab > li > a {
+    font-size: 16px;
+}
+
+/* タブのアクティブ状態の色 */
+.uk-tab > .uk-active > a {
+    border-bottom: 3px solid #2E8B57 !important;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.uplade_content{
+    justify-content:space-between;
+    align-items: flex-end;
+}
+
+.display_left{
+    width: 70%;
+    margin-left: 14%;
+    font-size: 1.2rem;
+}
+
+.item{
+    width: 71.2%; 
+    margin-left: 13.5%;
+}
+
+.file_drag_drop_area {
+    display: flex;
+    flex-direction: column;        
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: background-color 0.5s ease;
+    height: 150px;
+    padding: 0;
+    font-size: 1.2rem;
+    vertical-align: middle;
+}
+
+.text_underline{
+    border-bottom: 3px solid #2a682c;
+}
+
+.uk-button-default{
+    padding: 0 0.7rem;
+    font-size: 1.2rem;
+    color: black;
+}
+
+.uk-button-default:hover{
+    background-color: #3c923f; /* ホバー時の背景色 */
+    color: white; /* ホバー時の文字色 */
+}
+
+/* 注意書きのstyle */
+.caution {
+    border: 2px solid red;
+    padding: 10px;
+    margin: 10px;
+    width: 65%;
+    margin-left: 4%
+}
+
+.custom-text {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    color: red; 
+}
+
+.caution p {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    font-weight: normal;
+}
+
+
+/*文字、罫線の設定*/
+.uk-form-label {
+    font-size: 1rem;
+}
+
+.note {
+    padding: 10px;
+    background: linear-gradient(white 35px, #f0f0f0 35px, #f0f0f0 36px);
+    background-size: 100% 36px;
+    line-height: 36px;
+    word-break: break-word; /* 単語の途中で改行 */
+}
+
+.note p {
+    margin: 0; /* 段落の余白をなくす */
+    white-space: pre-line; /* 改行を保持しつつ、空白は反映しない */
+    transform: translateY(-5px); /* 文字を少し上に移動 */
+    margin-left: 0%; /* 左の余白をなくす */
+}
+
+.band{
+    margin: 0 10em;
+    flex-direction: column;        
+    justify-content: center;
+    align-items: center;
+
+}
+
+/* 確認モーダル表示 */
+.import-modal-overlay {
+    display: none !important;
+    position: fixed;
+    z-index: 10000;
+    left: 0; top: 0; width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.3);
+}
+.import-modal-content {
+    background: #fff;
+    border-radius: 10px;
+    max-width: 540px;
+    margin: 60px auto;
+    padding: 30px 30px 20px 30px;
+    position: relative;
+    top: 10vh;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+    font-size: 16px;
+}
+.import-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #888;
+    cursor: pointer;
+}
+.import-modal-close:hover {
+    color: #d00;
+}
+.import-modal-body {
+    margin-top: 10px;
+}
+
+.error-message {
+    color: #ff0000; /* エラーチェックに引っかかったものは赤文字でメッセージ表示 */
+}
+
+/* 付箋風メッセージのCSS */
+.sticky-note-center {
+    position: fixed !important;
+    top: 40px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 9999;
+    background: #fffbe6;
+    border: 2px solid #ffd700;
+    box-shadow: 2px 2px #aaa;
+    padding: 18px 24px 24px 24px;
+    border-radius: 12px;
+    font-size: 18px;
+    color: #333;
+    min-width: 500px;
+    max-width: 1300px;
+    max-height: 400px;
+    overflow-y: auto;
+    text-align: left;
+    transition: opacity 0.3s;
+}
+
+.error_import{
+    color: #d00;
+}
+
+.sticky-note-center .close-btn {
+    float: right;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 22px;
+    color: #888;
+    margin-left: 10px;
+}
+
+.sticky-note-center .close-btn:hover {
+    color: #d00;
+}
+
+/* 確認用モーダル　設定 */
+/* モーダル全体 */
+.uk-modal-body{
+    width: 45em;
+}
+
+/* 確認事項　背景 */
+.modal-message{
+    border: 2px solid #54c258;
+    background-color: #f9fff5;
+    padding: 20px 0 20px 0;
+}
+
+/* 確認事項　重要点 */
+.mtext-font-size{
+    font-size: 1.3rem;
+    font-weight: bold;
+    color:#ff0000;
+    border-bottom: 1px solid #ff0000;
+}
+
+/* 確認事項　最終確認 */
+.modal-caution{
+    color: black;
+    font-size: 1.3rem;
+    text-align: center;
+    text-decoration:underline wavy #ff0000;
+}
+
+/* インポート完了のメッセージ */
+.import-message{
+    border: 1px solid #EFFFE8;
+    background-color: #EFFFE8;
+    padding: 5px;
+    margin: 5px;
+    width: 50%;
+    margin-left: 5%;
+    border-radius: 10px; /* 角を丸くする */
+}
+.import-message h2{
+    text-align: center;
+    color: #2a682c;
+    font-size: 30px;
+    font-weight: bolder;
+    margin-top: 15px; /* アイコンの上に余白を追加 */
+}
+.import-message i {
+    font-size: 44px;
+    color: #2a682c;
+    display: block; /* アイコンをブロック要素にすることで、下の余白を詰める */
+    margin-top: 10px; /* アイコンの上に余白を追加 */
+}
+.import-message p {
+    text-align: center;
+    color: #2a682c;
+    font-size: 16px;
+    font-weight: bolder;
+}
+.bt{
+    display: block; /* ブロック要素にする */
+    margin-left: 28%;       
+    margin-top: 7px; /* 上の余白を追加 */
+}
+
+/* インポート完了メッセージ_画面サイズが小さい場合のスタイル */
+@media (max-width: 959px) {
+    .import-message {
+        width: 50%; /* 幅を90%に変更 */
+        margin-left: 5%; /* 左右の余白を均等にする */
+        margin-top: 120px; /* 上の余白を追加 */
+    }
+    .import-message h2 {
+        font-size: 24px; /* フォントサイズを小さくする */
+    }
+    .import-message i {
+        font-size: 34px; /* アイコンのサイズを小さくする */
+    }
+    .import-message p {
+        font-size: 14px; /* フォントサイズを小さくする */
+    }
+    .bt {
+        margin-left: 26%; /* 左右の余白を均等にする */
+    }
+}
+
+/* CSVデータについてのスタイル */
+.csv-table-container {
+    overflow-x: auto;   /* 横スクロールバー */
+    overflow-y: auto;   /* 縦スクロールバー */
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(60,120,200,0.10), 0 1.5px 6px rgba(0,0,0,0.04);
+    padding: 1.2em 1.2em 1em 1.2em;
+    margin: 2em auto;
+    max-width: 98vw;
+    max-height: 60vh;   /* モーダル内で縦スクロール */
+    background: #fff;
+}
+
+table.stylish-csv-table {
+    width: auto;
+    min-width: 600px;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: transparent;
+    table-layout: auto;
+}
+table.stylish-csv-table th, table.stylish-csv-table td {
+    padding: 0.8em 1em;
+    border: none;
+    font-size: 1.05em;
+    transition: background 0.2s;
+    word-break: break-all;
+    white-space: pre-line;
+    max-width: 600px;
+}
+table.stylish-csv-table td {
+    min-width: 100px;             /* 最小幅 */
+    max-width: 6000px;            /* 最大幅 */
+}
+table.stylish-csv-table th {
+    background: #e3eaf5;
+    color: #222;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    border-top: 2px solid #b5c7e6;
+    border-bottom: 2px solid #b5c7e6;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    white-space: nowrap;
+}
+table.stylish-csv-table tr:nth-child(even) td {
+    background: #f7fafd;
+}
+table.stylish-csv-table tr:nth-child(odd) td {
+    background: #fff;
+}
+table.stylish-csv-table tr:hover td {
+    background: #eaf3ff;
+    transition: background 0.2s;
+}
+table.stylish-csv-table td {
+    color: #222;
+    border-bottom: 1px solid #e3eaf5;
+}
+table.stylish-csv-table tr:last-child td {
+    border-bottom: none;
+}
+/* スクロールバーも美しく */
+.csv-table-container::-webkit-scrollbar {
+    height: 10px;
+    width: 10px;
+    background: #e3f0ff;
+    border-radius: 8px;
+}
+.csv-table-container::-webkit-scrollbar-thumb {
+    background: #b5c7e6;
+    border-radius: 8px;
+}
+/* レスポンシブ対応 */
+@media (max-width: 900px) {
+    .csv-table-container {
+        padding: 0.7em 0.3em 0.3em 0.3em;
+        border-radius: 10px;
+    }
+    table.stylish-csv-table {
+        min-width: 400px;
+        font-size: 0.97em;
+    }
+    table.stylish-csv-table th, table.stylish-csv-table td {
+        padding: 0.5em 0.5em;
+    }
+}
+@media (max-width: 600px) {
+    .csv-table-container {
+        padding: 0.3em 0.1em 0.1em 0.1em;
+        border-radius: 6px;
+    }
+    table.stylish-csv-table {
+        min-width: 300px;
+        font-size: 0.92em;
+    }
+    table.stylish-csv-table th, table.stylish-csv-table td {
+        padding: 0.3em 0.2em;
+    }
+}

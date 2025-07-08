@@ -1,0 +1,60 @@
+<?php
+
+//櫻間
+  foreach ($data50 as $key =>$var):
+  //櫻間
+  $user_id = $_SESSION['member']['user_id'];
+  $user_name = $_SESSION['member']['user_name'];
+  $user_adm = $_SESSION['member']['adm_user'];
+   //櫻間
+//foreach($data as $key => $var):
+?>
+
+    <div class="uk-position-medium uk-position-top-right uk-position-z-index">
+        <!-- Offcanvas -->
+        <a class="uk-navbar-toggle uk-navbar-toggle-animate" href="#" uk-navbar-toggle-icon style="margin:0 0 0 auto;"></a>
+    </div>
+
+    <div class="uk-navbar-dropdown uk-width-auto" uk-dropdown="mode: click">
+        <ul class="uk-nav uk-navbar-dropdown-nav" uk-margin>
+            <li class="uk-nav-header">
+                <span uk-icon="icon: user"></span>
+            </li>
+            <li><span>ID：<?php echo $var['user_id'];?></span></li>
+            <li><span>ユーザー名：<?php echo $var['user_name'];?></span></li>
+            <li><span><?php echo get_adm_label($var['adm_user']); ?></span> でログイン中</li>
+            <li class="uk-nav-divider"></li>
+            <li><a href="../password/password_control.php"><span class="uk-margin-small-right" uk-icon="icon: cog"></span> パスワード変更</a></li>
+            <li><a href="../login/logout.php"><span class="uk-margin-small-right" uk-icon="icon: sign-out"></span> ログアウト</a></li>
+        </ul>
+    </div>
+<?php
+  endforeach;
+  //櫻間
+?>
+
+
+
+<!-- 右側ドロップダウン表示ありのheader　//高橋 -->
+<nav class="uk-navbar-container">
+    <div class="uk-navbar uk-flex-middle bg-navbar3">
+        <div><!--Logo-->
+            <a class="uk-navbar-item uk-logo" href="../menu/MENU_control.php">医療機関情報システム</a>
+        </div>
+        <div class="uk-navbar uk-visible@m"><!-- Link -->          
+            <ul class="uk-navbar-nav">
+                <li class="uk-active">
+                    <a href="./mess_mainte/mainte.php"><i class="fas fa-screwdriver-wrench fa-2x"></i></i>メンテナンス通知</a>
+                </li> 
+                <li>
+                    <a href="./mess_mainte_start/mainte.php"><i class="fas fa-laptop-medical fa-2x"></i></i>メンテナンス開始・停止</a>
+                </li> 
+                <li>
+                    <a href="./mes_log.php"><i class="far fa-comment fa-2x"></i></i>メッセージ</a>
+                </li>                  
+            </ul>
+        </div>
+    </div>
+</nav>
+
+

@@ -1,0 +1,25 @@
+    /*三宅20231226 テーブルの背景色_偶数に色付け*/
+    table td {
+        background: #dcdcdc;
+    }
+
+    table tr:nth-child(odd) td {
+        background: #fff;
+    }
+
+    /*三宅20231226 テーブルの幅の変更 */
+    table tr{
+        line-height: 300%;
+    }
+
+    /* 三宅20240213 確認ボタンの位置を下に少しずらす */
+    .position{
+        margin-top: auto;
+    }
+
+    .meslog {
+        width: 45rem;
+        resize: none;
+    }
+    
+

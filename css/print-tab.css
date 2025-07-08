@@ -1,0 +1,135 @@
+@media print {
+    @page {
+        /* size: A4 landscape !important; */ /* ページサイズをA4の横向きに設定 */
+        size: A4 portrait !important; /* ページサイズをA4の縦向きに設定 */
+        margin: 1cm; /* ページの余白を1cmに設定 */        
+    }
+
+    /* ※ここを消すと全体の縮小がおかしくなるので消さないでください。 */
+    body, main {
+        zoom: 0.5 !important;  /* 印刷時に縮小 */
+    }
+    
+    table {
+        width: 100%; /* テーブルの幅を100%にする */
+        table-layout: fixed; /* 固定レイアウトにする */
+        border-collapse: collapse !important; /* 枠線を重ねて表示 */
+        border-spacing: 0; /* セル間の隙間をなくす */
+    }
+    
+    th, td {
+        word-wrap: break-word; /* 単語の途中で改行する */
+        overflow: hidden; /* オーバーフローを隠す */
+        white-space: normal; /* ホワイトスペースを通常にする */
+        padding: 5px; /* 余白を追加 */
+        page-break-inside: avoid; /* ページ内で途中で改行しないようにする */
+    }
+
+}    
+
+/* 表が途中で途切れないようにする＆途切れたときのcss */
+.uk-grid-small.uk-flex-middle.uk-grid {
+    display: none !important; /* 非表示にする */
+}
+.rowInsert-btn {
+    display: none !important; /* 行を追加ボタンを非表示にする */
+}
+.uk-margin {
+    page-break-inside: avoid !important; /* <div class="uk-margin">の中身が途中で途切れないようにする */
+}
+.uk-margin {
+    zoom: 0.8 !important; /* uk-marginの中身が途切れる場合はサイズを小さくする */
+}
+.uk-subnav.uk-subnav-pill {
+    display: none !important; /* <ul class="uk-subnav uk-subnav-pill">を非表示にする */
+}
+
+/* table_css */
+/* フォントの設定 */
+body table th,
+body table td,
+body .uk-table th,
+body .uk-table td {
+    font-weight: 600 !important; /* フォントの太さを600に設定 */
+}
+
+/* テーブルの幅、マージン、パディングの設定 */
+body .uk-table {
+    width: 100% !important; /* テーブルの幅を100%に設定 */
+    margin-bottom: 10px !important; /* テーブルの下に10pxのマージンを追加 */
+}
+
+body .uk-table th,
+body .uk-table td {
+    padding: 8px 6px !important; /* セルの内側に8pxの上下パディングと6pxの左右パディングを追加 */
+}
+
+body .uk-table-small th,
+body .uk-table-small td {
+    padding: 5px 6px !important; /* 小さいテーブルのセルの内側に5pxの上下パディングと6pxの左右パディングを追加 */
+}
+
+body .uk-table-large th,
+body .uk-table-large td {
+    padding: 22px 12px !important; /* 大きいテーブルのセルの内側に22pxの上下パディングと12pxの左右パディングを追加 */
+}
+
+/* セルのアラインメント（配置）の設定 */
+body .uk-table th,
+body .uk-table td {
+    vertical-align: middle !important; /* セルの垂直方向の配置を中央に設定 */
+    text-align: left !important; /* セルのテキストを左揃えに設定 */
+}
+
+body .uk-table-small th,
+body .uk-table-middle th,
+body .uk-table-large th {
+    text-align: center !important; /* 見出しのテキストを中央揃えに設定 */
+    vertical-align: middle !important; /* 見出しの垂直方向の配置を中央に設定 */
+}
+.uk-table-small td,
+.uk-table-middle td,
+.uk-table-large td {
+    text-align: center; /* セルのテキストを中央揃えに設定 */
+    vertical-align: middle !important; /* セルの垂直方向の配置を中央に設定 */
+}
+
+    /* 最初の列 */
+    .table-green2 tr>*:first-child{
+        /* color:rgb(55,86,35); /* ⇒深緑 */
+        color:#000000; /* 高橋20230704　黒に変更 */
+        }
+        /* 最初から2番目までの列 */
+        .table-green2 tr>*:nth-of-type(-n+2) {
+        font-weight:bolder;
+        }
+    
+        /* 最初の行：見出し行 */
+        .table-green2 tr:first-child>*{
+        /* background: rgb(112, 173, 71); */
+        background:#419116;
+        color: rgb(255,255,255); /* ⇒白 */
+        }
+    
+        /*　th */
+        .table-green2 tr th{
+        font-weight:bolder;
+        text-align:center;
+        }
+        /* td文字色 */
+        .table-green2 tr td{
+        /* color:rgb(84,130,53); /* ⇒濃い緑 */
+        color:#000000; /* 高橋20230704　黒に変更 */
+        }
+    
+        /*
+        背景色（データ行）
+        */
+        /* 奇数行 */
+            .table-green2 tbody:nth-child(odd) td{
+            background: rgb(226,239,218);  /* （薄緑） */
+            }
+        /* 偶数行 */
+            .table-green2 tbody:nth-child(even) td{
+            background: rgb(255,255,255); /* （白） */
+            }

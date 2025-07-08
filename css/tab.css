@@ -1,0 +1,110 @@
+/*外枠*/
+.tab-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  margin:20px 0px;
+  
+  /* border -- 全体(タブ+コンテンツ)を取り囲む */
+  /*border :#008009 1.5px solid; /* ☆ */
+  border-top :#008009 1.5px solid; /* 高橋 */
+  background-color: #fff;
+}
+
+.tab-wrap:after {
+  content: '';
+  width: 100%;
+  height: 0px; /* 3→0.5に変更高橋 */
+  background: #008009; /* ☆ */
+  display: block;
+  order: -1;
+}
+
+.tab-label {
+  font-weight: bold;
+  white-space: nowrap; /* ★ */
+  padding: 10px .5em; /*高橋20230107 変更*/
+  padding: 10px 1rem;
+  order: -1;
+  position: relative;
+  /* z-index: 1; */
+  cursor: pointer;
+  border-radius: 5px 5px 0 0;
+  flex: 1;
+  
+  /*縦横 中央寄せ*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center; 
+}
+.tab-label:not(:last-of-type) {
+  margin-right: 5px;
+}
+.tab-content {
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+}
+
+/*使ってないかも*//*
+.tab-switch:checked+.tab-label {
+  background: #008009; /* ☆ */
+/*}
+/*--使ってないかも*/
+
+
+.tab-switch:checked+.tab-label+.tab-content {
+  height: auto;
+  overflow: auto;
+  padding: 30px 15px 0px 15px;
+  opacity: 1;
+  transition: .5s opacity;
+  /* box-shadow: 0 0 3px rgba(0, 0, 0, 0.3); */
+}
+.tab-switch {
+  display: none;
+}
+.tab-switch:checked+.tab-label:after {
+  top: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(136, 183, 213, 0);
+  border-top-color: #008009; /* ☆ */
+  border-width: 14px;
+  margin-left: -14px;
+}
+.tab-switch:checked+.tab-label {
+  background: #008009; /* ☆ */
+  position: relative;
+}
+
+
+
+.tab-label {
+    border-radius: 0;
+    margin-bottom:0; /* ★ */
+}
+.tab-label:not(:last-of-type) {
+    margin-right: 0;
+}
+.tab-label {
+    background: #fff;
+    color: #008009; /* ☆ */
+    border-left: 1px solid; /* 高橋 */
+    border-right: 1px solid; /* 高橋 */
+    border-bottom: 1.5px solid; /* 高橋 */
+    /* border-left: 0; */
+}
+
+/* 吹き出し */
+.tab-switch:checked+.tab-label {
+    background: #008009; /* ☆ */
+    color: #fff;
+    border-color: #008009; /* ☆ */
+}

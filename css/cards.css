@@ -1,0 +1,44 @@
+/* uk-card_1 */
+
+/*
+ * Default
+*/
+
+
+.uk-card-default{
+    /* 背景色 */
+    background-color: rgb(255, 255, 255);
+    /* 文字 */
+    color:#000;
+    font-weight: 510;
+    /* font-size:0.9rem; */
+    /* 枠 */
+    /*box-shadow:0 5px 15px rgba(62, 190, 36, 0.527); /*前*/
+    box-shadow: 5px 5px 5px #8ACC58;
+    border: 3px #6bad81 solid;
+    border-radius: 20px;
+
+    padding: 1.5em;
+    }
+
+.uk-card-default .uk-card-title{
+    color:#000;
+}
+
+
+
+
+/*オリジナル*/
+.userCard {
+    /* 背景色 */
+    background-color: rgb(255, 255, 255);
+    /* 文字 */
+    color:#000;
+    font-weight: 510;
+    /* 枠 */
+    box-shadow: 5px 5px 5px #eee;
+    border: 2px #888 solid;
+    border-radius: 2px;
+
+    padding: 1.5em;
+    }

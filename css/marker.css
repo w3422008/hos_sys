@@ -1,0 +1,27 @@
+/*--- 
+    marker
+    https://colorcodesearch.com/colorcode3/
+    左から3番目
+ ---*/
+ 
+/* グレー#ddd */
+.GREY_marker {
+    background:linear-gradient(transparent 60%, #ddd 60%);
+    }
+/* 赤 #fbb */
+    .RED_marker {
+    background:linear-gradient(transparent 60%, #fbb 60%);
+    }
+/* 黄 #ff6 */
+    .YELLOW_marker {
+    background:linear-gradient(transparent 60%, #ff6 60%);
+    }
+/* 緑 #bfb */
+    .GREEN_marker {
+    background:linear-gradient(transparent 60%, #bfb 60%);
+    }
+/* 青 #bef */
+.BLUE_marker {
+    background:linear-gradient(transparent 60%, #bef 60%);
+    }
+    

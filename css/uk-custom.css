@@ -1,0 +1,115 @@
+/* 
+    配置・レイアウト関連
+    《layout》
+*/
+
+    [class*='uk-width'] {
+        /* 高橋20230106 100%→98%に変更 */
+        max-width: 98%;
+    }
+
+
+    /* uk-grid */
+    .uk-grid {
+        margin-left: -30px;
+        margin-right: -10px;
+    }
+        .uk-grid-margin-small, .uk-grid.uk-grid-row-small, .uk-grid.uk-grid-small, .uk-grid-row-small>.uk-grid-margin, .uk-grid-small>.uk-grid-margin {
+            margin-top: 0px;
+        }
+
+
+/* 
+    カラー
+    《color》
+*/
+
+/* 高橋メモ --- UIkit デフォルトカラー
+
+    * emphasis(強調) -> #333;
+    * muted -> #999;
+    * secondary -> #222;
+    * Primary -> #1e87f0;
+    * Success -> #32d296;
+    * Warning -> #faa05a;
+    * Danger -> #f0506e;
+
+--- */
+
+    /*uk-Alert-successの文字色変更*/
+    .uk-alert-success {
+        color:#4e9c70;
+    }
+
+    /* uk-label オリジナル追加 */
+    /*[必須] ：必須項目*/
+    .uk-label-required {
+        background-color: #fff;
+        color: #f0506e;
+        border: 1.6px solid #f0506e;
+    }
+    /*[任意] ：任意項目*/
+    .uk-label-optional {
+        background-color: #fff;
+        color: #222;
+        border: 1.6px solid #222;
+    }
+    
+    /* [~~] ：文字数制限、半角/全角など 入力制限の説明*/
+    .uk-label-normal {
+        background-color: #fff;
+        color: #777;
+        border: 1.6px solid #777;
+    }
+
+
+/*
+    文字(サイズなど)
+    《font-size, font-weight ...etc》
+*/
+
+    /*form 見出し*/
+    .uk-form-label {
+        font-weight:600;
+    }
+
+
+
+
+
+
+
+/*
+    その他
+*/
+
+    /*--- uk-subnav---*/
+    .uk-subnav > * {
+        font-weight: 600;
+
+        /* ボタン間の余白を削除 高橋20230107要検討 */ 
+        padding-left: 0;
+
+    }      
+
+    /*--- uk-subnav-pill ---*/
+    /*フィルター ボタンの角を丸く*/
+    .uk-subnav-pill a{
+        border-radius:2px;
+    }
+
+    /* Active */
+    .uk-subnav-pill > .uk-active > a {
+        background-color: #22663f;
+        color: #fff;
+    }
+
+    .uk-subnav-pill>*>:first-child {
+        color: #000;
+    }
+
+    /*--- uk-nav-header ---*/
+    /*ドロップダウン ヘッダ文字中央寄せ*/
+    .uk-nav-header{
+        text-align:center;
+    }

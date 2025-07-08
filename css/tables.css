@@ -1,0 +1,352 @@
+/* font */
+table th,
+table td,
+.uk-table th,
+.uk-table td
+{
+    font-weight: 600;
+}
+
+.uk-table th {
+    color: #000;
+    text-transform: capitalize;
+}
+
+
+/* width,margin,padding */
+.uk-table{
+width: 100%;
+/* min-width: 350px; */
+margin-bottom: 10px;
+}
+
+    .uk-table th,
+    .uk-table td
+    {
+        padding: 8px 6px;
+    }
+
+    .uk-table-small th,
+    .uk-table-small td {
+        padding:5px 6px
+    }
+    .uk-table-large th,
+    .uk-table-large td {
+        padding: 22px 12px;
+    }
+
+
+
+/* Alignment  */
+    .uk-table th,
+    .uk-table td
+    {
+        vertical-align: middle !important;
+        text-align: left;
+    }
+
+   .uk-table-small th,
+   .uk-table-middle th,
+   .uk-table-large th
+   {
+        text-align: center;
+        vertical-align: middle !important;
+   }
+
+   .uk-table-small td,
+   .uk-table-middle td,
+   .uk-table-large td
+   {
+        text-align: center;
+        vertical-align: middle !important;
+   }
+
+
+/** Divider */
+.uk-table-divider > tr:not(:first-child),
+.uk-table-divider > :not(:first-child) > tr,
+.uk-table-divider > :first-child > tr:not(:first-child) {
+  border-top: 1px solid #444;
+}
+
+/** Striped */
+.uk-table-striped > tr:nth-of-type(odd),
+.uk-table-striped tbody tr:nth-of-type(odd) {
+  background: #f8f8f8;
+  border-top: 1px dotted #666;
+  border-bottom: 1px dotted #666;
+}
+
+/** Hover */
+.uk-table-hover > tr:hover,
+.uk-table-hover tbody tr:hover {
+    background: #ffd;
+}
+/* Active */
+.uk-table > tr.uk-active,
+.uk-table tbody tr.uk-active {
+    background: #ffd;
+}
+  
+
+/* Caption */
+.uk-table caption {
+font-size: 0.9rem;
+color: #000;
+}
+
+
+
+
+
+
+
+
+/* tbl-border 診察日テーブル */
+.tbl-border {
+    border-collapse: collapse;
+    border-spacing: 10px;
+    width:90%;
+    }
+
+.tbl-border th ,
+.tbl-border td {
+    background: #ffffff;
+    border: solid 1px #000000;   
+    text-align: center;
+}
+
+/* tbl-line userテーブル */
+/*.tbl-line { border-collapse: collapse; }*/
+.tbl-line th { border-bottom: solid 2px #253325; }
+.tbl-line tr { border-bottom: solid 1px #253325; }
+
+
+
+/* tbl-bubble ユーザ 変更・新規テーブル */
+.tbl-bubble{
+    width: 100%;
+    border-collapse: collapse;
+    border: solid 1px #008009;
+
+  }
+  
+  .tbl-bubble tr{    
+    border: solid 1px #008009;
+  }
+  
+  .tbl-bubble tr:last-child{
+    border-bottom: none;
+  }
+  
+  .tbl-bubble th{
+    position: relative;
+    text-align: left;
+    width: 20%;
+    /* background-color: #008009; */
+    border-right: solid 1px #008009;
+    /*color: white; */
+    color: #008009; 
+    text-align: center;
+    padding: 10px;
+  }
+  
+  .tbl-bubble td{
+    text-align: left;
+    width: auto;
+    text-align: center;
+    /*background-color: #eee;*/
+    background-color: #fff;
+
+    padding: 10px 0;
+  }
+
+
+
+
+
+/* table-bordered 色付きテーブル */
+.table-bordered{
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 1.5px #419116 solid;
+    }
+
+.table-bordered th {
+padding: 5px;
+background: #419116;
+border: solid 0.5px #419116;
+color: #fff;
+text-align: center; /* 高橋20230704修正 */
+}
+
+.table-bordered td {
+padding: 1px;
+border: solid 0.5px #419116;
+}
+
+
+
+/* 
+  table-green 緑色テーブル 
+*/
+
+/* 最初の列 */
+.table-green tr>*:first-child{
+  /* color:rgb(55,86,35); /* ⇒深緑 */
+  color:#000000; /* 高橋20230704　黒に変更 */
+}
+/* 最初から2番目までの列 */
+.table-green tr>*:nth-of-type(-n+2) {
+  font-weight:bolder;
+}
+
+/* 最初の行：見出し行 */
+.table-green tr:first-child>*{
+  /* background: rgb(112, 173, 71); */
+  background:#419116;
+  color: rgb(255,255,255); /* ⇒白 */
+}
+
+/*　th */
+.table-green tr th{
+  font-weight:bolder;
+  text-align:center;
+}
+/* td文字色 */
+.table-green tr td{
+  /* color:rgb(84,130,53); /* ⇒濃い緑 */
+  color:#000000; /* 高橋20230704　黒に変更 */
+}
+
+/*
+  背景色（データ行）
+  */
+  /* 奇数行 */
+    .table-green tr:nth-child(odd) td{
+      background: rgb(226,239,218);  /* （薄緑） */
+    }
+  /* 偶数行 */
+    .table-green tr:nth-child(even) td{
+      background: rgb(255,255,255); /* （白） */
+    }
+   
+    
+/* 最後の行：集計行 */
+/* .table-green tr:last-child td{  
+  border-top: double rgb(112, 173, 71);
+} */
+/* テーブル全体 ※削除予定　*//*
+.table-green {
+  border: 1px groove rgb(112, 173, 71);
+}*/
+
+
+/* テーブル見出し行・列固定 */
+
+
+
+/* テーブル縦スクロールバー */
+.intro_tbl_wrap {
+  font-size:0.8rem;
+  display: block;
+  max-height: calc(100vh/2);
+  border:1px dotted rgb(112, 173, 71);
+  border-collapse: collapse;
+
+}
+
+.intro_tbl_wrap{
+  overflow: auto; /* 親要素にoverflow:auto */
+  width: 100%;
+}
+.intro_tbl_wrap table{
+  margin: 0;
+  border-spacing: 0;
+}
+.intro_tbl_wrap td{
+  white-space: nowrap; /* tableにwidthやheightを指定するかtdにwhite-space:nowrapを指定 */
+  background: #FFF;
+  border-right: 1px solid #fff;
+  padding: 5px;
+}
+.intro_tbl_wrap th,
+.intro_tbl_wrap td:first-child{
+  white-space: nowrap;
+  border-right: 1px solid #fff;
+  position: sticky; /* thを固定 */
+  top: 0; /* thを固定 */
+  left: 0; /* thを固定 */
+}
+
+.intro_tbl_wrap tr:last-child/*★*/ {
+  white-space: nowrap;
+  border-right: 1px solid #fff;
+  position: sticky; /* thを固定 */
+  bottom: 0; /* thを固定 */
+  left: 0; /* thを固定 */
+  border-top:#008009 double; 
+}
+
+
+.intro_tbl_wrap tr:first-child th:first-child,
+.intro_tbl_wrap tr:first-child td:first-child,
+.intro_tbl_wrap tr:last-child th:last-child,/*★*/
+.intro_tbl_wrap tr:last-child td:last-child/*★*/{
+  z-index: 1; /* 左上のthを手前にする */
+  border-right: 2px double #fff;
+}
+
+
+
+
+.support_tbl_wrap {
+  font-size:0.75rem;
+  display: block;
+  overflow-y: auto;
+  max-height: calc(100vh/2);
+  border:1px solid rgb(112, 173, 71);
+  border-collapse: collapse;
+}
+
+
+/* テーブル内フォーム */
+.tbl-form th>*,
+.tbl-form td>*{
+    outline: none;
+    border : 0;
+    background: transparent;
+    height:100% 
+}
+
+
+
+
+
+
+
+
+/* 
+  table-green 緑色テーブル（集計なし）
+*/
+
+/*　th太字 */
+
+.table-h-green tr th{
+  font-weight:bolder;
+}
+/* td文字色 */
+.table-h-green tr td{
+  color:#000;
+}
+.table-h-green tr{
+  padding:3rem;
+}
+
+/* 最初の行：見出し行 */
+/* .table-h-green tr th{
+   background: rgb(112, 173, 71); 
+  background-color: #419116;
+  color: rgb(255,255,255);
+}
+ */

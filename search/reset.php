@@ -1,0 +1,42 @@
+<?php
+session_start();
+$_SESSION['hos_name'] = '';
+$_SESSION['college'] = '';
+$_SESSION['chi'] = '';
+$_SESSION['pre'] = '';
+$_SESSION['hos_div']='';
+$_SESSION['hos_diva']='';
+$_SESSION['bed']='';
+$_SESSION['condition']='';
+$_SESSION['year']='';
+$_SESSION['introduction']='';
+$_SESSION['week']='';
+$_SESSION['kawasaki']='';
+$_SESSION['naika']='';
+$_SESSION['syounika']='';
+$_SESSION['geka']='';
+$_SESSION['seikei']='';
+$_SESSION['ganka']='';
+$_SESSION['zibiinkou']='';
+$_SESSION['hifuka']='';
+$_SESSION['sanfuzin']='';
+$_SESSION['seisin']='';
+$_SESSION['sika']='';
+$_SESSION['sonota']='';
+$_SESSION['nantou']='';
+$_SESSION['nansei']='';
+$_SESSION['takahashiniimi']='';
+$_SESSION['maniwa']='';
+$_SESSION['tuyamaaida']='';
+$_SESSION['taken']='';
+$_SESSION['area']='';
+$_SESSION['zip']='';
+$_SESSION['nantou1']='';
+$_SESSION['nansei1']='';
+$_SESSION['takahashi']='';
+$_SESSION['maniwa1']='';
+$_SESSION['tuyama']='';
+$_SESSION['a']='';
+
+header('Location: checkbox_control.php');
+        ?>

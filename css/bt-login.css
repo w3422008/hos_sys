@@ -1,0 +1,64 @@
+/* ログインボタンのスタイル */
+.bt-container {
+    display: flex;
+    justify-content: center; /* ボタンを水平方向に中央揃え */
+    align-items: center; /* ボタンを垂直方向に中央揃え */
+    margin-top: 100px; /* ボタンの上部に100pxのマージンを追加 */
+}
+.bt-container form {
+    margin: 0 10px; /* ボタン間のスペースを調整 */
+}
+
+.lg-button {
+    color: white; /* ボタンの文字色 */
+    padding: 15px 30px; /* ボタンの内側の余白 */
+    font-size: 18px; /* ボタンの文字サイズ */
+    border: none; /* ボタンの枠線を消す */
+    border-radius: 25px; /* ボタンの角を丸くする */
+    cursor: pointer; /* ホバー時にポインターを表示 */
+}
+
+/* 管理者_ログインボタン */
+.lg-button.admin {
+    background-color: #f0506e; /* 管理者の背景色 */
+    color: #fff;
+    border: 1px solid transparent;
+}
+.lg-button.admin:hover {
+    background-color: #c0394e; /* 管理者のホバー時の背景色 */
+    color: #fff;
+}
+.lg-button.admin.uk-active, .lg-button.admin:active {
+    background-color: #a0283e; /* 管理者のアクティブ時の背景色 */
+    color: #fff;
+}
+
+/* 一般事務_ログインボタン */
+.lg-button.office {
+    background-color: #1e87f0; /* 一般事務の背景色 */
+    color: #fff;
+    border: 1px solid transparent;
+}
+.lg-button.office:hover {
+    background-color: #0f5ba7; /* 一般事務のホバー時の背景色 */
+    color: #fff;
+}
+.lg-button.office.uk-active, .lg-button.office:active {
+    background-color: #0a3e75; /* 一般事務のアクティブ時の背景色 */
+    color: #fff;
+}
+
+/* 一般_ログインボタン */
+.lg-button.general {
+    background-color: #32d296; /* 一般の背景色 */
+    color: #fff;
+    border: 1px solid transparent;
+}
+.lg-button.general:hover {
+    background-color: #1e8a64; /* 一般のホバー時の背景色 */
+    color: #fff;
+}
+.lg-button.general.uk-active, .lg-button.general:active {
+    background-color: #146b4a; /* 一般のアクティブ時の背景色 */
+    color: #fff;
+}

@@ -1,0 +1,83 @@
+/*★
+
+≪buttons.css≫
+※ログイン画面、menu"のみ" で読込み
+
+*/
+
+
+/*
+    button
+    >>radius設定；30px
+*/
+.uk-button-primary,
+.uk-button-secondary{
+    border-radius: 30px;
+}
+
+
+
+/*各種ボタン*/
+.button_1 {
+    /*背景色*/
+    /*background-color: #ffffff;*/
+    background-color: #23814ee7;
+    /* 枠 */
+    /*box-shadow:10px 10px 15px #29a5619c;
+    border: 3px  #29a5619c           solid;*/
+    border-radius: 600px;
+    box-shadow:10px 10px 15px #29a561a1;
+    border: 2px  #ffffff           solid;
+
+}
+.button_1:hover {
+    background-color: #29a561a1;
+    box-shadow:10px 10px 15px #ffffff;
+}
+    .button_1>span{
+        font-size:1.4rem;
+        font-weight: 700;
+        color:#ffffff;
+    }
+
+
+
+.button_2 {
+    /*背景色*/
+    background-color: #5ca47ce7;
+    /* 枠 */
+    box-shadow:7px 7px 15px #29a561a1;
+    border: 1px  #ffffff           solid;
+    border-radius: 30px;
+}
+.button_2:hover {
+    background-color: #23814ee7;
+    box-shadow:7px 7px 15px #5ca47cbb;
+
+}
+    .button_2>span{
+        font-weight: 700;
+        color:#fff;
+    }
+
+
+
+.button_3 {
+    /*背景色*/
+    background-color: #5ca47ce7;
+    /* 枠 */
+    box-shadow:5px 5px 15px #29a561a1;
+    border: 1px  #ffffff           solid;
+    /*border-radius: 10px;*/
+    border-radius: 30px;
+}
+.button_3:hover {
+    background-color: #23814ee7;
+    box-shadow:5px 5px 15px #5ca47ce7;
+
+}
+    .button_3>span{
+        font-size:1rem;
+        font-weight: 700;
+        color:#fff;
+    }

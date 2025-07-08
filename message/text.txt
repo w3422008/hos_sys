@@ -1,0 +1,50 @@
+フォルダー パスの一覧
+ボリューム シリアル番号は EAF9-AA3D です
+C:.
+│  login.php
+│  logout.php
+│  mes_add.php
+│  mes_add_comp.php
+│  mes_delete.php
+│  mes_delete_comp.php
+│  mes_display.php
+│  mes_display_comp.php
+│  mes_footer.php
+│  mes_header.php
+│  mes_log.php
+│  mes_update.php
+│  mes_update_comp.php
+│  text.txt
+│  
+├─message_view
+│      login_view.php
+│      mes_add_view.php
+│      mes_delete_view.php
+│      mes_display_view.php
+│      mes_header_view.php
+│      mes_log_view.php
+│      mes_update_view.php
+│      
+├─mess_mainte
+│  │  add.php
+│  │  add_comp.php
+│  │  header.php
+│  │  header_view.php
+│  │  mainte.php
+│  │  mainte_view.php
+│  │  
+│  └─mainte_view
+│          add_view.php
+│          mainte_view.php
+│          
+└─mess_mainte_start
+    │  add.php
+    │  add_comp.php
+    │  header.php
+    │  header_view.php
+    │  mainte.php
+    │  
+    └─mainte_view
+            add_view.php
+            mainte_view.php
+            

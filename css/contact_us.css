@@ -1,0 +1,513 @@
+/* 20241110 加藤 */
+
+/* 全体 */
+/* 画面幅の設定 */
+.set-width {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* タイトル */
+.contact_h2{
+    margin-top: 120px; /* ナビゲーションバーの高さ分余白を追加 */
+    text-align: center;
+}
+
+/* 文字の中央揃え */
+.text-center {
+    text-align: center !important;
+}
+
+/* 依頼入力フォームデザイン ↓-------------------------------------- */
+
+/* フォーム全体 */
+.ci_body{
+    margin: 0 auto;
+    max-width: 1000px;
+}
+
+/* 通常・緊急ボタン群の調整 */
+.toggle-button {
+    display: flex;
+    align-items: center;
+}
+/* 通常・緊急ボタン　チェックボックスの非表示 */
+.toggle-button input {
+    display: none;
+}
+/* 通常・緊急ボタンのデザイン */
+.toggle-button label {
+    background-color: #ddd;
+    border-radius: 20px;
+    cursor: pointer;
+    padding: 10px 20px;
+    margin: 0 5px;
+    transition: background-color 0.3s;
+}
+
+/* チェックが入れば色を変える */
+.toggle-button input:checked + label {
+    background-color: #2E8B57;
+    color: white;
+}
+
+/* 画像選択欄 */
+.c_image-input{
+    font-size: 15px;
+}
+
+/* 依頼入力欄 */
+.uk-con-textarea{
+    width: 45em;
+    padding :10px;
+    font-size: 20px;
+}
+
+/* 確認ボタン */
+.openmodalbutton{
+    text-align: right !important;
+}
+
+
+/* 確認モーダル */
+/* header 領域内空間確保 */
+.padding-modal {
+    padding:1.5em 2em;
+    color:#f2f2f2;
+    background-color:#2E8B57;
+}
+
+/* 「依頼内容」表示について */
+.consultationvalue-text {
+    font-size: 20px;
+    padding:0 5px;
+    background: linear-gradient(transparent 80%, #a3ebc1 20%);
+}
+/* 「依頼内容」「⚠緊急」の間の指定 */
+#modalEmerg {
+    padding-left:10px;
+    color : #f00;
+}
+
+/* textarea（編集不可）　大きさ調整、枠線、空間指定 */
+#modalConsultationText {
+    /* 入力欄外の空間 */
+    margin:7px 0;
+    /* 入力欄内の空間 */
+    padding:7px;
+    /* 横幅 */
+    max-width:26em;
+    width:26em;
+    /* 縦幅 */
+    height:10em;
+    font-size: 20px;
+    border:5px solid #2E8B57;
+    outline:none;
+    border-radius:6px;
+}
+
+/* 画像レビュー　大きさ指定 */
+#modalImagePreview {
+    display: none; 
+    max-width: 500px;
+    max-height: 300px;
+}
+
+
+/* ロード画面のスタイル */
+#loadingOverlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 9999;
+    text-align: center;
+    padding-top: 200px;
+}
+
+.spinner {
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #3498db;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 依頼入力フォーム デザイン ↑-------------------------------------- */
+
+/* filter選択デザイン ↓-------------------------------------- */
+
+/* フィルター選択欄表示用ボタン */
+.filter-toggle-button {
+    position: relative;
+    z-index: 1000;
+    text-align: center;
+    font-size: 1.5em;
+    background-color:#fff;
+    color:#22663f; 
+}
+
+/* モーダルのスタイル */
+.filter-modal {
+    position: absolute;
+    top: 100%; /* トグルボタンの真下に表示 */
+    right: 0;
+    width: 270px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* 項目間の余白 */
+    padding: 1.5em 0.8em;
+}
+
+/* toggleFilterButton 内の <i> 要素を最背面に配置 */
+#toggleFilterButton i {
+    position: relative;
+    z-index: -1; /* 最背面に配置 */
+}
+
+/* 選択項目欄の体裁を整える */
+.filter-modal .filter-options {
+    display: flex;
+    justify-content: space-between; /* 項目を横並びに配置 */
+    align-items: center;
+}
+
+/* 横幅の調整 */
+.filter-options,.filter-modal p {
+    margin: 0 10px
+}
+
+/* 全選択、全クリアボタン */
+.allSelect,.allClear{
+    background-color: #fff; /* 全選択用の背景色 */
+    color: #22663f; /* 全選択用の文字色 */
+    border-radius: 5px;
+    border: 1px solid #22663f;
+    padding: 5px;
+    font-weight: 700;
+    height: 4em;
+    width: 5em;
+    margin-bottom: 1em;
+}
+
+/* 全選択・全クリアボタンへカーソルを合わせた時 */
+.allSelect:hover,.allClear:hover {
+    background-color: #22663f; 
+    color: #fff;
+}
+
+/* チェックボックスの非表示 */
+#filterUrgent,#filterNotLook,#filterPoss,#filterImPoss,#filterBacklog,#filterWIP,#filterClosed{
+    display: none;
+    width:0;
+}
+
+/* 緊急度・対応状況 ラベル */
+.filter-modal label {
+    display: block;
+}
+
+/* 緊急度、対応状況　文字列 */
+.filter-modal p {
+    text-align: left;
+    margin-bottom: 1em;
+    padding: 0.25em 0.5em;/*上下 左右の余白*/
+    color: #494949;/*文字色*/
+    background: transparent;/*背景透明に*/
+    border-left: solid 5px #22663f;/*左線*/
+}
+
+/* チェックボックスに対応するラベル */
+.Urgentlabel,.NotLooklabel,.Posslabel,.ImPosslabel,.backloglabel,.WIPlabel,.Closedlabel{
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #fff; /* 通常の背景色 */
+    color: #22663f; /* 通常の文字色 */
+    border: 1px solid #22663f; /* 通常の枠線 */
+    border-radius: 5px;
+    cursor: pointer;
+    width: 3em;
+}
+
+/* 緊急・通常ラベル　サイズ調整 */
+.Urgentlabel,.Normallabel{
+    width: 5em;
+    height: 1.5em;
+    /* padding-right: 1.5em; */
+    text-align: center;
+}
+
+/* チェックが入った場合のラベルの背景色変更 */
+/* チェックが入った場合の共通スタイル */
+.checked-label {
+    background-color: #2E8B57; /* 背景色 */
+    color: #ffffff; /* 文字色 */
+    border-radius: 5px; /* 角丸 */
+}
+
+/* 各ラベルに共通スタイルを適用 */
+#filterUrgent:checked + .Urgentlabel,
+#filterNormal:checked + .Normallabel,
+#filterBacklog:checked + .backloglabel,
+#filterWIP:checked + .WIPlabel,
+#filterClosed:checked + .Closedlabel,
+#filterNotLook:checked + .NotLooklabel,
+#filterPoss:checked + .Posslabel,
+#filterImPoss:checked + .ImPosslabel{
+    background-color: #2E8B57; /* 背景色 */
+    color: #ffffff; /* 文字色 */
+    border-radius: 5px; /* 角丸 */
+}
+
+/* filter選択デザイン ↑-------------------------------------- */
+
+/* 依頼内容一覧（Table） ↓-------------------------------------- */
+
+/* テーブル自体の大きさを調整する */
+.table-width{
+    max-width: 70em;
+    /* width: 1em; */
+}
+
+/* filterアイコンをth中へ入れるための調整 */
+#history_thead th{
+    text-align: center; /* 左右中央揃え */
+    vertical-align: middle; /* 上下中央揃え */
+    height: 20px;
+}
+
+/* th */
+/* 共通 ↓ --------------------------------------*/
+/* 緊急表示 */
+.th_width{
+    width: 2.1em;
+}
+
+/* 依頼日 */
+.odate{
+    width: 6em;
+}
+
+/* 対応可否 */
+.advisab_status{
+    width: 4.5em;
+}
+
+/* 詳細/フィルター */
+.th_filter{
+    width: 35px;
+}
+
+/* 共通 ↑ --------------------------------------*/
+/* 管理者・依頼者 ↓ --------------------------------------*/
+
+/* 管理者側 */
+/* 施設名 */
+.th_facility{
+    width: 12em;
+}
+/* 名前 */
+.th_name{
+    width: 10em;
+}
+
+/* 依頼者側 */
+/* 依頼内容 */
+.content_th{
+    width: 20em;
+}
+
+/* 管理者・依頼者 ↑ --------------------------------------*/
+
+/* フィルター　該当データなし ↑ --------------------------------------*/
+
+.box-005 {
+    max-width: 400px;
+    margin: 0 auto;
+    border: 2px solid #fe5858;
+    border-radius: 5px;
+    color: #333333;
+}
+
+.box-005 div {
+    display: inline-flex;
+    align-items: center;
+    column-gap: 4px;
+    position: relative;
+    top: -13px;
+    left: 10px;
+    margin: 0 7px;
+    padding: 0 8px;
+    background: #fff;
+    color: #fe5858;
+    font-weight: 600;
+    vertical-align: top;
+}
+
+.box-005 div::before {
+    width: 22px;
+    height: 22px;
+    content: '';
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12.8659 3.00017L22.3922 19.5002C22.6684 19.9785 22.5045 20.5901 22.0262 20.8662C21.8742 20.954 21.7017 21.0002 21.5262 21.0002H2.47363C1.92135 21.0002 1.47363 20.5525 1.47363 20.0002C1.47363 19.8246 1.51984 19.6522 1.60761 19.5002L11.1339 3.00017C11.41 2.52187 12.0216 2.358 12.4999 2.63414C12.6519 2.72191 12.7782 2.84815 12.8659 3.00017ZM10.9999 16.0002V18.0002H12.9999V16.0002H10.9999ZM10.9999 9.00017V14.0002H12.9999V9.00017H10.9999Z' fill='%23fe5858'%3E%3C/path%3E%3C/svg%3E");
+}
+
+.box-005 p {
+    margin: 0;
+    padding: 0 1.5em 1em;
+}
+
+.box-005 span{
+    background: linear-gradient(transparent 70%, #44e98b 70%);
+}
+
+/* テーブルへ挿入するため、高さを確保 */
+.error_filter{
+    height: 10em;
+    background-color: #fff;
+}
+
+/* フィルター　該当データなし ↑ --------------------------------------*/
+
+/* td */
+/* 共通 ↓ --------------------------------------*/
+
+/* 緊急アイコン */
+.emerg-icon {
+    color: #f00;
+    font-size: 1.5rem;
+    margin-right: 5px;
+}
+
+/* 点滅アニメーション */
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* 点滅 */
+#td_emerg {
+    animation: blink 1s infinite; /* 1秒間隔で無限に点滅 */
+}
+
+/* 上下左右中央揃え */
+#history_tbody td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+/*  */
+.td_facility,.name_num{
+    text-align: left !important;
+}
+
+/* 詳細ボタン */
+.uk-button-details{
+background: #2E8B57; 
+color: #ffffff; 
+border-radius: 50vh; 
+padding: 1em 2em 0.8em; 
+line-height:1; 
+display: inline-block;
+}
+
+/* 共通 ↑ --------------------------------------*/
+
+/* 依頼内容一覧（Table） ↑-------------------------------------- */
+
+
+/* モーダル内 ↓ ------------------------------------------------- */
+
+/* モーダル内の領域より外側を増設 */
+.modal-content {
+    padding: 20px;
+}
+
+/* 文字サイズ設定 */
+.modal-font-size{
+    font-size: 18px;
+}
+
+/* 要素まとめ　左右幅調整 */
+.width_adjustment{
+    margin:0 18px;
+}
+
+/* 返信　モーダル背景色 */
+.modal_background{
+    background-color: #eef8eefa;
+    padding-top: 1em;
+    padding-bottom: 0.5em;
+}
+
+/* 返信入力　トグルボタン */
+.toggle-bottom{
+    margin-bottom: 10px;
+}
+
+/* 対応可否・対応状況 ↓ -------------------------------------- */
+
+/* 可否・状況 文字サイズ */
+.ad-stfont-size{
+font-size: 20px;
+}
+
+/* 対応可否・対応状況 ↑ -------------------------------------- */
+
+/* 画像 ↓ -------------------------------------- */
+
+/* 注意書き */
+.color-posision{
+color: red;
+font-size: 15px;
+}
+
+/* プレビュー画像*/
+.img_csize{
+width: 80%;
+cursor: pointer;
+}
+
+/* 画像下の幅調整 */
+.img_bottom{
+margin-bottom: 20px;
+}
+
+/* 画像 ↑ -------------------------------------- */
+
+/* 依頼内容・返信 ↓ -------------------------------------- */
+/* ラベル（p） */
+.content-label{
+    font-size: 23px;
+    border-bottom:1px solid #6bad81; 
+}
+
+/* 文章出力部分 */
+.width_adjust-margin{
+    margin:20px 18px;
+}
+/* 依頼内容・返信 ↑ -------------------------------------- */
+
+/* モーダル内 ↑ ------------------------------------------------- */

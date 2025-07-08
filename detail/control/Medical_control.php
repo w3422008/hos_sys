@@ -1,0 +1,32 @@
+<?php
+//ユーザー定義関数ファイルfunctions.phpの読み込み
+require_once('../functions.php');
+   $hos_cd= $_GET['cd'];
+
+$dbh = get_db_connect();
+
+/* 高橋20230224 診療内容データ */
+$medCare_data = detail_medCare($dbh,$hos_cd);
+
+
+   $med_depts = array( 
+     '全般'
+     => array('各種治療','在宅診療内容','各種検査'),
+     '内科系'
+     => array(
+      '消化器内科', '呼吸器内科', '精神科・神経科・診療内科', 
+      '内分泌・糖尿病（代謝内科）', '（脳）神経内科・脳卒中内科', '腎臓内科', 
+      '小児科', '循環器内科' ),
+     '外科系'
+     => array(
+      '外科', '呼吸器外科', '腎臓移植外科', 
+      '乳腺外科', '泌尿器科', '耳鼻咽喉科', 
+      '歯科・口腔外科', '整形外科・リハビリ・リウマチ科', 
+      '脳神経外科', '形成外科', '産婦人科', 
+      '皮膚科', '眼科' ),
+   );
+
+   $medCare_all = medCare($dbh,'全般');
+   $medCare_naika = medCare($dbh,'内科系');
+   $medCare_geka = medCare($dbh,'外科系');
+

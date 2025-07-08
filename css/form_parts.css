@@ -1,0 +1,258 @@
+/*
+    button
+    >>radius設定；10px
+*/
+.uk-button-primary,
+.uk-button-secondary{
+    border-radius: 10px;
+}
+
+
+    /* テキストボックスとラベルの間にスペースを入れる*/
+    /* ラジオボタン・チェックボックスとラベルの間にスペースを入れる*/
+    .uk-input,.uk-select,
+    .uk-textarea,.uk-radio,
+    .uk-checkbox {
+    margin-right: 3px;
+    }
+
+
+    /*背景色*/
+    .bg-grey {
+        background-color:#eee;   
+    }
+    
+
+/*--- input and select and textarea ---*/
+    /* Focus */
+/*     
+    .uk-input:focus,
+    .uk-select:focus,
+    .uk-textarea:focus {
+    outline: none;
+    background-color: #fff;
+    color: #000;
+    border-color: #22663f;
+    }
+ */
+
+
+/*--- Checkbox and Radio ---*/
+    .uk-radio,
+    .uk-checkbox {
+    /* 枠 */
+    border: 2px solid #c7c7c7;
+    border: 2px solid #666;
+    }
+
+
+    /* Focus */
+    .uk-radio:focus,
+    .uk-checkbox:focus {
+    background-color: rgba(0, 0, 0, 0);
+    outline: none;
+    border-color: #22663f;
+    }
+
+    /*
+    * Checked
+    */
+    .uk-radio:checked,
+    .uk-checkbox:checked,
+    .uk-checkbox:indeterminate {
+    background-color: #22663f;
+    border-color: transparent;
+    }
+    /* Focus */
+    .uk-radio:checked:focus,
+    .uk-checkbox:checked:focus,
+    .uk-checkbox:indeterminate:focus {
+    background-color: #22663f;
+    }
+
+
+
+
+
+/* 絞込み検索 */
+.filter_select {
+    padding: 0 2rem;
+}
+.filter_select::after{
+    font-family: 'FontAwesome';
+    content: "\f054";
+    position: absolute;
+    right: 10px;
+    margin-top: 2px;
+}
+
+
+.filter_items {
+    margin-bottom:10px;
+}
+.filter_items > form,
+.filter_items > div {
+    display: inline-block;
+    margin:5px 10px auto 10px;
+}
+
+.filter_select,
+.filter_items > form > select,
+.filter_btn {
+    cursor: pointer;
+}
+
+.filter_btn {
+    font-size:1.2rem;
+    border:0;
+    background-color:transparent;
+    color:#222;
+}
+
+.filter_select,
+.filter_items > form > select,
+.filter_items > form > input{
+    width: fit-content;
+    box-sizing: border-box;
+    display: inline;
+    align-items: center;
+    padding-left: .75rem;
+    height: 2rem;
+    background: #fff;
+    border: 1px solid #bbb;
+    border-radius: 999px;
+}
+
+.filter_select:focus,
+.filter_items > form > select:focus,
+.filter_items > form > input:focus {
+    border:1px solid #555;
+}
+
+.filter_select:focus,
+.filter_items > form > *:focus {
+    outline: none;
+    color: #000;
+}
+
+
+
+
+
+
+
+
+/* 医療機関 詳細・変更・新規
+    テーブルセル内のform要素 サイズ固定 */
+    td > input,
+    td > select {
+        resize: none;
+        width:100%;
+        height:100%;
+    }
+
+    td > textarea {
+        resize: none;
+        width:auto;
+        height:100px;
+    }
+
+/*
+      td input, td select,
+      td input:active, td select:active,
+      td input:focus, td select:focus {
+        border :none;
+        outline:none;
+        background:none;
+      }
+
+      */
+
+
+
+/*
+    input,select,textarea サイズ指定
+*/
+    /* 医療機関 詳細・変更・新規 */
+        /**1*/
+        .size-input-hosCd { width: 16em; /* max-width: 100%; */ }
+        .size-input-hosName { width: 35em; }
+        .size-select-hosdiv { width: 7em; }
+        .size-input-Medass { width: 13em; }
+        .size-select-area { width: 12em; }
+        .size-select-areacd { width: 16em; }
+        .size-input-zip { width: 7em; }
+        .size-input-pre { width: 10em; }
+        .size-input-city { width: 10em; }
+        .size-input-zone { width: 10em; }
+        .size-input-town { width: 15em; }
+        .size-input-strNum { width: 35em; }
+        .size-input-Tel { width: 12.5em; }
+        .size-input-Fax { width: 12.5em; }
+        .size-input-Email { width: 20em; }
+
+        /**2*/
+        .size-input-bed { width: 5em; }
+
+        /**3*/
+        .size-input-dirName { width: 16em; }
+        .size-input-dirDept { width: 16em; }
+        .size-input-dirYear { width: 16em; }
+        .size-input-dirSchool { width: 16em; }
+        .size-input-dirNote { width: 100%; }
+
+        /**1~9 備考*/
+        .size-textarea-Notes { width: 100%;  } 
+
+        /**2,3,4,5,6,7,8 テーブル内フォーム要素*/
+        .size-textarea-tbl { width: 6em; }
+
+        /**6,8 フィルタ機能 年度*/
+        .size-select-filter { width: 16em; }
+
+        /**7 医療連携懇話会参加年度 テキストエリア固定*/        
+        .size-textarea-socialmeeting { resize:none; } /* 高橋20231121 懇話会追加 */ 
+
+
+    /* ユーザー 変更・新規 ／ パスワード変更 */
+        .size-input-userId { width: 100%; }
+        .size-input-userName { width: 100%; }
+        .size-select-Ins { width: 100%; }
+        .size-select-Bel { width: 100%; }
+        .size-input-password { width: 100%; }
+        .size-select-permission { width: 100%; }
+
+
+
+/* アイコンつき input */
+.icon-input {
+    width: fit-content;
+    margin-left: 10px;
+    padding-left: .75rem;
+    background: #fff;
+    border: 1px solid #bbb;
+    border-radius: 999px;
+    height: 40px;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.icon-input > input,
+.icon-input > select {
+    outline: none;
+    border : 0;
+    background: transparent;
+}
+
+.tbl-form th input, 
+.tbl-form td input,
+.tbl-form th select, 
+.tbl-form td select,
+.tbl-form th button, 
+.tbl-form td button,
+.rowInsert-btn {
+    outline: none;
+    border : 0;
+    background: transparent;
+    height:100% 
+}

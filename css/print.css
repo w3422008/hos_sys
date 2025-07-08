@@ -1,0 +1,32 @@
+/*--- 
+    メディアクエリ
+    ： 印刷用CSSを指定 
+---*/
+
+@media print {
+body {
+    transform: scale(1.0);
+    zoom:.3;
+}
+
+    @page {
+        size: A4;
+    }
+
+    /*印刷時非表示*/
+    .not_print {
+        display: none;
+    }
+    /*タイトル（「検索結果」）を大きく*/
+    .uk-card-header .uk-heading-primary {
+        font-size:24px;
+        text-align: left;
+        color :#000000;
+    }
+
+    /*1Cardの途中で改ページしないように設定*/
+    .uk-card-default {
+        break-inside:avoid;
+    }
+
+}

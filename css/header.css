@@ -1,0 +1,21 @@
+/* 自動ログアウトカウントダウンタブ */
+#auto-logout-countdown-tab {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: bold;
+    padding: 18px 0;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    letter-spacing: 0.05em;
+    transition: opacity 0.3s;
+    opacity: 0.98;
+    pointer-events: none;
+    user-select: none;
+    text-align: center;
+}
