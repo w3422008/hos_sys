@@ -235,7 +235,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 
                 // 部分一致チェック：入力値がmainテーブルのhos_nameに含まれているかチェック
                 if (strpos($normalized_expected, $normalized_input) === false) {
-                    $hos_data_errors[] = "・行" . ($row_index + 2) . ": 医療機関CD「{$csv_hos_cd}」の医療機関名が一致しません。<br>　対応病院名: 「{$expected_name}」<br>　入力値: 「{$csv_hos_name}」<br>　正規化後比較: 「{$normalized_expected}」 ← 「{$normalized_input}」";
+                    $hos_data_errors[] = "・行" . ($row_index + 2) . ": 医療機関CD「{$csv_hos_cd}」の医療機関名が一致しません。<br>　マスタ病院名: 「{$expected_name}」<br>　CSVデータ: 「{$csv_hos_name}」<br>　正誤比較: 正：「{$normalized_expected}」  誤：「{$normalized_input}」";
                 }
             }
         }

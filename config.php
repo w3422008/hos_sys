@@ -45,7 +45,8 @@ define('headerCss_URL', SITE_URL . 'css/header.css');
 
 // マニュアル
 // define('manual_URL', SITE_URL.'manual/5th_manual.pdf');
-// define('adm_manual_URL', SITE_URL.'manual/5th_manual_admin.pdf');
+// define('adm_manual_URL', SITE_URL.'manual/5th_adm_manual.pdf');
+define('Sysadm_manual_URL', SITE_URL.'manual/5th_manual_admin.pdf');
 
 // CSS関連
 // define('headerCss_URL', SITE_URL . 'css/header.css');

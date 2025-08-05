@@ -1,7 +1,7 @@
 (function() {
     var logoutUrl = 'http://localhost:8080/hos_sys/login/logout.php';
-    var timeout = 0.5 * 60 * 1000; // 10分（ミリ秒）
-    var countdownStart = 20; // 1分前からカウントダウン
+    var timeout = 60* 60 * 1000; // 15秒（ミリ秒）
+    var countdownStart = 10; // 10秒前からカウントダウン
     var timer, countdownTimer;
     var countdownTab = null;
 

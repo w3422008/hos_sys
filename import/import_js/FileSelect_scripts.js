@@ -402,6 +402,7 @@ $(function() {
 
                     // responseの確認
                     let data;
+                    console.log(data);
                     try {
                         data = await response.json();
                         // data_type、modeの値をグローバル変数に格納
