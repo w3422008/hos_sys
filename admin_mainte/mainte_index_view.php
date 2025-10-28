@@ -88,8 +88,8 @@
             <form class="uk-form-stacked" action="" method="POST">
             <div class="uk-margin">
                 <div class="uk-inline">
-                    <input type="hidden" name="user_id"  value='111' >
-                    <input type="hidden" name="password"  value='Aa111111' >
+                    <input type="hidden" name="user_id"  value='T1111111' >
+                    <input type="hidden" name="password"  value='Kawasaki1111' >
                     <button class="lg-button admin uk-width-1-1">管理者</button>
                 </div>
                 <span class="uk-text-danger">
@@ -105,8 +105,8 @@
             <form class="uk-form-stacked" action="" method="POST">
                 <div class="uk-margin">
                     <div class="uk-inline">
-                        <input type="hidden" name="user_id"  value='222' >
-                        <input type="hidden" name="password"  value='Aa222222' >
+                        <input type="hidden" name="user_id"  value='T2222222' >
+                        <input type="hidden" name="password"  value='Kawasaki2222' >
                         <button class="lg-button office uk-width-1-1">一般 (事務)</button>
                 </div>
                 <span class="uk-text-danger">
@@ -123,8 +123,8 @@
             <form class="uk-form-stacked" action="" method="POST">
                 <div class="uk-margin">
                     <div class="uk-inline">
-                        <input type="hidden" name="user_id"  value='333' >
-                        <input type="hidden" name="password"  value='Aa333333' >
+                        <input type="hidden" name="user_id"  value='T3333333' >
+                        <input type="hidden" name="password"  value='Kawasaki3333' >
                         <button class="lg-button general uk-width-1-1">一般</button>
                     </div>
                 <span class="uk-text-danger">

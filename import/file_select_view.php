@@ -116,7 +116,7 @@ define("KAWASAKI_URL", "https://w.kawasaki-m.ac.jp/");
                             </form> -->
                             <form id="introBackupForm">
                                 <button type="submit" class="button_3 uk-button uk-width-1-1"> 
-                                    <span></span> <span>バックアップ時点に戻す</span>
+                                    <span></span> <span>バックアップ</span>
                                 </button>
                             </form>
 
@@ -173,7 +173,7 @@ define("KAWASAKI_URL", "https://w.kawasaki-m.ac.jp/");
                     <div class="uk-margin-large-top uk-margin-large-bottom uk-container uk-container-center uk-width-1-2@m uk-width-1-3@xl">
                         <fieldset class="uk-fieldset uk-margin" id="search-area">
                             <form id="invIntroBackupForm" action="inv_intro_file_backup.php">
-                                <button type="submit" class="button_3 uk-button uk-width-1-1"><span></span> <span>バックアップ時点に戻す</span></button>
+                                <button type="submit" class="button_3 uk-button uk-width-1-1"><span></span> <span>バックアップ</span></button>
                             </form>
                             <p style="color: #4c84af;">　<span class="far fa-folder"></span> バックアップデータの最新年度：<?php echo $invB_year ?? ""; ?></p>
                         </fieldset>
@@ -229,7 +229,7 @@ define("KAWASAKI_URL", "https://w.kawasaki-m.ac.jp/");
                     <div class="uk-margin-large-top uk-margin-large-bottom uk-container uk-container-center uk-width-1-2@m uk-width-1-3@xl">
                         <fieldset class="uk-fieldset" id="search-area">
                             <form id="contactBackupForm" action="file_backup.php">
-                                <button type="submit" class="button_3 uk-button uk-width-1-1"><span></span> <span>バックアップ時点に戻す</span></button>
+                                <button type="submit" class="button_3 uk-button uk-width-1-1"><span></span> <span>バックアップ</span></button>
                             </form>
                             <p style="color: #4c84af;">　<span class="far fa-folder"></span> バックアップデータの最新年月：<?php echo $contactB_year ?? ""; ?></p>
                         </fieldset>
@@ -267,7 +267,7 @@ define("KAWASAKI_URL", "https://w.kawasaki-m.ac.jp/");
                     <div class="uk-margin-large-top uk-margin-large-bottom uk-container uk-container-center uk-width-1-2@m uk-width-1-3@xl">
                         <fieldset class="uk-fieldset uk-margin" id="search-area">
                             <form id="trainingBackupForm" action="file_backup.php">
-                                <button type="submit" class="button_3 uk-button uk-width-1-1"><span></span> <span>バックアップ時点に戻す</span></button>
+                                <button type="submit" class="button_3 uk-button uk-width-1-1"><span></span> <span>バックアップ</span></button>
                             </form>
                             <p style="color: #4c84af;">　<span class="far fa-folder"></span> バックアップデータの最新年度：<?php echo $trainingB_year ?? ""; ?></p>
                         </fieldset>
@@ -288,6 +288,17 @@ define("KAWASAKI_URL", "https://w.kawasaki-m.ac.jp/");
         </div>
     </div>
 
+    <!-- 不一致確認用モーダル -->
+    <div id="mismatch-modal" uk-modal>
+        <div class="uk-modal-dialog uk-modal-body" style="width: 90%; max-width: 1200px;">
+            <div id="mismatch-modal-message"></div>
+            <div class="uk-text-center uk-margin-top">
+                <button id="mismatch-modal-submit" class="uk-button uk-button-danger" style="margin-right:20px;">了承し、インポートを行う</button>
+                <button id="mismatch-modal-cancel" class="uk-button uk-button-default">キャンセル</button>
+            </div>
+        </div>
+    </div>
+
     <!-- CSV閲覧モーダル -->
     <div id="csv-modal" uk-modal>
         <div class="uk-modal-dialog uk-modal-body">
@@ -302,11 +313,20 @@ define("KAWASAKI_URL", "https://w.kawasaki-m.ac.jp/");
 
     <div id="backup-modal" uk-modal>
         <div class="uk-modal-dialog uk-modal-body">
-            <h3>紹介バックアップ一覧</h3>
+            <h3 id="backup-modal-title">バックアップ一覧</h3>
             <ul id="backup-list"></ul>
             <div class="uk-text-center uk-margin-top">
                 <button id="close-backup-modal" class="uk-button uk-button-default" uk-modal-close>閉じる</button>
             </div>
+        </div>
+    </div>
+
+    <!-- ローディングモーダル -->
+    <div id="loading-modal" uk-modal class="loading-modal">
+        <div class="uk-modal-dialog uk-modal-body uk-text-center">
+            <div uk-spinner="ratio: 2"></div>
+            <h3>インポート処理中...</h3>
+            <p>しばらくお待ちください。</p>
         </div>
     </div>
 
@@ -315,9 +335,8 @@ define("KAWASAKI_URL", "https://w.kawasaki-m.ac.jp/");
         const folderFiles = <?php echo json_encode($folderFiles); ?>;
         window.folderFiles = folderFiles;
     </script>
-
-    <script src="import_js/FileSelect_scripts.js"></script>
-    <!-- <script src="./import_js/csv_browsing.js" defer></script> -->
-
+    <script src="import_js/functions.js"></script>
+    <script src="import_js/main.js"></script>
+    
 </body>
 </html>

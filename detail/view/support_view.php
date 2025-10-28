@@ -75,7 +75,7 @@
             <td style="color:black;"><?php echo $var['year'];?></td>
             <td style="color:black;"><?php if($var['ins']==='0'){ echo '附属病院'; }elseif($var['ins']==='1'){ echo '総合医療センター';}elseif($var['ins']==='2'){ echo '高齢者医療センター';}?></td>
             <td style="color:black;"><?php echo $var['dep'];?></td>
-            <td style="color:black;"><?php echo $var['occ'];?></td>
+            <td style="color:black;"><?php echo $var['position'];?></td>
             <td style="color:black;"><?php echo $var['name'];?>
             </td style="color:black;">
             <td style="color:black;"><?php echo $var['start'];?></td>

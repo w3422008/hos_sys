@@ -35,11 +35,12 @@ if(isset($_GET['user_id'])):
 
 else:
     
-
-    if(isset($_GET['onf'])){
-        if($_GET['onf']==='Active'){ $onf='0'; }
-        elseif($_GET['onf']==='InActive'){ $onf='1'; }
-        elseif($_GET['onf']==='ALL'){ $onf=''; }
+    // 利用状況　フィルター情報取得
+    if(isset($_GET['onf']) || isset($_SESSION['onf'])){
+        $_SESSION['onf'] = isset($_GET['onf']) ? $_GET['onf'] : $_SESSION['onf'];
+        if($_SESSION['onf']==='Active'){ $onf='0'; }
+        elseif($_SESSION['onf']==='InActive'){ $onf='1'; }
+        elseif($_SESSION['onf']==='ALL'){ $onf=''; }
     }
     
     if($onf === '0'){

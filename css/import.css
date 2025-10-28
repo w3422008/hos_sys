@@ -379,6 +379,185 @@ table.stylish-csv-table tr:last-child td {
     background: #b5c7e6;
     border-radius: 8px;
 }
+
+/* ローディングモーダルのスタイル */
+#loading-modal.uk-modal::before {
+    content: none !important;
+    display: none !important;
+}
+
+#loading-modal .uk-modal-dialog {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    color: white !important;
+}
+
+/* スピナーとテキストのみ表示される状態 */
+#loading-modal .uk-modal-dialog .uk-text-center {
+    background: none;
+    color: white !important;
+    padding: 20px;
+}
+
+/* h3とpタグの文字色も確実に白にする */
+#loading-modal h3,
+#loading-modal p {
+    color: white !important;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* 読みやすさのために影を追加 */
+    font-weight: bold !important; /* ★ 文字を太くする */
+}
+
+/* h3をさらに太くする */
+#loading-modal h3 {
+    font-weight: 900 !important; /* ★ より太い文字 */
+    font-size: 2em !important; /* ★ 文字サイズも大きく */
+}
+
+/* pタグも太くする */
+#loading-modal p {
+    font-weight: 700 !important; /* ★ 太い文字 */
+}
+
+/* スピナーの線を太くする */
+#loading-modal [uk-spinner] svg {
+    color: white !important;
+    stroke: white !important;
+    stroke-width: 3 !important; /* ★ スピナーの線を太くする */
+}
+
+#loading-modal [uk-spinner] > * {
+    stroke: white !important;
+    color: white !important;
+    stroke-width: 3 !important; /* ★ スピナーの線を太くする */
+}
+
+/* スピナー全体のサイズも大きくする場合 */
+#loading-modal [uk-spinner] {
+    color: white !important;
+    transform: scale(1.2); /* ★ スピナーを20%大きくする */
+}
+
+
+/* バックアップ履歴モーダル内 */
+.backup-entry {
+    margin-bottom: 12px;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.backup-entry:hover {
+    background: linear-gradient(135deg, #e3f2fd 0%, #f8f9fa 100%) !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+    transform: translateY(-2px) !important;
+}
+
+.backup-content {
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.backup-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+}
+
+.backup-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.backup-datetime {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 4px;
+}
+
+.backup-user {
+    font-size: 14px;
+    color: #666;
+}
+
+.backup-arrow {
+    font-size: 16px;
+    color: #999;
+    transition: transform 0.2s ease;
+}
+
+.backup-dropdown {
+    display: none;
+    border-top: 1px solid #dee2e6;
+    background: #f8f9fa;
+    padding: 12px 20px;
+    border-radius: 0 0 8px 8px;
+    animation: slideDown 0.2s ease-out;
+}
+
+.backup-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.backup-preview-btn {
+    flex: 1;
+    border-radius: 6px !important;
+    border: 1px solid #007bff !important;
+    color: #007bff !important;
+    background: white !important;
+    font-weight: 500 !important;
+    transition: all 0.2s ease;
+}
+
+.backup-preview-btn:hover {
+    background: #007bff !important;
+    color: white !important;
+    transform: scale(1.02);
+}
+
+.backup-download-btn {
+    flex: 1;
+    border-radius: 6px !important;
+    background: linear-gradient(135deg, #28a745, #20c997) !important;
+    border: none !important;
+    color: white !important;
+    font-weight: 500 !important;
+    transition: all 0.2s ease;
+}
+
+.backup-download-btn:hover {
+    background: linear-gradient(135deg, #218838, #1e7e34) !important;
+    transform: scale(1.02);
+}
+
+/* アニメーション */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* レスポンシブ対応 */
 @media (max-width: 900px) {
     .csv-table-container {

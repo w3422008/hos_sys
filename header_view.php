@@ -21,6 +21,25 @@
                 <li><span>ユーザー名：<?php echo $var['user_name'];?></span></li>
                 <li><span><?php echo get_adm_label($var['adm_user']); ?></span> でログイン中</li>
                 <li class="uk-nav-divider"></li>
+                <li>
+                    <div class="uk-margin-small">
+                        <label class="uk-form-label" style="font-size: 12px; color: #666;">権限変更:</label>
+                        <select class="uk-select uk-form-small" id="permission-change" style="font-size: 12px; min-width: 150px;">
+                            <option value="3" <?php echo ($var['adm_user'] == '3') ? 'selected' : ''; ?>>システム管理者</option>
+                            <option value="2" <?php echo ($var['adm_user'] == '2') ? 'selected' : ''; ?>>管理者</option>
+                            <option value="1" <?php echo ($var['adm_user'] == '1') ? 'selected' : ''; ?>>一般(事務)</option>
+                            <option value="0" <?php echo ($var['adm_user'] == '0') ? 'selected' : ''; ?>>一般</option>
+                        </select>
+                        <?php if (isset($is_temp_changed)): ?>
+                        <button class="uk-button uk-button-small uk-button-secondary uk-margin-small-top" 
+                                style="font-size: 11px; width: 100%;" 
+                                onclick="">
+                            元の権限に戻す
+                        </button>
+                        <?php endif; ?>
+                    </div>
+                </li>
+                <li class="uk-nav-divider"></li>
                 <li><a href="<?php echo password_URL; ?>"><span class="uk-margin-small-right" uk-icon="icon: cog"></span> パスワード変更</a></li>
                 <li><a href="<?php echo logout_URL; ?>"><span class="uk-margin-small-right" uk-icon="icon: sign-out"></span> ログアウト</a></li>
             </ul>

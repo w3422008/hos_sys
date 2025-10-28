@@ -1137,7 +1137,7 @@ function get_10Years(){
     
     //過去10年
     $Years = array();
-    for($num = 1; $num <= 10; $num++){
+    for($num = 0; $num <= 9; $num++){
     $Years[$num] = $year-$num;
     }
     sort($Years); //配列の要素を昇順に並び替え
@@ -1506,8 +1506,15 @@ return $data;
 
 //6-兼業 表示
 function detail_training($dbh,$hos_cd){
-    $sql="SELECT *
-    FROM training WHERE hos_cd=:hos_cd order by year desc, dep desc, occ_turn;";
+    $sql = "
+    SELECT 
+    t.hos_cd, t.year, t.ins, t.tra_name, t.dep, t.position, t.name, t.start, t.end, t.dia_div, t.date, p.`order`
+    FROM training AS t
+    JOIN positions AS p ON t.position = p.position
+    WHERE t.hos_cd = :hos_cd
+    ORDER BY t.year DESC, t.dep DESC, p.`order` ASC;
+    ";
+
     $stmt = $dbh->prepare($sql);
     $stmt->bindvalue(':hos_cd', $hos_cd,PDO::PARAM_STR);
     $stmt->execute();
@@ -2502,7 +2509,7 @@ function contact($dbh,$hos_cd){
 
 function training($dbh,$hos_cd){
     $sql="
-	SELECT training.hos_cd, main.hos_name, training.year,training.ins, training.tra_div, training.dep, training.occ, training.name, training.start, training.end, training.date FROM `main` JOIN training on main.hos_cd = training.hos_cd WHERE main.hos_cd = :hos_cd; 
+	SELECT training.hos_cd, main.hos_name, training.year,training.ins, training.dep, training.occ, training.name, training.start, training.end, training.date FROM `main` JOIN training on main.hos_cd = training.hos_cd WHERE main.hos_cd = :hos_cd; 
 	";
 	$stmt = $dbh->prepare($sql);
 	$stmt->bindvalue(':hos_cd', $hos_cd, PDO::PARAM_STR);
@@ -3370,7 +3377,14 @@ function getCsvFolders() {
 function getCsvFiles($dir) {
     $files = [];
     if (is_dir($dir)) {
-        foreach (glob($dir . '/*.csv') as $file) {
+        $csvFiles = glob($dir . '/*.csv');
+        // 日付降順で並べ替え（新しい順）
+        usort($csvFiles, function($a, $b) {
+            return filemtime($b) - filemtime($a);
+        });
+        // 最新5件のみ取得
+        $csvFiles = array_slice($csvFiles, 1, 5);
+        foreach ($csvFiles as $file) {
             $files[] = basename($file);
         }
     }

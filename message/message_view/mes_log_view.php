@@ -50,6 +50,26 @@
         <?php include_once("./mes_footer.php"); ?>
     </footer>
 
+<?php
+
+$hosts = [
+    'hosplist.kawasaki-m.ac.jp',
+    'db.hosplist.kawasaki-m.ac.jp',
+    'mysql.hosplist.kawasaki-m.ac.jp',
+    'database.kawasaki-m.ac.jp',
+    'db.kawasaki-m.ac.jp'
+];
+
+foreach ($hosts as $host) {
+    try {
+        $pdo = new PDO("mysql:dbname=hosplistdb;host=$host;charset=utf8mb4", 'hosplist_adm', 'q3#FZXcQs');
+        echo "成功: $host\n";
+        break;
+    } catch (PDOException $e) {
+        echo "失敗: $host - " . $e->getMessage() . "\n";
+    }
+}
+?>
 
     <!-- **main -->
     <main>
