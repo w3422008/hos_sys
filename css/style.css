@@ -232,7 +232,8 @@ main{
     各タブ中身 セクション*/
 .detail-section {
     /* セクション間余白 */
-    margin-bottom :30px;
+
+    margin-bottom :-50px;
 }
 
 .detail-section {

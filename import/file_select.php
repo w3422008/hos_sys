@@ -7,52 +7,46 @@ require_once('../functions.php');
 session_start();
 $dbh = get_db_connect();
 
+// データ最新年度 取得
 //紹介・逆紹介-------------------------------------------------------------------
-$introB_year = get_introB_year($dbh);
-$invB_year = get_invB_year($dbh);
+$intro_ym = get_intro_ym($dbh);
+$inv_ym = get_inv_intro_ym($dbh);
 
 // 紹介
-if(empty($introB_year)){
-    $introB_year = 'データなし';
+if(empty($intro_ym)){
+    $intro_ym = 'データなし';
 }else{
-    $introB_year = substr( $introB_year, 0, 4 )."年度";
+    $intro_ym = substr( $intro_ym, 0, 4 )."年".substr( $intro_ym, 5, 2 )."月";
 }
 
 // 逆紹介
-if(empty($invB_year)){
-    $invB_year = 'データなし';
+if(empty($inv_ym)){
+    $inv_ym = 'データなし';
 }else{
-    $invB_year = substr( $invB_year, 0, 4 )."年度";
+    $inv_ym = substr( $inv_ym, 0, 4 )."年".substr( $inv_ym, 5, 2 )."月";
 }
 
 // コンタクト -------------------------------------------------------------------
-$contactB_year = get_contactB_ym($dbh);
+$contact_ym = get_contact_ym($dbh);
 
-if(empty($contactB_year)){
-    $contactB_year = 'データなし';
+if(empty($contact_ym)){
+    $contact_ym = 'データなし';
 }else{
-    $contactB_year = substr( $contactB_year, 0, 4 )."年度";
+    $contact_ym = substr( $contact_ym, 0, 4 )."年".substr( $contact_ym, 5, 2 )."月";
 }
 
 
 //　　兼業　　-------------------------------------------------------------------
-$trainingB_year = get_trainingB_year($dbh);
+$training_year = get_training_year($dbh);
 
-if(empty($trainingB_year)){
-    $trainingB_year = 'データなし';
+if(empty($training_year)){
+    $training_year = 'データなし';
 }else{
-    $trainingB_year = substr( $trainingB_year, 0, 4 )."年度";
+    $training_year = substr( $training_year, 0, 4 )."年度";
 }
 
 $folders = getCsvFolders();
 $baseDir = __DIR__ . '/';
-
-// AJAXリクエスト: CSV内容取得
-if (isset($_GET['ajax_view'])) {
-    $viewFile = $_GET['ajax_view'];
-    echo getCsvTableHtml($baseDir, $folders, $viewFile);
-    exit;
-}
 
 // ファイル一覧取得
 $folderFiles = [];
@@ -61,5 +55,3 @@ foreach ($folders as $label => $folder) {
 }
 
 include_once('file_select_view.php');
-
-

@@ -3266,58 +3266,9 @@ function get_version($dbh) {
 }
 
 // インポート機能
-
-//　中尾20241111　バックアップデータ年度取得（紹介）
-function get_intro_year($dbh){
-    $sql ='SELECT year FROM intro_backup ORDER BY year DESC LIMIT 1';
-    $stmt = $dbh->prepare($sql);
-    $stmt->execute();
-    return $stmt->fetchColumn();
-}
-
-//　中尾20241111　バックアップデータ年度取得（逆紹介）
-function get_inv_year($dbh){
-    $sql ='SELECT year FROM invers_intro_backup ORDER BY year DESC LIMIT 1';
-    $stmt = $dbh->prepare($sql);
-    $stmt->execute();
-    return $stmt->fetchColumn();
-}
-
-//　中尾20241111　バックアップデータ年度取得（紹介）
-function get_introB_year($dbh){
-    $sql ='SELECT year FROM intro_backup ORDER BY year DESC LIMIT 1';
-    $stmt = $dbh->prepare($sql);
-    $stmt->execute();
-    return $stmt->fetchColumn();
-}
-
-//　中尾20241111　バックアップデータ年度取得（逆紹介）
-function get_invB_year($dbh){
-    $sql ='SELECT year FROM invers_intro_backup ORDER BY year DESC LIMIT 1';
-    $stmt = $dbh->prepare($sql);
-    $stmt->execute();
-    return $stmt->fetchColumn();
-}
-
-//　中尾20241111　バックアップデータ年度取得（兼業）
-function get_trainingB_year($dbh){
-    $sql ='SELECT year FROM training_backup ORDER BY year DESC LIMIT 1';
-    $stmt = $dbh->prepare($sql);
-    $stmt->execute();
-    return $stmt->fetchColumn();
-}
-
 //　中尾20241111　年度取得（兼業）
 function get_training_year($dbh){
     $sql ='SELECT year FROM training ORDER BY year DESC LIMIT 1';
-    $stmt = $dbh->prepare($sql);
-    $stmt->execute();
-    return $stmt->fetchColumn();
-}
-
-//　中尾20241111　バックアップデータ年月取得（コンタクト履歴）
-function get_contactB_ym($dbh){
-    $sql ='SELECT date FROM contact_backup ORDER BY date DESC LIMIT 1';
     $stmt = $dbh->prepare($sql);
     $stmt->execute();
     return $stmt->fetchColumn();
@@ -3339,25 +3290,9 @@ function get_intro_ym($dbh){
     return $stmt->fetchColumn();
 }
 
-//　畑20250523　バックアップデータ年月取得（紹介）
-function get_introB_ym($dbh){
-    $sql ='SELECT date FROM intro_backup ORDER BY date DESC LIMIT 1';
-    $stmt = $dbh->prepare($sql);
-    $stmt->execute();
-    return $stmt->fetchColumn();
-}
-
 //　畑20250523　年月取得（逆紹介）
 function get_inv_intro_ym($dbh){
     $sql ='SELECT date FROM invers_intro ORDER BY date DESC LIMIT 1';
-    $stmt = $dbh->prepare($sql);
-    $stmt->execute();
-    return $stmt->fetchColumn();
-}
-
-//　畑20250523　バックアップデータ年月取得（逆紹介）
-function get_inv_introB_ym($dbh){
-    $sql ='SELECT date FROM invers_intro_backup ORDER BY date DESC LIMIT 1';
     $stmt = $dbh->prepare($sql);
     $stmt->execute();
     return $stmt->fetchColumn();
@@ -3391,40 +3326,62 @@ function getCsvFiles($dir) {
     return $files;
 }
 
-// 指定されたCSVファイルの内容をHTMLテーブルとして返す
-// フォルダの安全性もチェックする
-function getCsvTableHtml($baseDir, $folders, $viewFile) {
-    $realPath = realpath($baseDir . $viewFile);
+/**
+ * ユーザーID/名前で検索
+ */
+function search_users($dbh, $keyword, $status = 'ALL') {
+    $keyword = trim($keyword);
     
-    // フォルダの安全性チェック
-    $allow = false;
-    foreach ($folders as $folder) {
-        if (strpos($realPath, realpath($baseDir . $folder)) === 0) {
-            $allow = true;
-            break;
-        }
+    if(empty($keyword)) {
+        return get_users_by_status($dbh, $status);
     }
-    // ファイルの存在とアクセス権を確認
-    if ($allow && is_file($realPath)) {
-        if (($fp = fopen($realPath, 'r')) !== false) {
-            $html = "<table class='stylish-csv-table'>";
-            $isFirst = true;    // 最初の行はヘッダーとして扱う
+    
+    // ステータスに応じたSQL条件
+    $status_condition = '';
+    if($status === 'Active') {
+        $status_condition = " AND user.onf = '0'";
+    } elseif($status === 'InActive') {
+        $status_condition = " AND user.onf = '1'";
+    }
+    
+    try {
+        // IDまたは名前で検索
+        $sql = "SELECT * FROM user 
+                WHERE (user_id LIKE :keyword OR user_name LIKE :keyword)
+                {$status_condition}
+                ORDER BY user_id ASC";
+        
+        $stmt = $dbh->prepare($sql);
+        $like_keyword = "%{$keyword}%";
+        $stmt->bindValue(':keyword', $like_keyword, PDO::PARAM_STR);
+        $stmt->execute();
+        
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch(PDOException $e) {
+        error_log("Error in search_users: " . $e->getMessage());
+        return [];
+    }
+}
 
-            // CSVファイルを読み込み、HTMLテーブルに変換
-            // fgetcsvはCSVの各行を配列として返す
-            while (($row = fgetcsv($fp)) !== false) {
-                $html .= "<tr>";
-                foreach ($row as $cell) {
-                    $tag = $isFirst ? "th" : "td";
-                    $html .= "<$tag>" . htmlspecialchars($cell) . "</$tag>";
-                }
-                $html .= "</tr>";
-                $isFirst = false;
-            }
-            $html .= "</table>";
-            fclose($fp);
-            return $html;
+/**
+ * ステータス別にユーザーを取得
+ */
+function get_users_by_status($dbh, $status = 'ALL') {
+    try {
+        if($status === 'Active' || $status === '0') {
+            $sql = "SELECT * FROM user WHERE onf = '0' ORDER BY user_id ASC";
+        } elseif($status === 'InActive' || $status === '1') {
+            $sql = "SELECT * FROM user WHERE onf = '1' ORDER BY user_id ASC";
+        } else {
+            $sql = "SELECT * FROM user ORDER BY user_id ASC";
         }
+        
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute();
+        
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch(PDOException $e) {
+        error_log("Error in get_users_by_status: " . $e->getMessage());
+        return [];
     }
-    return "<p style='color:red;'>ファイルが見つからないか、アクセスできません。</p>";
 }

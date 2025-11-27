@@ -98,14 +98,9 @@ function executeImport(forceImport = false) {
  */
 function parseResponseWithErrorHandling(response) {
     return response.text().then(responseText => {
-        console.log('Raw response:', responseText);
-        
         try {
             return JSON.parse(responseText);
         } catch (parseError) {
-            console.error('JSON parse error:', parseError);
-            console.error('Response that failed to parse:', responseText);
-            
             // サーバーからのエラーメッセージがHTMLまたはテキストの場合
             if (responseText.includes('<!DOCTYPE') || responseText.includes('<html')) {
                 throw new Error('サーバーからHTMLエラーページが返されました。管理者にお問い合わせください。');
@@ -127,17 +122,14 @@ function performFileCheck(formData) {
         body: formData
     })
     .then(response => {
-        console.log('Response status:', response.status);
-        console.log('Response headers:', response.headers.get('Content-Type'));
         return parseResponseWithErrorHandling(response);
     })
     .then(data => {
         // data_type、modeの値をグローバル変数に格納
         dataTypeValue = data.data_type; 
         Mode = data.mode;
-        console.log('Parsed data:', data);
-        console.log('dataTypeValue:', dataTypeValue);
-        console.log('Mode:', Mode);
+        console.log(data.min);
+        console.log(data.max);
         
         if (data.judge === 'success') {
             // 成功時：モーダル表示
@@ -148,7 +140,6 @@ function performFileCheck(formData) {
         }
     })
     .catch(error => {
-        console.error('Fetch error:', error);
         showStickyNote(error.message || '問題が発生しました。');
     });
 }
@@ -204,10 +195,6 @@ function formatBackupFileList(fileList) {
     });
 }
 
-// ===========================================
-// メインモーダル関数
-// ===========================================
-
 /**
  * ファイルチェック後処理関数
  * エラーなし　→ モーダル表示
@@ -220,7 +207,8 @@ function showImportModal(name, f_year, l_year, file_name, year) {
             　・ファイルの形式が「csv」ではない場合は、ファイルを再選択してください。<br>
             　・ファイルの内容が、<span class="mtext-font-size">「${name}」</span>であるか確認してください。<br>
             　・既存データの最新${f_year}は、<span class="mtext-font-size">${l_year}</span>です。<br>
-            　・<span class="mtext-font-size">${file_name}</span> は、<br><span class="mtext-font-size">${year}</span> のデータです。
+            　・ファイル名：<span class="mtext-font-size">${file_name}</span><br>
+            　・<span class="mtext-font-size">${year}</span> のデータです。
         </p>
         <p class="modal-caution">上記の内容に問題がない場合は、「インポート」を押してください</p>
     `;
@@ -376,7 +364,6 @@ function showConfirmationModal(result) {
     const cancelBtn = document.getElementById('import-modal-cancel');
     if (cancelBtn) {
         cancelBtn.onclick = function() {
-            console.log('Import cancelled');
             UIkit.modal('#import-modal').hide();
             resetGlobalVariables();
         };
@@ -452,8 +439,6 @@ function generateErrorTable(parsedErrors) {
  * 不一致情報表示モーダルを表示する関数
  */
 function showMismatchModal(result) {
-    console.log('=== showMismatchModal called ===');
-    console.log('result:', result);
     
     // 基本的なエラーメッセージを作成
     let errorMessage = '<h3 style="color: #e74c3c; margin-bottom: 15px;">医療機関情報に不整合があります</h3>';
@@ -481,7 +466,6 @@ function showMismatchModal(result) {
     if (messageElement) {
         messageElement.innerHTML = errorMessage;
     } else {
-        console.error('mismatch-modal-message element not found');
         return;
     }
 
@@ -501,7 +485,6 @@ function showMismatchModal(result) {
     const mismatchCancelBtn = document.getElementById('mismatch-modal-cancel');
     if (mismatchCancelBtn) {
         mismatchCancelBtn.onclick = function() {
-            console.log('Mismatch Import cancelled');
             UIkit.modal('#mismatch-modal').hide();
             resetGlobalVariables();
         };

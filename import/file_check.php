@@ -39,19 +39,19 @@ $data_types = [
     //     'mode' => データ種別が「年単位（'year'）」か「月単位（'month'）」かを表す
     // ]
 
-    'introY' => [
-        'name' => '紹介データ',
-        'columns' => ['医療機関CD','病院区分','年度','診療年月日','科コード','診療科','紹介件数'],
-        'year_func' => function($dbh) {
-            $intro_ym = get_intro_ym($dbh);
-            return empty($intro_ym) ? 'データなし' : substr($intro_ym, 0, 4) . "年" . substr($intro_ym, 5, 2) . "月";
-        },
-        'year_col' => 3, // 年度
-        'year_label' => '年度',
-        'mode' => 'year'
-    ],
+    // 'introY' => [
+    //     'name' => '紹介データ',
+    //     'columns' => ['医療機関CD','病院区分','年度','診療年月日','科コード','診療科','紹介件数'],
+    //     'year_func' => function($dbh) {
+    //         $intro_ym = get_intro_ym($dbh);
+    //         return empty($intro_ym) ? 'データなし' : substr($intro_ym, 0, 4) . "年" . substr($intro_ym, 5, 2) . "月";
+    //     },
+    //     'year_col' => 3, // 年度
+    //     'year_label' => '年度',
+    //     'mode' => 'year'
+    // ],
     'introM' => [
-        'name' => '紹介データ（月単位）',
+        'name' => '紹介データ',
         'columns' => ['医療機関CD','病院区分','年度','診療年月日','科コード','診療科','紹介件数'],
         'year_func' => function($dbh) {
             $intro_ym = get_intro_ym($dbh);
@@ -61,19 +61,19 @@ $data_types = [
         'year_label' => '月',
         'mode' => 'month'
     ],
-    'inversintroY' => [
-        'name' => '紹介データ',
-        'columns' => ['医療機関CD','病院区分','年度','診療年月日','科コード','診療科','紹介件数'],
-        'year_func' => function($dbh) {
-            $inv_ym = get_inv_intro_ym($dbh);
-            return empty($inv_ym) ? 'データなし' : substr($inv_ym, 0, 4) . "年" . substr($inv_ym, 5, 2) . "月";
-        },
-        'year_col' => 3, // 年度
-        'year_label' => '年度',
-        'mode' => 'year'
-    ],
+    // 'inversintroY' => [
+    //     'name' => '紹介データ',
+    //     'columns' => ['医療機関CD','病院区分','年度','診療年月日','科コード','診療科','紹介件数'],
+    //     'year_func' => function($dbh) {
+    //         $inv_ym = get_inv_intro_ym($dbh);
+    //         return empty($inv_ym) ? 'データなし' : substr($inv_ym, 0, 4) . "年" . substr($inv_ym, 5, 2) . "月";
+    //     },
+    //     'year_col' => 3, // 年度
+    //     'year_label' => '年度',
+    //     'mode' => 'year'
+    // ],
     'inversintroM' => [
-        'name' => '紹介データ（月単位）',
+        'name' => '逆紹介データ',
         'columns' => ['医療機関CD','病院区分','年度','診療年月日','科コード','診療科','紹介件数'],
         'year_func' => function($dbh) {
             $inv_ym = get_inv_intro_ym($dbh);
@@ -83,19 +83,19 @@ $data_types = [
         'year_label' => '月',
         'mode' => 'month'
     ],
-    'contactY' => [
-        'name' => 'コンタクト履歴データ',
-        'columns' => ['医療機関CD','医療機関名','年度','施設区分','日付','方法','連携機関対応者部署','連携機関対応者役職','連携機関対応者氏名','連携機関対応人数・氏名','当院対応者所属','当院対応者氏名','当院対応人数・氏名','内容','備考','データ作成部署'],
-        'year_func' => function($dbh) {
-            $contact_ym = get_contact_ym($dbh);
-            return empty($contact_ym) ? 'データなし' : substr($contact_ym, 0, 4) . "年" . substr($contact_ym, 5, 2) . "月";
-        },
-        'year_col' => 4, // 年度
-        'year_label' => '年',
-        'mode' => 'year' // デフォルトは年単位
-    ],
+    // 'contactY' => [
+    //     'name' => 'コンタクト履歴データ',
+    //     'columns' => ['医療機関CD','医療機関名','年度','施設区分','日付','方法','連携機関対応者部署','連携機関対応者役職','連携機関対応者氏名','連携機関対応人数・氏名','当院対応者所属','当院対応者氏名','当院対応人数・氏名','内容','備考','データ作成部署'],
+    //     'year_func' => function($dbh) {
+    //         $contact_ym = get_contact_ym($dbh);
+    //         return empty($contact_ym) ? 'データなし' : substr($contact_ym, 0, 4) . "年" . substr($contact_ym, 5, 2) . "月";
+    //     },
+    //     'year_col' => 4, // 年度
+    //     'year_label' => '年',
+    //     'mode' => 'year' // デフォルトは年単位
+    // ],
     'contactM' => [
-        'name' => 'コンタクト履歴データ（月単位）',
+        'name' => 'コンタクト履歴データ',
         'columns' => ['医療機関CD','医療機関名','年度','施設区分','日付','方法','連携機関対応者部署','連携機関対応者役職','連携機関対応者氏名','連携機関対応人数・氏名','当院対応者所属','当院対応者氏名','当院対応人数・氏名','内容','備考','データ作成部署'],
         'year_func' => function($dbh) {
             $contact_ym = get_contact_ym($dbh);
@@ -112,7 +112,8 @@ $data_types = [
             $training_year = get_training_year($dbh);
             return empty($training_year) ? 'データなし' : substr($training_year, 0, 4) . "年度";
         },
-        'year_col' => 1,
+        'date_start' => 7,
+        'date_end' => 8,
         'year_label' => '年度',
         'mode' => 'year'
     ]
@@ -136,7 +137,6 @@ $setting = $data_types[$type];
 
 // 月単位 or 年単位かの情報を取得
 $mode = $setting['mode'];
-
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // ファイルが正しくアップロードされたか確認
@@ -208,16 +208,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
             }
 
-            // if($type == 'introY' || $type == 'introM' || $type == 'inversintroY' || $type == 'inversintroM' || $type == 'training') {
-            //     // 空のデータがあるかチェック（紹介・逆紹介・兼業）
-            //     foreach ($csv_data as $rowIndex => $row) {
-            //         foreach ($row as $colIndex => $field) {
-            //             if (trim($field) === '') {
-            //                 $errors[] = "・空のデータが含まれています。行: " . ($rowIndex + 1) . ", 列: " . ($colIndex + 1);
-            //             }
-            //         }
-            //     }
-            // }
 
             if ($col_ok) {
                 $_SESSION['csv_data'] = $csv_data;
@@ -227,18 +217,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // 1行目（ヘッダ）を除外
                 $csv_data = array_slice($csv_data, 1);
 
-                $dateIndex = $setting['year_col'];
                 $minDate = null;
                 $maxDate = null;
 
-                foreach ($csv_data as $row) {
-                    if (!isset($row[$dateIndex])) continue;
-                    $date = trim($row[$dateIndex]);
-                    if ($date === '') continue;
-                    if ($minDate === null || strtotime($date) < strtotime($minDate)) $minDate = $date;
-                    if ($maxDate === null || strtotime($date) > strtotime($maxDate)) $maxDate = $date;
-                }
+                if ($type === 'training') {
+
+                    // 兼業データの場合
+                    foreach ($csv_data as $row) {
+                        if (!isset($row[$setting['date_start']]) || !isset($row[$setting['date_end']])) continue;
+                        $startDate = trim($row[$setting['date_start']]);
+                        $endDate = trim($row[$setting['date_end']]);
+                        if ($startDate === '' && $endDate === '') continue;
+                        if ($startDate !== '') {
+                            if ($minDate === null || strtotime($startDate) < strtotime($minDate)) {
+                                $minDate = $startDate;
+                            }
+                        }
+                        if ($endDate !== '') {
+                            if ($maxDate === null || strtotime($endDate) > strtotime($maxDate)) {
+                                $maxDate = $endDate;
+                            }
+                        }
+                    }
+                    
+                }else{
                 
+                    // 紹介・逆紹介・コンタクト履歴データの場合
+                    $dateIndex = $setting['year_col'];
+                    foreach ($csv_data as $row) {
+                        if (!isset($row[$dateIndex])) continue;
+                        $date = trim($row[$dateIndex]);
+                        if ($date === '') continue;
+                        if ($minDate === null || strtotime($date) < strtotime($minDate)) $minDate = $date;
+                        if ($maxDate === null || strtotime($date) > strtotime($maxDate)) $maxDate = $date;
+                    }
+                    
+                }
 
                 // --- ここから contact_month 用の月単位チェック ---
                 if ($setting['mode'] === 'month') {
@@ -249,6 +263,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // セッションに保存
                     $_SESSION['minYearMonth'] = $minYearMonth;
                     $_SESSION['maxYearMonth'] = $maxYearMonth;
+                    
                     
                     // 年月日形式
                     $minDateFmt = ($minDate !== null && strpos($minDate, '/') !== false)
@@ -298,7 +313,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         // 365日以内ならOK
                         if ($diffDays <= 365) {
                             if ($minDate === $maxDate) {
-                                $year = $minDateFmt;
+                                $year = $minDateFmt."年度";
                             } else {
                                 $year = $minDateFmt . " ～ " . $maxDateFmt;
                                 // 1年分であればエラーを出さない

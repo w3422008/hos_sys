@@ -47,11 +47,13 @@ define("KAWASAKI_URL", "https://w.kawasaki-m.ac.jp/");
     <div id="sticky-note-area"></div>
     <!-- 注意書き -->
     <div class="mt-3 caution">
-        <h4 class="custom-text">　!　確認事項（以下の状態ではデータインポート、アップデートが実行されない場合があります）</h4>
-        <p>・ファイルのデータ形式が「csv」でない場合</p>
-        <p>・ファイル内のデータ項目が異なる、または必要項目に未記載などの不備がある場合</p>
-        <p>・ファイルデータの年度・年月が複数ある場合（例：2023のみ〇、2023,2024...×）</p>
-        <p>・その他含め問題があるファイルで実行した場合は、エラーメッセージが表示されます。</p>
+        <div class="caution-contents">
+            <h4 class="custom-text">　!　確認事項（以下の状態ではデータインポート、アップデートが実行されない場合があります）</h4>
+            <p>・ファイルのデータ形式が「csv」でない場合</p>
+            <p>・ファイル内のデータ項目が異なる、または必要項目に未記載などの不備がある場合</p>
+            <!-- <p>・ファイルデータの年度・年月が複数ある場合（例：2023のみ〇、2023,2024...×）</p> -->
+            <p>・その他含め問題があるファイルで実行した場合は、エラーメッセージが表示されます。</p>
+        </div>
     </div>
 
     <!-- データ種別切り替えタブ -->
@@ -68,7 +70,7 @@ define("KAWASAKI_URL", "https://w.kawasaki-m.ac.jp/");
         <!-- 紹介データ -->
         <li>
             <div class="mt-3">
-                <div class="detail-section">
+                <div class="import-section">
                     <div class="band">
                         <h4>紹介データインポート（1ヶ月）</h4>
                     </div>
@@ -86,41 +88,18 @@ define("KAWASAKI_URL", "https://w.kawasaki-m.ac.jp/");
                         </div>
                     </form>
                 </div>
-                <div class="detail-section">
-                    <div class="band">
-                        <h4>紹介データインポート（1年）</h4>
-                    </div>
-                    <form id="file_upload_form_intro_year" method="post" enctype="multipart/form-data">
-                        <div class="uplade_content">
-                            <div id="file_drag_drop_area_intro_year" class="file_drag_drop_area display_left rounded dashed-border">
-                                <span class="upload_font-size">ここにファイルをドラッグ&ドロップ<br/>または<br/></span>
-                                <button type="button" id="customFileBtn_intro_year" class="uk-button uk-button-default upload_font-size">こちらからファイルを選択</button>
-                                <input id="myFile_intro_year" type="file" name="filename" multiple style="display:none;" />
-                            </div>
-                            <span id="fileName_intro_year" class="display_left"></span>
-                            <div class="d-flex justify-content-center mt-2 text-center">
-                                <button type="submit" name="introY_add" value="送信" class="uk-button uk-button-primary">送信</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
                 <!-- バックアップ復元 -->
-                <div class="detail-section">
-                    <div class="band">
-                        <h4>紹介バックアップ復元</h4>
-                    </div>
+                <div class="backup-section">
                     <div class="uk-margin-large-top uk-margin-large-bottom uk-container uk-container-center uk-width-1-2@m uk-width-1-3@xl">
                         <fieldset class="uk-fieldset uk-margin" id="search-area">
-                            <!-- <form id="introBackupForm" action="intro_file_backup.php">
-                                <button type="submit" class="button_3 uk-button uk-width-1-1"><span></span> <span>バックアップ時点に戻す</span></button>
-                            </form> -->
                             <form id="introBackupForm">
                                 <button type="submit" class="button_3 uk-button uk-width-1-1"> 
                                     <span></span> <span>バックアップ</span>
                                 </button>
                             </form>
 
-                            <p style="color: #4c84af;">　<span class="far fa-folder"></span> バックアップデータの最新年度：<?php echo $introB_year ?? ""; ?></p>
+                            <p style="color: #4c84af;">　<span class="far fa-folder"></span> インポート済データの最新年月：<?php echo $intro_ym ?? ""; ?></p>
+                            <p style="color: #4c84af;">　<span class="far fa-calendar"></span> 最終バックアップ年月日：<span id="IntroLatestBackup"></span></p>
                         </fieldset>
                     </div>
                 </div>
@@ -129,7 +108,7 @@ define("KAWASAKI_URL", "https://w.kawasaki-m.ac.jp/");
         <!-- 逆紹介データ -->
         <li>
             <div class="mt-3">
-                <div class="detail-section">
+                <div class="import-section">
                     <div class="band">
                         <h4>逆紹介データインポート（1ヶ月）</h4>
                     </div>
@@ -147,35 +126,15 @@ define("KAWASAKI_URL", "https://w.kawasaki-m.ac.jp/");
                         </div>
                     </form>
                 </div>
-                <div class="detail-section">
-                    <div class="band">
-                        <h4>逆紹介データインポート（1年）</h4>
-                    </div>
-                    <form id="file_upload_form_invintro_year" method="post" enctype="multipart/form-data">
-                        <div class="uplade_content">
-                            <div id="file_drag_drop_area_invintro_year" class="file_drag_drop_area display_left rounded dashed-border">
-                                <span class="upload_font-size">ここにファイルをドラッグ&ドロップ<br/>または<br/></span>
-                                <button type="button" id="customFileBtn_invintro_year" class="uk-button uk-button-default upload_font-size">こちらからファイルを選択</button>
-                                <input id="myFile_invintro_year" type="file" name="filename" multiple style="display:none;" />
-                            </div>
-                            <span id="fileName_invintro_year" class="display_left"></span>
-                            <div class="d-flex justify-content-center mt-2 text-center">
-                                <button type="submit" name="inversintroY_add" value="送信" class="uk-button uk-button-primary">送信</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
                 <!-- バックアップ復元 -->
-                <div class="detail-section">
-                    <div class="band">
-                        <h4>逆紹介バックアップ復元</h4>
-                    </div>
+                <div class="backup-section">
                     <div class="uk-margin-large-top uk-margin-large-bottom uk-container uk-container-center uk-width-1-2@m uk-width-1-3@xl">
                         <fieldset class="uk-fieldset uk-margin" id="search-area">
                             <form id="invIntroBackupForm" action="inv_intro_file_backup.php">
                                 <button type="submit" class="button_3 uk-button uk-width-1-1"><span></span> <span>バックアップ</span></button>
                             </form>
-                            <p style="color: #4c84af;">　<span class="far fa-folder"></span> バックアップデータの最新年度：<?php echo $invB_year ?? ""; ?></p>
+                            <p style="color: #4c84af;">　<span class="far fa-folder"></span> インポート済データの最新年月：<?php echo $inv_ym ?? ""; ?></p>
+                            <p style="color: #4c84af;">　<span class="far fa-calendar"></span> 最終バックアップ年月日：<span id="InvIntroLatestBackup"></span></p>
                         </fieldset>
                     </div>
                 </div>
@@ -184,7 +143,7 @@ define("KAWASAKI_URL", "https://w.kawasaki-m.ac.jp/");
         <!-- コンタクト履歴データ -->
         <li>
             <div class="mt-3">
-                <div class="detail-section">
+                <div class="import-section">
                     <div class="band">
                         <h4>コンタクト履歴データインポート（1ヶ月）</h4>
                     </div>
@@ -202,36 +161,15 @@ define("KAWASAKI_URL", "https://w.kawasaki-m.ac.jp/");
                         </div>
                     </form>
                 </div>
-                <div class="detail-section">
-                    <div class="band">
-                        <h4>コンタクト履歴データインポート（1年）</h4>
-                    </div>
-                    <form id="file_upload_form_contact_year" method="post" enctype="multipart/form-data">
-                        <div class="uplade_content">
-                            <div id="file_drag_drop_area_contact_year" class="file_drag_drop_area display_left rounded dashed-border">
-                                <span class="upload_font-size">ここにファイルをドラッグ&ドロップ<br/>または<br/></span>
-                                <button type="button" id="customFileBtn_contact_year" class="uk-button uk-button-default upload_font-size">こちらからファイルを選択</button>
-                                <input id="myFile_contact_year" type="file" name="filename" multiple style="display:none;" />
-                            </div>
-                            <span id="fileName_contact_year" class="display_left"></span>
-                            <div class="d-flex justify-content-center mt-2 text-center">
-                                <button type="submit" name="contactY_add" value="送信" class="uk-button uk-button-primary">送信</button>
-                            </div>
-                        </div>
-                        
-                    </form>
-                </div>
                 <!-- バックアップ復元 -->
-                <div class="detail-section">
-                    <div class="band">
-                        <h4>コンタクト履歴バックアップ復元</h4>
-                    </div>
+                <div class="backup-section">
                     <div class="uk-margin-large-top uk-margin-large-bottom uk-container uk-container-center uk-width-1-2@m uk-width-1-3@xl">
                         <fieldset class="uk-fieldset" id="search-area">
                             <form id="contactBackupForm" action="file_backup.php">
                                 <button type="submit" class="button_3 uk-button uk-width-1-1"><span></span> <span>バックアップ</span></button>
                             </form>
-                            <p style="color: #4c84af;">　<span class="far fa-folder"></span> バックアップデータの最新年月：<?php echo $contactB_year ?? ""; ?></p>
+                            <p style="color: #4c84af;">　<span class="far fa-folder"></span> インポート済データの最新年月：<?php echo $contact_ym ?? ""; ?></p>
+                            <p style="color: #4c84af;">　<span class="far fa-calendar"></span> 最終バックアップ年月日：<span id="ContactLatestBackup"></span></p>
                         </fieldset>
                     </div>
                 </div>
@@ -240,7 +178,7 @@ define("KAWASAKI_URL", "https://w.kawasaki-m.ac.jp/");
         <!-- 兼業データ -->
         <li>
             <div class="mt-3">
-                <div class="detail-section">
+                <div class="import-section">
                     <div class="band">
                         <h4>兼業データインポート</h4>
                     </div>
@@ -260,16 +198,14 @@ define("KAWASAKI_URL", "https://w.kawasaki-m.ac.jp/");
                     </form>
                 </div>
                 <!-- バックアップ復元 -->
-                <div class="detail-section">
-                    <div class="band">
-                        <h4>兼業バックアップ復元</h4>
-                    </div>
+                <div class="backup-section">
                     <div class="uk-margin-large-top uk-margin-large-bottom uk-container uk-container-center uk-width-1-2@m uk-width-1-3@xl">
                         <fieldset class="uk-fieldset uk-margin" id="search-area">
                             <form id="trainingBackupForm" action="file_backup.php">
                                 <button type="submit" class="button_3 uk-button uk-width-1-1"><span></span> <span>バックアップ</span></button>
                             </form>
-                            <p style="color: #4c84af;">　<span class="far fa-folder"></span> バックアップデータの最新年度：<?php echo $trainingB_year ?? ""; ?></p>
+                            <p style="color: #4c84af;">　<span class="far fa-folder"></span> インポート済データの最新年度：<?php echo $training_year ?? ""; ?></p>
+                            <p style="color: #4c84af;">　<span class="far fa-calendar"></span> 最終バックアップ年月日：<span id="TrainingLatestBackup"></span></p>
                         </fieldset>
                     </div>
                 </div>
@@ -299,18 +235,7 @@ define("KAWASAKI_URL", "https://w.kawasaki-m.ac.jp/");
         </div>
     </div>
 
-    <!-- CSV閲覧モーダル -->
-    <div id="csv-modal" uk-modal>
-        <div class="uk-modal-dialog uk-modal-body">
-            <button class="uk-modal-close-default" type="button" uk-close></button>
-            <h2 class="uk-modal-title" id="csv-modal-title">CSV閲覧</h2>
-            <div id="csv-modal-content"></div>
-        </div>
-    </div>
-
-
-
-
+    <!-- バックアップ一覧モーダル -->
     <div id="backup-modal" uk-modal>
         <div class="uk-modal-dialog uk-modal-body">
             <h3 id="backup-modal-title">バックアップ一覧</h3>
@@ -321,7 +246,7 @@ define("KAWASAKI_URL", "https://w.kawasaki-m.ac.jp/");
         </div>
     </div>
 
-    <!-- ローディングモーダル -->
+    <!-- インポート中モーダル -->
     <div id="loading-modal" uk-modal class="loading-modal">
         <div class="uk-modal-dialog uk-modal-body uk-text-center">
             <div uk-spinner="ratio: 2"></div>

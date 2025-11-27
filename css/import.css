@@ -92,19 +92,12 @@ body {
 .caution {
     border: 2px solid red;
     padding: 10px;
-    margin: 10px;
-    width: 65%;
-    margin-left: 4%
+    margin: 10px auto;
+    width: 52%;
+    max-width: 65em;
 }
 
-.custom-text {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    margin-top: 10px;
-    color: red; 
-}
-
+/* 注意書きの文字色等指定 */
 .caution p {
     color: red;
     font-size: 14px;
@@ -113,6 +106,41 @@ body {
     font-weight: normal;
 }
 
+/* 注意書きの書き出し調整 */
+.caution-contents {
+    margin-left: 1em;
+}
+
+/* 注意書き 見出し */
+.custom-text {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    color: red; 
+}
+
+/* インポート領域周辺設定 */
+.import-section {
+    margin: 1em 0 1em 0;  
+}
+
+.import-section h4 {
+
+    padding:.3em .8rem;
+
+    color: #000;
+    background: #EFFFE8; /* 薄い黄みの緑 */
+    /*background:#fff; /* 白 */
+
+    border-radius: 1px;
+    border-left: solid 10px #8ACC58;
+
+}
+
+.backup-content p {
+    margin: 0; /* 段落の余白をなくす */
+}
 
 /*文字、罫線の設定*/
 .uk-form-label {
@@ -380,7 +408,7 @@ table.stylish-csv-table tr:last-child td {
     border-radius: 8px;
 }
 
-/* ローディングモーダルのスタイル */
+/* ローディングモーダル・プレビューモーダルのスタイル */
 #loading-modal.uk-modal::before {
     content: none !important;
     display: none !important;
@@ -544,6 +572,13 @@ table.stylish-csv-table tr:last-child td {
 .backup-download-btn:hover {
     background: linear-gradient(135deg, #218838, #1e7e34) !important;
     transform: scale(1.02);
+}
+
+.backup-empty-text{
+    padding: 2.2em 2em 1.3em 2em;
+    text-align: center;
+    color: #666;
+    font-size: 25px;
 }
 
 /* アニメーション */

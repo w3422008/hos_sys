@@ -1,67 +1,54 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head><link rel="shortcut icon" href="../favicon.ico">
+<head>
+    <link rel="shortcut icon" href="../favicon.ico">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ユーザー管理 | 医療機関情報システム</title>
-    <!--CSS/JS-->
-    <!-- *全画面必須 ---------->
-        <!--UIkit3-->
-        <link rel="stylesheet" href="../css/uikit.min.css" />
-        <script src="../js/uikit.min.js"></script>
-        <script src="../js/uikit-icons.min.js"></script>
-        <link rel="stylesheet" href="../css/uk-custom.css">
+    
+    <!-- CSS/JS 略 -->
+    <link rel="stylesheet" href="../css/uikit.min.css" />
+    <script src="../js/uikit.min.js"></script>
+    <script src="../js/uikit-icons.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css"/>
+    <link rel="stylesheet" href="../css/form_parts.css" />
+    <link rel="stylesheet" href="../css/tables.css" />
+    <link rel="stylesheet" href="../css/all.min.css" />
 
-        <!--style.css-->
-        <link rel="stylesheet" href="../css/style.css"/>
-        <link rel="stylesheet" href="../css/form_parts.css" />
-        <link rel="stylesheet" href="../css/marker.css"/>
-        <link rel="stylesheet" href="../css/tables.css" />
-
-        <!--*font awesome-->
-        <link rel="stylesheet" href="../css/all.min.css" />
-<!--20231031櫻間-->
-
-        <style>
-            /*停止中ユーザ―の背景色をグレーに*/
-            .hide-tbl-bgd {
-                background: #f8f8f8;
-            }
-
-            /* 高橋 今度やる
-            .fixed-thead {
-                position: relative;
-            }
-            .fixed-thead th {
-                position: sticky;
-                top: 0px;
-            }
-            */
-        </style>
-
-</head> 
+    <style>
+        .hide-tbl-bgd {
+            background: #f8f8f8;
+        }
+        .search-loading {
+            opacity: 0.6;
+        }
+        .per-page-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
 
 <body>
-    <!-- **header -->
     <?php include_once("../header.php"); ?>
+    
     <header uk-sticky>
-        <!-- パンくず -->
         <ul class="uk-breadcrumb breadcrumb">
             <li><a href="../menu/MENU_control.php">MENU</a></li>
             <li><span>ユーザー管理</span></li>
         </ul>
     </header>
 
-    <!-- **footer ページ下部固定 -->
     <footer uk-sticky="position: bottom">
         <?php include_once("../footer.php"); ?>
     </footer>
 
-    <!-- **main -->
     <main>
-    <div class="uk-container uk-width-expand">
-        <!-- *main_header -->
+        <div class="uk-container uk-width-expand">
+            <!-- ヘッダー -->
             <div class="uk-card-header uk-flex uk-flex-middle uk-flex-between">
                 <h2>ユーザー管理</h2>
                 <div>
@@ -71,190 +58,59 @@
                 </div>
             </div>
 
-        <!-- *main_body -->
-            <div class="filter_items">
-                <!-- 絞込条件 -->
-                <!--form action="user_MT_control.php" method="GET">
-                    <span>
-                        <i class="fas fa-filter fa-lg"></i>
-                        絞込み条件：
-                    </span>
-                    <div class="uk-inline">
-                        <button class="filter_select" type="button">
-                            権限
-                        </button>
-                        <div uk-dropdown="mode: click">
-                            <ul class="uk-nav uk-dropdown-nav">
-                                <li class="uk-nav-header">権限</li>
-                                <li><label><input type="checkbox" name="FIL_adm[]" value="" class="uk-checkbox" <?php //if($FIL_adm === null){?> checked <?php //} ?>>ALL</label></li>
-                                <li class="uk-nav-divider"></li>
-                                <li><label><input type="checkbox" name="FIL_adm[]" value="1" class="uk-checkbox" onchange="submit(this.form)" <?php //if($FIL_adm === '1'){?> checked <?php //} ?>>管理者</label></li>
-                                <li><label><input type="checkbox" name="FIL_adm[]" value="0" class="uk-checkbox" onchange="submit(this.form)" <?php //if($FIL_adm === '0'){?> checked <?php //} ?>>一般</label></li>
-                                <li><label><input type="checkbox" name="FIL_adm[]" value="2" class="uk-checkbox" onchange="submit(this.form)" <?php //if($FIL_adm === '2'){?> checked <?php //} ?>>一般（事務）</label></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="uk-inline">
-                        <button class="filter_select" type="button">
-                            施設
-                        </button>
-                        <div uk-dropdown="mode: click">
-                            <ul class="uk-nav uk-dropdown-nav">
-                                <li class="uk-nav-header">施設</li>
-                                <li><label><input type="radio" name="ins" class="uk-radio" checked>ALL</label></li>
-                                <li class="uk-nav-divider"></li>
-                                <li><label><input type="radio" name="ins" class="uk-radio">附属病院</label></li>
-                                <li><label><input type="radio" name="ins" class="uk-radio">総合医療センター</label></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="uk-inline">
-                        <button class="filter_select" type="button">
-                            所属
-                        </button>
-                        <div uk-dropdown="mode: click">
-                            <ul class="uk-nav uk-dropdown-nav">
-                                <li class="uk-nav-header">所属</li>
-                                <li><label><input type="checkbox" name="" class="uk-checkbox" checked>ALL</label></li>
-                                <li class="uk-nav-divider"></li>
-                                <li><label><input type="checkbox" name="" class="uk-checkbox">医事課</label></li>
-                                <li><label><input type="checkbox" name="" class="uk-checkbox">庶務課</label></li>
-                                <li><label><input type="checkbox" name="" class="uk-checkbox">地域医療連携室</label></li>
-                                <li><label><input type="checkbox" name="" class="uk-checkbox">医療資料部</label></li>
-                            </ul>
-                        </div>
-                    </div>
-                </form-->
-
-                <!--ID検索-->
-                <form action="user_MT_control.php" method="GET" class="validationForm" novalidate>
-                    <span>ID検索：</span>
-                    <!-- textbox -->
-                    <?php if(isset($id)){ ?>
-                        <input type="text" class="required user_id" id="user_id" name="user_id" value="<?php echo $id ; ?>" placeholder="ユーザーIDを入力" data-pattern="user">
-                    <?php }else{ ?>
-                        <input type="text" class="required user_id" id="user_id" name="user_id" placeholder="ユーザーIDを入力" data-pattern="user">
-                    <?php } ?>
-
-                    <!-- button -->
-                    <button type="submit" class="filter_btn"><i class="fas fa-arrow-alt-circle-right"></i></button>
-                    
-                    <?php if(isset($id)&&$id!==''){ //解除 ?>
-                    <a href="user_MT_control.php" class="filter_btn"><i class="far fa-times-circle"></i></a>
-                    <?php } ?>                
-                </form>
-            </div>
-
+            <!-- 検索・フィルター -->
             <div class="filter_items uk-flex uk-flex-between">
-                <form action="user_MT_control.php" method="GET">
-                    <select class="filter_select" name="onf" onchange="submit(this.form)">
-                        <option value="ALL" <?php if($onf === null){?> selected <?php } ?>>すべてのユーザー</option>
-                        <option value="Active" <?php if($onf === '0'){?> selected <?php } ?>>利用中</option>
-                        <option value="InActive" <?php if($onf === '1'){?> selected <?php } ?>>停止中</option>
-                    </select>
-                </form>
+                <!-- リアルタイム検索入力 -->
+                <div>
+                    <span>検索：</span>
+                    <input type="text" 
+                           id="search-keyword" 
+                           class="search-input" 
+                           placeholder="ユーザーID/名前を入力"
+                           value="<?php echo html_escape($search_keyword); ?>">
+                </div>
 
-                <?php if(!empty($data)){ ?>
-                    <!-- 高橋20221211
-                        件数表示変更　✅必要に応じてカスタマイズ
-                    -->
-                    <form action="user_MT_control.php" method="POST">
-                        <span>表示件数：</span>
-                        <select name="display" onchange="submit(this.form)">
-                            <option value="5" <?php if($disp_cnt === '5'){?> selected <?php } ?>>5</option>
-                            <option value="10" <?php if($disp_cnt === '10'){?> selected <?php } ?>>10</option>
-                            <option value="15" <?php if($disp_cnt === '15'){?> selected <?php } ?>>15</option>
-                            <option value="20" <?php if($disp_cnt === '20'){?> selected <?php } ?>>20</option>
-                            <option value="50" <?php if($disp_cnt === '50'){?> selected <?php } ?>>50</option>
-                            <option value="全件" <?php if($disp_cnt === '全件'){?> selected <?php } ?>>全件</option>
-                        </select>
-                        <button type="submit" class="filter_btn"><i class="fas fa-exchange-alt"></i></button>
-                    </form>
-                    <!-- 件数表示変更ここまで -->
-                <?php } ?>
+                <!-- ステータスフィルター -->
+                <div>
+                    <select id="status-filter" class="filter_select">
+                        <option value="ALL" <?php if($filter_status === 'ALL') echo 'selected'; ?>>すべてのユーザー</option>
+                        <option value="Active" <?php if($filter_status === 'Active') echo 'selected'; ?>>利用中</option>
+                        <option value="InActive" <?php if($filter_status === 'InActive') echo 'selected'; ?>>停止中</option>
+                    </select>
+                </div>
             </div>
 
-        <?php //高橋20221224 修正
-            if(!empty($data)){
-        ?>               
-                <!-- 1120
-                    Pagination
-                -->
-                <ul class="uk-pagination uk-flex-center" uk-margin>
-                    <!-- 最初のページへのリンク（<<）uk-pagination-previous -->
-                    <?php if ($page > 1) { ?>
-                        <li><a href="?page=1" title="最初のページへ"><span uk-icon="chevron-double-left"></span></a></li>
-                    <?php } else { ?>
-                        <li class="uk-disabled"><span uk-icon="chevron-double-left"></span></li>
-                    <?php } ?>
+            <!-- 結果統計 -->
+            <div class="filter_items uk-text-right">
+                <span id="result-count">
+                    <?php echo "検索結果: {$total}件"; ?>
+                </span>
+                <span style="margin-left: 20px;">
+                    利用中: <?php echo $active_user; ?>件 / 
+                    停止中: <?php echo $hide_user; ?>件 / 
+                    全体: <?php echo $total_user; ?>件
+                </span>
+            </div>
 
-                    <!-- 前のページへのリンク（前へ）uk-pagination-previous -->
-                    <?php if ($page > 1) { ?>
-                        <li><a href="?page=<?php echo $prev; ?>" title="前のページへ"><span  uk-icon="chevron-left"></span></a></li>
-                    <?php } else { ?>
-                        <li class="uk-disabled"><span uk-icon="chevron-left"></span></li>
-                    <?php } ?>
+            <?php if($total > 0): ?>
+                <!-- 表示件数選択 -->
+                <div class="per-page-controls">
+                    <label for="per-page-select">1ページあたりの表示件数：</label>
+                    <select id="per-page-select" class="filter_select" style="width: auto;">
+                        <option value="5">5件</option>
+                        <option value="10">10件</option>
+                        <option value="15">15件</option>
+                        <option value="20">20件</option>
+                        <option value="50">50件</option>
+                        <option value="all">全件</option>
+                    </select>
+                </div>
 
-                    <!-- 最初のページ番号へのリンク（1） -->
-                    <?php if ($page > 1) { ?>
-                        <li><a href="?page=1">1</a></li>
-                    <?php } else { ?>
-                        <li class="uk-disabled"><span>1</span></li>
-                    <?php } ?>
+                <!-- ページネーション（上） -->
+                <div id="pagination-top"></div>
 
-                    <!-- ドットの表示（...） -->
-                    <?php if ($page_start > $pageRange){ ?>
-                        <li class="uk-disabled"><span>…</span></li>
-                    <?php } ?>
-                
-                    <!-- ページリンク表示ループ -->
-                    <?php 
-                    foreach ($nums as $num):
-                        if ($num == $page) { //現在地のページ番号 ?>
-                            <li class="uk-active"><span><?php echo $num; ?></span></li>            
-                    <?php
-                        } else { //ページ番号リンク表示
-                    ?>
-                            <li><a href="?page=<?php echo $num; ?>"><?php echo $num; ?></a></li>
-                    <?php 
-                        } 
-                    endforeach;
-                    ?>
-
-                    <!-- ドットの表示（...） -->
-                    <?php if (($totalPage - 1) > $page_end){ ?>
-                        <li class="uk-disabled"><span>…</span></li>
-                    <?php } ?> 
-
-                    <!-- 最後のページ番号へのリンク（$totalPage） -->
-                    <?php if ($page < $totalPage) { ?>
-                        <li><a href="?page=<?php echo $totalPage; ?>"><?php echo $totalPage; ?></a></li>
-                    <?php } elseif($totalPage == 1) { ?>
-                        <li></li>
-                    <?php } else { ?>
-                        <li class="uk-disabled"><span><?php echo $totalPage; ?></span></li>
-                    <?php } ?>
-
-                    <!-- 次のページへのリンク（次へ）uk-pagination-next -->
-                    <?php if ($page < $totalPage) { ?>
-                        <li><a href="?page=<?php echo $next; ?>" title="次のページへ"><span uk-icon="chevron-right"></span></a></li>
-                    <?php } else { ?>
-                        <li class="uk-disabled"><span uk-icon="chevron-right"></span></li>
-                    <?php } ?>
-
-                    <!-- 最後のページへのリンク（>>）uk-pagination-next -->
-                    <?php if ($page < $totalPage) { ?>
-                        <li><a href="?page=<?php echo $totalPage; ?>" title="最後のページへ"><span uk-icon="chevron-double-right"></span></a></li>
-                    <?php } else { ?>
-                        <li class="uk-disabled"><span uk-icon="chevron-double-right"></span></li>
-                    <?php } ?>
-                </ul>
-                <!-- Paginationここまで -->
-
-                <!-- **Table -->
-                <table class="uk-table uk-table-hover uk-table-responsive tbl-line fixed-thead">
+                <!-- テーブル -->
+                <table class="uk-table uk-table-hover uk-table-responsive tbl-line">
                     <thead>
                         <tr>
                             <th class="uk-table-shrink"></th>
@@ -264,288 +120,338 @@
                             <th class="uk-width-medium">施設／所属</th>
                             <th class="uk-width-medium">履歴</th>
                             <th class="uk-table-shrink"></th>
-                            <!-- <th class="uk-table-shrink uk-text-nowrap">Shrink + Nowrap</th> -->
                         </tr>
                     </thead>
-
-                    <tbody>
-                        <?php
-                        foreach($disp_data as $key => $var):
-                        //foreach($data1 as $key => $var):
-                        ?>
-                        <tr <?php if($var['onf']==='1'){ echo 'class="hide-tbl-bgd" uk-tooltip="title:停止中ユーザ; pos: top-left" '; }else{ echo 'uk-tooltip="title:利用中ユーザ; pos: top-left" '; } ?>>
-                            <td>
-                                <?php /*if($var['onf']==='0'){ ?>
-                                    <i class="fas fa-check-circle"></i>
-                                <?php }else */if($var['onf']==='1'){ ?>
-                                    <i class="fas fa-lock"></i>
-                                <?php } ?>
-                            </td>
-                            <td>
-                                <i class="fas fa-user-circle fa-2x" style="color:#aaa;"></i>
-                            </td>
-                            <td>            
-                                <!-- 権限ごとにlabelの色を変更 -->
-                                <?php echo get_adm_label($var['adm_user']); ?>
-                            </td>
-                            <td>
-                                <div>
-                                    <label for="user_id">ID：</label>
-                                    <u><?php echo html_escape($var['user_id']); ?></u>
-                                </div>
-                                <div>
-                                    <span style="font-size:1.2em;">
-                                    <?php echo html_escape($var['user_name']); ?>
-                                    </span>
-                                </div>
-                            </td>
-                            <td class="uk-text-truncate">
-                                <div>
-                                    <?php if($var['ins'] === '0'){ ?>
-                                        <span><?php echo "附属病院"; ?></span>
-                                    <?php }elseif($var['ins'] === '1'){ ?>
-                                        <span><?php echo "総合医療センター"; ?></span>
-                                    <?php }elseif($var['ins'] === '2'){ ?>
-                                        <span><?php echo "高齢者医療センター"; ?></span>
-                                    <?php };?>                      
-                                </div>
-                                <div>（
-                                    <?php //嶋津
-                                    if($var['ins'] === '0'){
-                                        foreach($user_bel as $key=>$row):?>
-                                        <?php if($var['bel'] === (string)$key){
-                                                echo $row;
-                                        };?>
-                                        <?php endforeach;
-                                    }elseif($var['ins'] === '1'){
-                                        foreach($center_bel as $key=>$row):?>
-                                            <?php if($var['bel'] === (string)$key){
-                                                    echo $row;
-                                            };?>
-                                            <?php endforeach;                               
-                                    }elseif($var['ins'] === '2'){
-                                        foreach($kourei_bel as $key=>$row):?>
-                                            <?php if($var['bel'] === (string)$key){
-                                                echo $row;
-                                            };?>
-                                    <?php endforeach;
-                                    }?>
-                                ）</div>
-                            </td>
-                            <td>
-                                <?php if($var['onf']==='0'){ ?>
-                                <div>開始日：<?php echo html_escape($var['start']); ?></div>
-                                <div>変更日：<?php echo html_escape($var['up_date']); ?></div>
-                                <?php }elseif($var['onf']==='1'){ ?>
-                                <div>利用停止日：<?php echo html_escape($var['end']); ?></div>
-                                <?php } ?>
-                            </td>
-                            <td>
-                                <?php if($var['onf']==='0'){ ?>
-                                <a class="uk-button"><i class="fas fa-ellipsis-h fa-lg"></i></a>
-                                <div class="uk-width-small" uk-dropdown="mode: click">
-                                    <ul class="uk-nav uk-dropdown-nav">
-                                        <li><a href="update.php?id=<?php echo $var['user_id']; ?>"><i class="fas fa-user-edit fa-lg"></i> 変更</a></li>
-                                        <li class="uk-nav-divider"></li>
-                                        <li><a href="hide.php?id=<?php echo $var['user_id']; ?>"><i class="fas fa-user-slash fa-lg"></i> 利用停止</a></li>
-                                        <li class="uk-nav-divider"></li>
-                                        <li><a href="clear.php?id=<?php echo $var['user_id']; ?>"><i class="fas fa-key fa-lg"></i> パスワード初期化</a></li>
-                                    </ul>
-                                </div>
-                                <?php }elseif($var['onf']==='1'){ ?>
-                                <a class="uk-button"><i class="fas fa-ellipsis-h fa-lg"></i></a>
-                                <div class="uk-width-small" uk-dropdown="mode: click">
-                                    <ul class="uk-nav uk-dropdown-nav">
-                                        <li><a href="undoing.php?id=<?php echo $var['user_id']; ?>"><i class="fas fa-lock-open fa-lg"></i> 停止解除</a></li>
-                                        <li class="uk-nav-divider"></li>
-                                        <li><a href="deleate.php?id=<?php echo $var['user_id']; ?>"><i class="far fa-trash-alt fa-lg"></i> 削除</a></li>
-                                    </ul>
-                                </div>
-                                <?php } ?>
-                            </td>
-                        </tr>
-                        <?php
-                        endforeach; 
-                        ?>
+                    <tbody id="user-table-body">
+                        <!-- JavaScriptで動的生成 -->
                     </tbody>
-
                 </table>
-                <!-- **Tableここまで -->
 
-                <!-- 1120
-                    Pagination
-                -->
-                <ul class="uk-pagination uk-flex-center uk-margin-top" uk-margin>
-                    <!-- 最初のページへのリンク（<<）uk-pagination-previous -->
-                    <?php if ($page > 1) { ?>
-                        <li><a href="?page=1" title="最初のページへ"><span uk-icon="chevron-double-left"></span></a></li>
-                    <?php } else { ?>
-                        <li class="uk-disabled"><span uk-icon="chevron-double-left"></span></li>
-                    <?php } ?>
+                <!-- ページネーション（下） -->
+                <div id="pagination-bottom"></div>
 
-                    <!-- 前のページへのリンク（前へ）uk-pagination-previous -->
-                    <?php if ($page > 1) { ?>
-                        <li><a href="?page=<?php echo $prev; ?>" title="前のページへ"><span  uk-icon="chevron-left"></span></a></li>
-                    <?php } else { ?>
-                        <li class="uk-disabled"><span uk-icon="chevron-left"></span></li>
-                    <?php } ?>
-
-                    <!-- 最初のページ番号へのリンク（1） -->
-                    <?php if ($page > 1) { ?>
-                        <li><a href="?page=1">1</a></li>
-                    <?php } else { ?>
-                        <li class="uk-disabled"><span>1</span></li>
-                    <?php } ?>
-
-                    <!-- ドットの表示（...） -->
-                    <?php if ($page_start > $pageRange){ ?>
-                        <li class="uk-disabled"><span>…</span></li>
-                    <?php } ?>
-                
-                    <!-- ページリンク表示ループ -->
-                    <?php 
-                    foreach ($nums as $num):
-                        if ($num == $page) { //現在地のページ番号 ?>
-                            <li class="uk-active"><span><?php echo $num; ?></span></li>            
-                    <?php
-                        } else { //ページ番号リンク表示
-                    ?>
-                            <li><a href="?page=<?php echo $num; ?>"><?php echo $num; ?></a></li>
-                    <?php 
-                        } 
-                    endforeach;
-                    ?>
-
-                    <!-- ドットの表示（...） -->
-                    <?php if (($totalPage - 1) > $page_end){ ?>
-                        <li class="uk-disabled"><span>…</span></li>
-                    <?php } ?> 
-
-                    <!-- 最後のページ番号へのリンク（$totalPage） -->
-                    <?php if ($page < $totalPage) { ?>
-                        <li><a href="?page=<?php echo $totalPage; ?>"><?php echo $totalPage; ?></a></li>
-                    <?php } elseif($totalPage == 1) { ?>
-                        <li></li>
-                    <?php } else { ?>
-                        <li class="uk-disabled"><span><?php echo $totalPage; ?></span></li>
-                    <?php } ?>
-
-                    <!-- 次のページへのリンク（次へ）uk-pagination-next -->
-                    <?php if ($page < $totalPage) { ?>
-                        <li><a href="?page=<?php echo $next; ?>" title="次のページへ"><span uk-icon="chevron-right"></span></a></li>
-                    <?php } else { ?>
-                        <li class="uk-disabled"><span uk-icon="chevron-right"></span></li>
-                    <?php } ?>
-
-                    <!-- 最後のページへのリンク（>>）uk-pagination-next -->
-                    <?php if ($page < $totalPage) { ?>
-                        <li><a href="?page=<?php echo $totalPage; ?>" title="最後のページへ"><span uk-icon="chevron-double-right"></span></a></li>
-                    <?php } else { ?>
-                        <li class="uk-disabled"><span uk-icon="chevron-double-right"></span></li>
-                    <?php } ?>
-                </ul>
-                <!-- Paginationここまで -->
-
-        <?php  
-            }else{
-                if(isset($_GET['user_id'])){ 
-                /*検索結果なし*/ ?>
-                <div class="uk-margin-top uk-container uk-container-center uk-width-1-1@l">
-                    <p class="uk-text-danger"><span uk-icon="warning"></span> <b style="border-bottom:1px solid;">検索結果なし</b>：該当するユーザーIDがございません。</p>
+            <?php else: ?>
+                <div class="uk-margin-top uk-container uk-container-center">
+                    <p class="uk-text-danger">
+                        <span uk-icon="warning"></span> 
+                        <b>検索結果なし</b>：条件に合致するユーザーがありません
+                    </p>
                 </div>
-        <?php   }else{
-                /*データなし*/ ?>
-                <div class="uk-margin-top uk-container uk-container-center uk-width-1-1@l">
-                    <p class="uk-text-danger"><span uk-icon="warning"></span> <b style="border-bottom:1px solid;">データなし</b>：ユーザ情報がありません</p>
-                </div>
-        <?php  
-                }
-            }
-        ?>
+            <?php endif; ?>
+
         </div>
     </main>
 
+    <script>
+        // ★ グローバル変数
+        let currentPage = 1;
+        let searchKeyword = '<?php echo html_escape($search_keyword); ?>';
+        let statusFilter = '<?php echo $filter_status; ?>';
+        let perPage = 5; // ★ デフォルトを5に変更
 
-</body>
-    
-<script>  
-    //class="validationForm" と novalidate 属性を指定した form 要素を独自に検証
-    document.addEventListener('DOMContentLoaded', () => {
-      //.validationForm を指定した最初の form 要素を取得
-      const validationForm = document.querySelector('.validationForm');
-      //.validationForm を指定した form 要素が存在すれば
-      if(validationForm) {
-        //エラーを表示する span 要素に付与するクラス名（エラー用のクラス）
-        const errorClassName = 'error';
-        
-        //required クラスを指定された要素の集まり  
-        const requiredElems = document.querySelectorAll('.required');
-        //user_id クラスを指定された要素の集まり
-        const user_idElems =  document.querySelectorAll('.user_id');
-        
-        //エラーメッセージを表示する span 要素を生成して親要素に追加する関数
-        //elem ：対象の要素
-        //errorMessage ：表示するエラーメッセージ
-        const createError = (elem, errorMessage) => {
-          //span 要素を生成
-          const errorSpan = document.createElement('span');
-          //エラー用のクラスを追加（設定）
-          errorSpan.classList.add(errorClassName);
-          //aria-live 属性を設定
-          errorSpan.setAttribute('aria-live', 'polite');
-          //引数に指定されたエラーメッセージを設定
-          errorSpan.textContent = errorMessage;
-          //elem の親要素の子要素として追加
-          elem.parentNode.appendChild(errorSpan);
-        }
-     
-        //form 要素の submit イベントを使った送信時の処理
-        validationForm.addEventListener('submit', (e) => {
-          //エラーを表示する要素を全て取得して削除（初期化）
-          const errorElems = validationForm.querySelectorAll('.' + errorClassName);
-          errorElems.forEach( (elem) => {
-            elem.remove(); 
-          });
-          
-          //.required を指定した要素を検証
-          requiredElems.forEach( (elem) => {
-            //値（value プロパティ）の前後の空白文字を削除
-            const elemValue = elem.value.trim(); 
-            //値が空の場合はエラーを表示してフォームの送信を中止
-            if(elemValue.length === 0) {
-              createError(elem, '入力は必須です');
-              e.preventDefault();
+        // ★ 初期化（ページロード時）
+        document.addEventListener('DOMContentLoaded', () => {
+            // 表示件数セレクトボックスのイベントリスナーを設定
+            const perPageSelect = document.getElementById('per-page-select');
+            if(perPageSelect) {
+                perPageSelect.addEventListener('change', (e) => {
+                    const value = e.target.value;
+                    perPage = value === 'all' ? 99999 : parseInt(value); // 全件は大きな数値
+                    currentPage = 1; // ページをリセット
+                    renderTable();
+                });
             }
-          });
-          
-          //.user_id を指定した要素を検証
-          user_idElems.forEach( (elem) => {
-            //user_id の検証に使用する正規表現パターン
-            const pattern = /^[0-9a-zA-Z]+$/;
-            //値が空でなければ
-            if(elem.value !=='') {
-              //test() メソッドで値を判定し、マッチしなければエラーを表示してフォームの送信を中止
-              if(!pattern.test(elem.value)) {
-                createError(elem, 'ユーザIDは半角で入力してください。');
-                e.preventDefault();
-              }
-            }
-          });
-          
-      
-          //エラーの最初の要素を取得
-          const errorElem =  validationForm.querySelector('.' + errorClassName);
-          //エラーがあればエラーの最初の要素の位置へスクロール
-          if(errorElem) {
-            const errorElemOffsetTop = errorElem.offsetTop;
-            window.scrollTo({
-              top: errorElemOffsetTop - 40,  //40px 上に位置を調整
-              //スムーススクロール
-              behavior: 'smooth'
+
+            renderTable();
+            attachEventListeners();
+        });
+
+        /**
+         * テーブルをレンダリング
+         */
+        function renderTable() {
+            // ★ per_page を文字列から数値に確認
+            const perPageNum = isNaN(perPage) ? 5 : parseInt(perPage);
+            
+            console.log('renderTable called:', { 
+                searchKeyword, 
+                statusFilter, 
+                currentPage, 
+                perPage: perPageNum 
             });
-          }
-        }); 
-      }
-    });
+            
+            // ★ URLパラメータを確認
+            const url = `user_MT_control.php?ajax=1&keyword=${encodeURIComponent(searchKeyword)}&status=${encodeURIComponent(statusFilter)}&page=${currentPage}&per_page=${perPageNum}`;
+            console.log('Fetching URL:', url);
+            
+            fetch(url)
+                .then(response => response.json())
+                .then(result => {
+                    console.log('API Response:', result);
+                    
+                    if(!result.success) {
+                        console.error('API returned false');
+                        return;
+                    }
+
+                    const tbody = document.getElementById('user-table-body');
+                    tbody.innerHTML = '';
+
+                    // ★ データが配列であることを確認
+                    if(!Array.isArray(result.data)) {
+                        console.error('result.data is not an array:', result.data);
+                        tbody.innerHTML = '<tr><td colspan="7" class="uk-text-center">データ形式エラー</td></tr>';
+                        return;
+                    }
+
+                    console.log(`Display data count: ${result.data.length} items`);
+
+                    if(result.data.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="7" class="uk-text-center">データがありません</td></tr>';
+                        document.getElementById('pagination-top').innerHTML = '';
+                        document.getElementById('pagination-bottom').innerHTML = '';
+                        return;
+                    }
+
+                    // 行を生成
+                    result.data.forEach((user, index) => {
+                        try {
+                            const row = createUserRow(user);
+                            tbody.appendChild(row);
+                        } catch(e) {
+                            console.error(`Error creating row ${index}:`, e);
+                        }
+                    });
+
+                    // ページネーションを表示
+                    console.log(`Rendering ${result.total_pages} pages`);
+                    renderPagination(result.total_pages, result.current_page);
+
+                    // 結果件数を更新
+                    document.getElementById('result-count').textContent = `検索結果: ${result.total}件`;
+                })
+                .catch(error => {
+                    console.error('Fetch Error:', error);
+                    const tbody = document.getElementById('user-table-body');
+                    tbody.innerHTML = `<tr><td colspan="7" class="uk-text-center uk-text-danger">エラー: ${error.message}</td></tr>`;
+                });
+        }
+
+        /**
+         * ユーザー行を作成
+         */
+        function createUserRow(user) {
+            const row = document.createElement('tr');
+            
+            // ステータスに応じたクラス
+            if(user.onf === '1') {
+                row.className = 'hide-tbl-bgd';
+                row.setAttribute('uk-tooltip', 'title:停止中ユーザ; pos: top-left');
+            } else {
+                row.setAttribute('uk-tooltip', 'title:利用中ユーザ; pos: top-left');
+            }
+
+            // ステータスアイコン
+            let statusIcon = '';
+            if(user.onf === '1') {
+                statusIcon = '<i class="fas fa-lock"></i>';
+            }
+
+            // 権限ラベル（ここは既存の関数を使用）
+            const admLabel = getAdmLabelHtml(user.adm_user);
+
+            // 施設・所属情報
+            const facilityInfo = getFacilityInfo(user.ins, user.bel);
+
+            // 履歴情報
+            let historyHtml = '';
+            if(user.onf === '0') {
+                historyHtml = `
+                    <div>開始日：${user.start}</div>
+                    <div>変更日：${user.up_date}</div>
+                `;
+            } else {
+                historyHtml = `<div>利用停止日：${user.end}</div>`;
+            }
+
+            // アクションボタン
+            let actionHtml = '';
+            if(user.onf === '0') {
+                actionHtml = `
+                    <a class="uk-button"><i class="fas fa-ellipsis-h fa-lg"></i></a>
+                    <div class="uk-width-small" uk-dropdown="mode: click">
+                        <ul class="uk-nav uk-dropdown-nav">
+                            <li><a href="update.php?id=${user.user_id}"><i class="fas fa-user-edit fa-lg"></i> 変更</a></li>
+                            <li class="uk-nav-divider"></li>
+                            <li><a href="hide.php?id=${user.user_id}"><i class="fas fa-user-slash fa-lg"></i> 利用停止</a></li>
+                            <li class="uk-nav-divider"></li>
+                            <li><a href="clear.php?id=${user.user_id}"><i class="fas fa-key fa-lg"></i> パスワード初期化</a></li>
+                        </ul>
+                    </div>
+                `;
+            } else {
+                actionHtml = `
+                    <a class="uk-button"><i class="fas fa-ellipsis-h fa-lg"></i></a>
+                    <div class="uk-width-small" uk-dropdown="mode: click">
+                        <ul class="uk-nav uk-dropdown-nav">
+                            <li><a href="undoing.php?id=${user.user_id}"><i class="fas fa-lock-open fa-lg"></i> 停止解除</a></li>
+                            <li class="uk-nav-divider"></li>
+                            <li><a href="deleate.php?id=${user.user_id}"><i class="far fa-trash-alt fa-lg"></i> 削除</a></li>
+                        </ul>
+                    </div>
+                `;
+            }
+
+            row.innerHTML = `
+                <td>${statusIcon}</td>
+                <td><i class="fas fa-user-circle fa-2x" style="color:#aaa;"></i></td>
+                <td>${admLabel}</td>
+                <td>
+                    <div><label>ID：</label><u>${htmlEscape(user.user_id)}</u></div>
+                    <div style="font-size:1.2em;">${htmlEscape(user.user_name)}</div>
+                </td>
+                <td class="uk-text-truncate">
+                    <div>${facilityInfo.facility}</div>
+                    <div>（${facilityInfo.department}）</div>
+                </td>
+                <td>${historyHtml}</td>
+                <td>${actionHtml}</td>
+            `;
+
+            return row;
+        }
+
+        /**
+         * ページネーション表示
+         */
+        function renderPagination(totalPages, currentPage) {
+
+            if(totalPages <= 1) {
+                document.getElementById('pagination-top').innerHTML = '';
+                document.getElementById('pagination-bottom').innerHTML = '';
+                return;
+            }
+
+            let paginationHtml = '<ul class="uk-pagination uk-flex-center">';
+
+            // 前へ
+            if(currentPage > 1) {
+                paginationHtml += `<li><a onclick="goToPage(${currentPage - 1}); return false;">前へ</a></li>`;
+            } else {
+                paginationHtml += '<li class="uk-disabled"><span>前へ</span></li>';
+            }
+
+            // ページ番号（シンプル版：全ページ表示）
+            for(let i = 1; i <= totalPages; i++) {
+                if(i === currentPage) {
+                    paginationHtml += `<li class="uk-active"><span>${i}</span></li>`;
+                } else {
+                    paginationHtml += `<li><a onclick="goToPage(${i}); return false;">${i}</a></li>`;
+                }
+            }
+
+            // 次へ
+            if(currentPage < totalPages) {
+                paginationHtml += `<li><a onclick="goToPage(${currentPage + 1}); return false;">次へ</a></li>`;
+            } else {
+                paginationHtml += '<li class="uk-disabled"><span>次へ</span></li>';
+            }
+
+            paginationHtml += '</ul>';
+
+            // ★ 両方の場所に表示
+            const paginationTop = document.getElementById('pagination-top');
+            const paginationBottom = document.getElementById('pagination-bottom');
+            
+            if(paginationTop) {
+                paginationTop.innerHTML = paginationHtml;
+            }
+            if(paginationBottom) {
+                paginationBottom.innerHTML = paginationHtml;
+            }
+        }
+
+        /**
+         * ページ移動
+         */
+        function goToPage(page) {
+            currentPage = page;
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            renderTable();
+            
+            return false;
+        }
+
+        /**
+         * イベントリスナー設定
+         */
+        function attachEventListeners() {
+            const searchInput = document.getElementById('search-keyword');
+            const statusSelect = document.getElementById('status-filter');
+
+            // リアルタイム検索（入力中）
+            searchInput.addEventListener('input', (e) => {
+                searchKeyword = e.target.value;
+                currentPage = 1; // 検索時は1ページ目に戻す
+                renderTable();
+            });
+
+            // ステータスフィルター変更時
+            statusSelect.addEventListener('change', (e) => {
+                statusFilter = e.target.value;
+                currentPage = 1;
+                renderTable();
+            });
+        }
+
+        /**
+         * HTML特殊文字をエスケープ
+         */
+        function htmlEscape(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        /**
+         * 権限ラベル取得（PHP側の関数と同等）
+         */
+        function getAdmLabelHtml(admUser) {
+            let label = '';
+            if(admUser === '3') {
+                label = '<span class="uk-label SysAdmin">システム管理者</span>';
+            } else if(admUser === '1') {
+                label = '<span class="uk-label uk-label-danger">管理者</span>';
+            } else if(admUser === '2') {
+                label = '<span class="uk-label uk-label-warning">事務</span>';
+            } else {
+                label = '<span class="uk-label">一般</span>';
+            }
+            return label;
+        }
+
+        /**
+         * 施設・所属情報取得
+         */
+        function getFacilityInfo(ins, bel) {
+            const facilities = {
+                '0': '附属病院',
+                '1': '総合医療センター',
+                '2': '高齢者医療センター'
+            };
+
+            const departments = {
+                '0': { '0': '医事課', '1': '庶務課', '2': '地域医療連携室', '3': '医療資料部' },
+                '1': { '0': '企画課', '1': '総務課' },
+                '2': { '0': '総務課', '1': '医事課' }
+            };
+
+            return {
+                facility: facilities[ins] || '不明',
+                department: (departments[ins] && departments[ins][bel]) || '不明'
+            };
+        }
     </script>
+</body>
 </html>

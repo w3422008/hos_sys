@@ -8,13 +8,10 @@ let Mode = '';
 const fileAreas = [
     // 紹介データ
     { area: '#file_drag_drop_area_intro_month', input: '#myFile_intro_month', label: '#fileName_intro_month', button: '#customFileBtn_intro_month' },
-    { area: '#file_drag_drop_area_intro_year', input: '#myFile_intro_year', label: '#fileName_intro_year', button: '#customFileBtn_intro_year' },
     // 逆紹介データ
     { area: '#file_drag_drop_area_invintro_month', input: '#myFile_invintro_month', label: '#fileName_invintro_month', button: '#customFileBtn_invintro_month' },
-    { area: '#file_drag_drop_area_invintro_year', input: '#myFile_invintro_year', label: '#fileName_invintro_year', button: '#customFileBtn_invintro_year' },
     // コンタクト履歴データ
     { area: '#file_drag_drop_area_contact_month', input: '#myFile_contact_month', label: '#fileName_contact_month', button: '#customFileBtn_contact_month' },
-    { area: '#file_drag_drop_area_contact_year', input: '#myFile_contact_year', label: '#fileName_contact_year', button: '#customFileBtn_contact_year' },
     // 兼業データ
     { area: '#file_drag_drop_area_training', input: '#myFile_training', label: '#fileName_training', button: '#customFileBtn_training' }
 ];
@@ -23,35 +20,17 @@ $(function() {
 
     // ドラッグ＆ドロップエリア内のボタンクリック時の動作
     // 紹介データ
-    // 年
-    document.getElementById('customFileBtn_intro_year').addEventListener('click', function() {
-    document.getElementById('myFile_intro_year').click();
-    });
-
-    // 月
     document.getElementById('customFileBtn_intro_month').addEventListener('click', function() {
         document.getElementById('myFile_intro_month').click();
     });
     
     // 逆紹介データ
-    // 年
-    document.getElementById('customFileBtn_invintro_year').addEventListener('click', function() {
-    document.getElementById('myFile_invintro_year').click();
-    });
-
-    // 月
     document.getElementById('customFileBtn_invintro_month').addEventListener('click', function() {
         document.getElementById('myFile_invintro_month').click();
     });
 
 
     // コンタクト履歴データ
-    // 年
-    document.getElementById('customFileBtn_contact_year').addEventListener('click', function() {
-        document.getElementById('myFile_contact_year').click();
-    });
-
-    // 月
     document.getElementById('customFileBtn_contact_month').addEventListener('click', function() {
         document.getElementById('myFile_contact_month').click();
     });
@@ -189,19 +168,10 @@ $(function() {
 
                 // name属性から「_」より前の文字列をdata_typeとして追加
                 const btnName = $(this).attr('name');
-                
-                console.log('Button name:', btnName);
-                                
+                                                
                 if (btnName) {
                     const dataType = btnName.split('_')[0];
                     formData.append('data_type', dataType);
-                    console.log('Data type set to:', dataType);
-                }
-
-                // FormDataの内容をデバッグ出力
-                console.log('FormData contents:');
-                for (let [key, value] of formData.entries()) {
-                    console.log(key, value);
                 }
 
                 // ファイルチェック
@@ -215,81 +185,100 @@ $(function() {
     const backupBtnMap = [
         {
             btn: '#introBackupForm',
+            date: 'IntroLatestBackup',
             key: 'BK_intro',
             title: '紹介'
         },
         {
             btn: '#invIntroBackupForm',
+            date: 'InvIntroLatestBackup',
             key: 'BK_invers_intro',
             title: '逆紹介'
         },
         {
             btn: '#contactBackupForm',
+            date: 'ContactLatestBackup',
             key: 'BK_contact',
             title: 'コンタクト履歴'
         },
         {
             btn: '#trainingBackupForm',
+            date: 'TrainingLatestBackup',
             key: 'BK_training',
             title: '兼業'
         }
     ];
 
     backupBtnMap.forEach(function(item) {
+
+        // バックアップファイル一覧を取得
+        const backupFiles = window.folderFiles[item.key] || [];
+
+        // ★ ファイル一覧をログ形式に変換
+        const formattedFiles = formatBackupFileList(backupFiles);
+
+        const latestBackupYear = document.getElementById(item.date);
+        if (latestBackupYear && formattedFiles.length > 0) {
+            // 最新のバックアップ日時を表示
+            latestBackupYear.textContent = formattedFiles[0].date + ' ' + formattedFiles[0].time;
+        }else{
+            latestBackupYear.textContent = 'なし';
+        }
+
         $(item.btn).on('click', function(e) {
             e.preventDefault();
             // モーダルタイトル
             $('#backup-modal-title').text("バックアップ一覧（" + item.title + "）");
-
-            // バックアップファイル一覧を取得
-            const backupFiles = window.folderFiles[item.key] || [];
-            console.log(backupFiles);
-            // ★ ファイル一覧をログ形式に変換
-            const formattedFiles = formatBackupFileList(backupFiles);
             
             const backupList = document.getElementById('backup-list');
             backupList.innerHTML = '';
-            
-            // ★ ボタン形式のリスト作成
-            formattedFiles.forEach(function(fileInfo, index) {
+            if (formattedFiles.length === 0) {
                 // ボタン形式のエントリを作成
                 const entryDiv = document.createElement('div');
-                entryDiv.className = 'backup-entry';
-                
-                // ボタン内容
-                entryDiv.innerHTML = `
-                    <div class="backup-content">
-                        <div class="backup-info">
-                            <div class="backup-icon">
-                                <span uk-icon="icon: database; ratio: 1.2"></span>
-                            </div>
-                            <div class="backup-details">
-                                <div class="backup-datetime">${fileInfo.date} ${fileInfo.time}</div>
-                                <div class="backup-user">ユーザーID: ${fileInfo.userId}</div>
-                            </div>
-                        </div>
-                        <div class="backup-arrow">
-                            <span uk-icon="icon: chevron-down"></span>
-                        </div>
-                    </div>
-                    <div class="backup-dropdown">
-                        <div class="backup-buttons">
-                            <button class="backup-preview-btn uk-button uk-button-default uk-button-small" 
-                                    data-view="${item.key}/${fileInfo.originalName}">
-                                <span uk-icon="icon: search; ratio: 0.8"></span> プレビュー
-                            </button>
-                            <a class="backup-download-btn uk-button uk-button-primary uk-button-small" 
-                            href="./${item.key}/${encodeURIComponent(fileInfo.originalName)}" 
-                            download="${fileInfo.originalName}">
-                                <span uk-icon="icon: download; ratio: 0.8"></span> ダウンロード
-                            </a>
-                        </div>
-                    </div>
-                `;
-                
+                entryDiv.className = 'backup-empty-text';
+                entryDiv.innerHTML = '<p class="backup-empty-text">バックアップファイルはありません。</p>';
                 backupList.appendChild(entryDiv);
-            });
-            
+
+            } else {
+
+                // ★ ボタン形式のリスト作成
+                formattedFiles.forEach(function(fileInfo, index) {
+                    // ボタン形式のエントリを作成
+                    const entryDiv = document.createElement('div');
+                    entryDiv.className = 'backup-entry';
+                    
+                    // ボタン内容
+                    entryDiv.innerHTML = `
+                        <div class="backup-content">
+                            <div class="backup-info">
+                                <div class="backup-icon">
+                                    <span uk-icon="icon: database; ratio: 1.2"></span>
+                                </div>
+                                <div class="backup-details">
+                                    <div class="backup-datetime">${fileInfo.date} ${fileInfo.time}</div>
+                                    <div class="backup-user">ユーザーID: ${fileInfo.userId}</div>
+                                </div>
+                            </div>
+                            <div class="backup-arrow">
+                                <span uk-icon="icon: chevron-down"></span>
+                            </div>
+                        </div>
+                        <div class="backup-dropdown">
+                            <div class="backup-buttons">
+
+                                <a class="backup-download-btn uk-button uk-button-primary uk-button-small" 
+                                href="./${item.key}/${encodeURIComponent(fileInfo.originalName)}" 
+                                download="${fileInfo.originalName}">
+                                    <span uk-icon="icon: download; ratio: 0.8"></span> ダウンロード
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                    
+                    backupList.appendChild(entryDiv);
+                });
+                
+            }
             UIkit.modal('#backup-modal').show();
 
             // エントリクリック時のドロップダウン表示
@@ -308,30 +297,13 @@ $(function() {
                 arrow.css('transform', isOpen ? 'rotate(180deg)' : 'rotate(0deg)');
             });
 
-            // プレビューボタンのイベント
-            $('#backup-list .backup-preview-btn').off('click').on('click', function(e) {
-                e.stopPropagation(); // 親要素のクリックイベントを停止
-                showLoading();
-                const viewFile = $(this).attr('data-view');
-                fetch('file_select.php?ajax_view=' + encodeURIComponent(viewFile))
-                    .then(res => res.text())
-                    .then(html => {
-                        $('#csv-modal-content').html('<div class="csv-table-container">' + html + '</div>');
-                        hideLoading();
-                        UIkit.modal('#csv-modal').show();
-                    })
-                    .catch(() => {
-                        hideLoading();
-                        showStickyNote('CSVプレビューの読み込みに失敗しました。');
-                    });
-            });
-
             // ダウンロードボタンのイベント（クリック伝播を停止）
             $('#backup-list .backup-download-btn').off('click').on('click', function(e) {
                 e.stopPropagation(); // 親要素のクリックイベントを停止
             });
         });
     });
+    
     // バックアップモーダル閉じるボタン
     $('#close-backup-modal').on('click', function() {
     UIkit.modal('#backup-modal').hide();

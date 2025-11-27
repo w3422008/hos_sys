@@ -17,15 +17,6 @@ $user_id = html_escape($_SESSION['member']['user_id']);
 
 // テーブル情報の定義
 $table_info = [
-    'introY' => [
-        'table' => 'intro',
-        'backupDir' => __DIR__ . '/BK_intro/',
-        'columns' => ['hos_cd', 'ins', 'year', 'date', 'fie_cd', 'fie_name', 'intr'],
-        'JP_columns' => ['医療機関CD','病院区分','年度','診療年月日','科コード','診療科','紹介件数'],
-        'lock' => 'intro',
-        'month_delete' => 'DELETE FROM intro WHERE ins = ? AND DATE_FORMAT(date, "%Y-%m") = ?',
-        'year_delete'  => 'DELETE FROM intro WHERE ins = ? AND DATE_FORMAT(date, "%Y-%m") BETWEEN ? AND ?',
-    ],
     'introM' => [
         'table' => 'intro',
         'backupDir' => __DIR__ . '/BK_intro/',
@@ -33,16 +24,6 @@ $table_info = [
         'JP_columns' => ['医療機関CD','病院区分','年度','診療年月日','科コード','診療科','紹介件数'],
         'lock' => 'intro',
         'month_delete' => 'DELETE FROM intro WHERE ins = ? AND DATE_FORMAT(date, "%Y-%m") = ?',
-        'year_delete'  => 'DELETE FROM intro WHERE ins = ? AND DATE_FORMAT(date, "%Y-%m") BETWEEN ? AND ?',
-    ],
-    'inversintroY' => [
-        'table' => 'invers_intro',
-        'backupDir' => __DIR__ . '/BK_invers_intro/',
-        'columns' => ['hos_cd', 'ins', 'year', 'date', 'fie_cd', 'fie_name', 'invr_intr'],
-        'JP_columns' => ['医療機関CD','病院区分','年度','診療年月日','科コード','診療科','紹介件数'],
-        'lock' => 'invers_intro',
-        'month_delete' => 'DELETE FROM invers_intro WHERE ins = ? AND DATE_FORMAT(date, "%Y-%m") = ?',
-        'year_delete'  => 'DELETE FROM invers_intro WHERE ins = ? AND DATE_FORMAT(date, "%Y-%m") BETWEEN ? AND ?',
     ],
     'inversintroM' => [
         'table' => 'invers_intro',
@@ -51,19 +32,6 @@ $table_info = [
         'JP_columns' => ['医療機関CD','病院区分','年度','診療年月日','科コード','診療科','紹介件数'],
         'lock' => 'invers_intro',
         'month_delete' => 'DELETE FROM invers_intro WHERE ins = ? AND DATE_FORMAT(date, "%Y-%m") = ?',
-        'year_delete'  => 'DELETE FROM invers_intro WHERE ins = ? AND DATE_FORMAT(date, "%Y-%m") BETWEEN ? AND ?',
-    ],
-    'contactY' => [
-        'table' => 'contact',
-        'backupDir' => __DIR__ . '/BK_contact/',
-        'columns' => [
-            'hos_cd', 'hos_name', 'year', 'ins', 'date', 'method', 'ex_dept', 'ex_position', 'ex_name', 'ex_subnames',
-            'in_dept', 'in_name', 'in_subnames', 'detail', 'con_note', 'data_dept'
-        ],
-        'JP_columns' => ['医療機関CD','医療機関名','年度','施設区分','日付','方法','連携機関対応者部署','連携機関対応者役職','連携機関対応者氏名','連携機関対応人数・氏名','当院対応者所属','当院対応者氏名','当院対応人数・氏名','内容','備考','データ作成部署'],
-        'lock' => 'contact',
-        'month_delete' => 'DELETE FROM contact WHERE ins = ? AND DATE_FORMAT(date, "%Y-%m") = ?',
-        'year_delete'  => 'DELETE FROM contact WHERE ins = ? AND DATE_FORMAT(date, "%Y-%m") BETWEEN ? AND ?',
     ],
     'contactM' => [
         'table' => 'contact',
@@ -75,7 +43,6 @@ $table_info = [
         'JP_columns' => ['医療機関CD','医療機関名','年度','施設区分','日付','方法','連携機関対応者部署','連携機関対応者役職','連携機関対応者氏名','連携機関対応人数・氏名','当院対応者所属','当院対応者氏名','当院対応人数・氏名','内容','備考','データ作成部署'],
         'lock' => 'contact',
         'month_delete' => 'DELETE FROM contact WHERE ins = ? AND DATE_FORMAT(date, "%Y-%m") = ?',
-        'year_delete'  => 'DELETE FROM contact WHERE ins = ? AND DATE_FORMAT(date, "%Y-%m") BETWEEN ? AND ?',
     ],
     'training' => [
         'table' => 'training',
@@ -85,7 +52,6 @@ $table_info = [
         ],
         'JP_columns' => ['医療機関CD','年度','施設','医療機関名','診療科','職名','氏名','開始日','終了日','診療支援区分','日時'],
         'lock' => 'training',
-        'month_delete' => 'DELETE FROM training WHERE hos_cd = ? AND year = ? AND ins = ?',
         'year_delete'  => 'DELETE FROM training WHERE hos_cd = ? AND year = ? AND ins = ?',
     ]
 ];
@@ -184,6 +150,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //  データ種別に応じたテーブル情報を取得
     $info = $table_info[$data_type];
 
+    
+
     // バックアップファイルパス、ファイル名 呼び出し
     $backupDir = $info['backupDir'];
     $backupFileName = date('YmdHis') . '_' . $user_id . '_import.csv';
@@ -241,7 +209,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $csv_hos_cd = trim($row[0] ?? ''); // hos_cd は常に0番目
                 
                 // データ種別に応じてhos_nameの位置を特定
-                if ($data_type === 'contactY' || $data_type === 'contactM') {
+                if ($data_type === 'contactM') {
                     $csv_hos_name = trim($row[1] ?? ''); // contactの場合は1番目
                 } elseif ($data_type === 'training') {
                     $csv_hos_name = trim($row[3] ?? ''); // trainingの場合は3番目（tra_name）
@@ -254,7 +222,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if (!isset($main_hospitals[$csv_hos_cd])) {
                     // データ種別に応じてhos_nameの位置を特定（登録なしの場合の表示用）
                     $csv_hos_name_for_display = '';
-                    if ($data_type === 'contactY' || $data_type === 'contactM') {
+                    if ($data_type === 'contactM') {
                         $csv_hos_name_for_display = trim($row[1] ?? ''); // contactの場合は1番目
                     } elseif ($data_type === 'training') {
                         $csv_hos_name_for_display = trim($row[3] ?? ''); // trainingの場合は3番目（tra_name）
@@ -317,19 +285,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $keys = array_unique($keys, SORT_REGULAR);
             // 重複を削除するためのキーを作成・デバッグ処理
             foreach ($keys as $key) {
-                if ($is_month) {
-                    $stmt = $pdo->prepare($info['month_delete']);
-                    $stmt->execute($key);
-                } else {
-                    $stmt = $pdo->prepare($info['year_delete']);
-                    $stmt->execute($key);
-                }
+                $stmt = $pdo->prepare($info['year_delete']);
+                $stmt->execute($key);
             }
         } else {
             $keys = [];
             foreach ($csv_data as $row) {
                 if ($is_month) {
-                    if ($data_type === 'contactM' || $data_type === 'contactY') {
+                    if ($data_type === 'contactM') {
                         $date_col = 4;
                         $data_ins = $row[3];
                     } else {
@@ -350,7 +313,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $min = $_SESSION['minYearMonth'] ?? null;
                     $max = $_SESSION['maxYearMonth'] ?? null;
                     // contactM/contactYとcontactの判定を統一
-                    if ($data_type === 'contactM' || $data_type === 'contactY' || $data_type === 'contact') {
+                    if ($data_type === 'contactM') {
                         $data_ins = $row[3];
                     } else {
                         $data_ins = $row[1];
@@ -361,13 +324,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $keys = array_unique($keys, SORT_REGULAR);
             // 重複を削除するためのキーを作成
             foreach ($keys as $key_idx => $key) {
-                if ($is_month) {
-                    $stmt = $pdo->prepare($info['month_delete']);
-                    $stmt->execute($key);
-                } else {
-                    $stmt = $pdo->prepare($info['year_delete']);
-                    $stmt->execute($key);
-                }
+                $stmt = $pdo->prepare($info['month_delete']);
+                $stmt->execute($key);
             }
         }
 
