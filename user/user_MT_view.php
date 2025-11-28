@@ -29,6 +29,14 @@
             gap: 10px;
             margin-bottom: 15px;
         }
+        main{
+            margin: 0 7em;
+        }
+        @media (max-width: 1500px) {
+            main {
+                margin: 0 ;
+            }
+        }
     </style>
 </head>
 
@@ -62,10 +70,10 @@
             <div class="filter_items uk-flex uk-flex-between">
                 <!-- リアルタイム検索入力 -->
                 <div>
-                    <span>検索：</span>
+                    <span>ユーザー検索</span>
                     <input type="text" 
                            id="search-keyword" 
-                           class="search-input" 
+                           class="uk-input search-input" 
                            placeholder="ユーザーID/名前を入力"
                            value="<?php echo html_escape($search_keyword); ?>">
                 </div>
@@ -172,22 +180,13 @@
         function renderTable() {
             // ★ per_page を文字列から数値に確認
             const perPageNum = isNaN(perPage) ? 5 : parseInt(perPage);
-            
-            console.log('renderTable called:', { 
-                searchKeyword, 
-                statusFilter, 
-                currentPage, 
-                perPage: perPageNum 
-            });
-            
+
             // ★ URLパラメータを確認
             const url = `user_MT_control.php?ajax=1&keyword=${encodeURIComponent(searchKeyword)}&status=${encodeURIComponent(statusFilter)}&page=${currentPage}&per_page=${perPageNum}`;
-            console.log('Fetching URL:', url);
             
             fetch(url)
                 .then(response => response.json())
                 .then(result => {
-                    console.log('API Response:', result);
                     
                     if(!result.success) {
                         console.error('API returned false');
@@ -204,7 +203,6 @@
                         return;
                     }
 
-                    console.log(`Display data count: ${result.data.length} items`);
 
                     if(result.data.length === 0) {
                         tbody.innerHTML = '<tr><td colspan="7" class="uk-text-center">データがありません</td></tr>';
@@ -224,7 +222,6 @@
                     });
 
                     // ページネーションを表示
-                    console.log(`Rendering ${result.total_pages} pages`);
                     renderPagination(result.total_pages, result.current_page);
 
                     // 結果件数を更新
@@ -261,7 +258,7 @@
             const admLabel = getAdmLabelHtml(user.adm_user);
 
             // 施設・所属情報
-            const facilityInfo = getFacilityInfo(user.ins, user.bel);
+            const facilityInfo = getFacilityInfo(user.ins, user.bel,departments);
 
             // 履歴情報
             let historyHtml = '';
@@ -424,7 +421,7 @@
             } else if(admUser === '1') {
                 label = '<span class="uk-label uk-label-danger">管理者</span>';
             } else if(admUser === '2') {
-                label = '<span class="uk-label uk-label-warning">事務</span>';
+                label = '<span class="uk-label uk-label-warning">一般（事務）</span>';
             } else {
                 label = '<span class="uk-label">一般</span>';
             }
@@ -434,24 +431,25 @@
         /**
          * 施設・所属情報取得
          */
-        function getFacilityInfo(ins, bel) {
+        function getFacilityInfo(ins, bel, departments) {
+
             const facilities = {
                 '0': '附属病院',
                 '1': '総合医療センター',
                 '2': '高齢者医療センター'
             };
-
-            const departments = {
-                '0': { '0': '医事課', '1': '庶務課', '2': '地域医療連携室', '3': '医療資料部' },
-                '1': { '0': '企画課', '1': '総務課' },
-                '2': { '0': '総務課', '1': '医事課' }
-            };
-
             return {
                 facility: facilities[ins] || '不明',
                 department: (departments[ins] && departments[ins][bel]) || '不明'
             };
+
         }
+
     </script>
+
+    <script>
+        const departments = <?php echo json_encode($bel, JSON_UNESCAPED_UNICODE); ?>;
+    </script>
+
 </body>
 </html>

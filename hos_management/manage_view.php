@@ -52,6 +52,12 @@
             </div>
 
             <div>
+              <form action="../code_editor/code_editor.php">
+                <button class="button_3 uk-button uk-width-1-1"><span>引き継ぎ</span></button>
+              </form>
+            </div>
+
+            <div>
             <form action="../delete/hide_hos_control.php">
             <button class="button_3 uk-button uk-width-1-1"><span>削除</span></button>
             

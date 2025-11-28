@@ -114,5 +114,11 @@ if(isset($_SESSION['user'])){
     unset($_SESSION['user']);
 }
 
+$bel=array(
+    '0'=> $user_bel,
+    '1'=> $center_bel,
+    '2'=> $kourei_bel
+);
+
 include_once('user_MT_view.php');
 ?>
