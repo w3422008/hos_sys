@@ -1,0 +1,172 @@
+/* タイトル（h1） */
+.main-title{
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+
+/* 
+ *    カードボタン群
+ */
+
+.card-button {
+    height: auto;
+    padding: 30px 20px;
+    border-radius: 15px;
+    border: 2px solid #ddd;
+    transition: all 0.3s ease;
+    text-align: left;
+    background: white;
+    cursor: pointer;
+}
+
+.card-button:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-color: #999;
+}
+
+.card-button h4 {
+    margin: 0 0 15px 0;
+    font-weight: bold;
+    font-size: 1.2rem;
+    word-break: break-word;
+}
+
+.card-button p {
+    margin: 5px 0;
+    color: #666;
+    font-size: 0.95rem;
+}
+
+/* 
+ *    カードボタン群
+ */
+
+
+/* 検索結果がない場合のメッセージ */
+.no-results {
+    text-align: center;
+    color: #999;
+    padding: 40px 20px;
+    font-size: 1.1rem;
+}
+
+
+/* 
+ *    ★ モーダルスタイル群
+*/
+/* モーダルサイズの修正 */
+.uk-modal-body{
+    width: 45em;
+    border-radius: 10px;
+    padding-bottom: 0.5em;
+}
+
+/* モーダル全体の背景 */
+.modal-content {
+    background: white;
+    border-radius: 10px;
+}
+
+/* 「病院情報」ラベル */
+.modal-label {
+    font-weight: bold;
+    min-width: 120px;
+    padding: 1em 0 0 0;
+    font-size: 2em;
+}
+
+/* 値 */
+.modal-value {
+    flex: 1;
+    font-size: 1.2em;
+    background: linear-gradient(180deg, transparent 60%, #affcc2 60%, #affcc2 80%, transparent 80%);
+    padding: 2px 4px;
+    margin-left: 0.4em;
+}
+
+/* 医療機関コード用ラベル */
+.hospitalcode-modal-label{
+    flex: 1;
+    color: #f75757;
+    font-size: 1.2em;
+}
+
+/* 医療機関コード（数）用 */
+.hospitalcode-modal-value{
+    font-weight: bold;
+    min-width: 120px;
+    font-size: 1.3em;
+    text-align: center;
+    /* margin-left: 2.5em; */
+}
+
+.modal-label,
+.modal-value,
+.hospitalcode-modal-value,
+input,
+.modal-icon {
+    color: #333;
+}
+
+/* input欄周辺領域 */
+.input-content{
+    padding: 20px 20px 20px 30px;
+    background-color: #f5ffeb;
+    border-radius: 15px;
+}
+
+.hospitalcode-modal-input{
+    text-align: center;
+}
+
+/* 新医療機関コード入力欄 */
+input {
+    flex: 1;
+    padding: 10px 10px 10px 40px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1.3rem;
+    background-color: #e5ffe5;
+    width: 150px;
+    border: none;
+}
+input:focus {
+    outline: none;
+    border-color: #999;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    background-color: #f2faf2;
+}
+
+/* 矢印 */
+.text-arrow{
+    font-size: 1.5em;
+    margin: 0 20px 0 40px;
+    color: #666;
+}
+
+.modal-icon{
+    font-size: 1.5em;
+}
+
+/* ボタン群 */
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.modal-buttons button {
+    padding: 5px 30px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* 
+ *    ★ モーダルスタイル群
+*/

@@ -65,7 +65,7 @@
                     <a href="<?php echo search_URL; ?>"><i class="fas fa-search fa-2x" id=''></i>検索</a>
                 </li>
 <?php
-                if($user_adm === '3' || $user_adm === '1'){
+                if($user_adm == '3' || $user_adm == '1'){
 ?>
                 <li>
                     <a href="<?php echo hospital_URL; ?>"><i class="far fa-hospital fa-2x"></i>医療機関管理</a>

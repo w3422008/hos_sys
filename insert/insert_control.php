@@ -19,13 +19,18 @@ $user_adm = $_SESSION['member']['adm_user'];
 
 //sessionがあれば変数に保存
 if(isset($_SESSION['insert'])){	
+
+    // 代替案：$_SESSIONから連想配列へ保存することで、コード量を短縮できる
+    // $array = [];
+    // $array = $_SESSION['insert'];
+
     //基本情報
         $hos_cd=$_SESSION['insert']['hos_cd'];
         $hos_div=$_SESSION['insert']['hos_div'];
         $op_flg=$_SESSION['insert']['op_flg'];
         $clo_day=$_SESSION['insert']['clo_day'];
         $med_ass=$_SESSION['insert']['med_ass'];
-        $are_cd=$_SESSION['insert']['are_cd'];
+        $are_cd=strval($_SESSION['insert']['are_cd']);
         $hos_name=$_SESSION['insert']['hos_name'];
         $zipcode=$_SESSION['insert']['zipcode'];
         $area=$_SESSION['insert']['area'];
@@ -37,7 +42,7 @@ if(isset($_SESSION['insert'])){
         $tel=$_SESSION['insert']['tel'];
         $fax=$_SESSION['insert']['fax'];
         //櫻間20230317
-        $mail=$_SESSION['insert']['mail'];
+        $mail=$_SESSION['insert']['email'];
         $note=$_SESSION['insert']['note'];
     //診療科目
         $bed=$_SESSION['insert']['bed'];
@@ -68,21 +73,21 @@ if(isset($_SESSION['insert'])){
         $sun_pm=$_SESSION['insert']['sun_pm'];
         $holiday=$_SESSION['insert']['holiday'];
 
-        $mon_a=$_SESSION['insert']['mon_a'];
-        $mon_p=$_SESSION['insert']['mon_p'];
-        $tue_a=$_SESSION['insert']['tue_a'];
-        $tue_p=$_SESSION['insert']['tue_p'];
-        $wed_a=$_SESSION['insert']['wed_a'];
-        $wed_p=$_SESSION['insert']['wed_p'];
-        $thr_a=$_SESSION['insert']['thr_a'];
-        $thr_p=$_SESSION['insert']['thr_p'];
-        $fri_a=$_SESSION['insert']['fri_a'];
-        $fri_p=$_SESSION['insert']['fri_p'];
-        $sat_a=$_SESSION['insert']['sat_a'];
-        $sat_p=$_SESSION['insert']['sat_p'];
-        $sun_a=$_SESSION['insert']['sun_a'];
-        $sun_p=$_SESSION['insert']['sun_p'];
-        $holida=$_SESSION['insert']['holida'];
+        // $mon_a=$_SESSION['insert']['mon_a'];
+        // $mon_p=$_SESSION['insert']['mon_p'];
+        // $tue_a=$_SESSION['insert']['tue_a'];
+        // $tue_p=$_SESSION['insert']['tue_p'];
+        // $wed_a=$_SESSION['insert']['wed_a'];
+        // $wed_p=$_SESSION['insert']['wed_p'];
+        // $thr_a=$_SESSION['insert']['thr_a'];
+        // $thr_p=$_SESSION['insert']['thr_p'];
+        // $fri_a=$_SESSION['insert']['fri_a'];
+        // $fri_p=$_SESSION['insert']['fri_p'];
+        // $sat_a=$_SESSION['insert']['sat_a'];
+        // $sat_p=$_SESSION['insert']['sat_p'];
+        // $sun_a=$_SESSION['insert']['sun_a'];
+        // $sun_p=$_SESSION['insert']['sun_p'];
+        // $holida=$_SESSION['insert']['holida'];
 
         $int_med=$_SESSION['insert']['int_med'];
         $ped_med=$_SESSION['insert']['ped_med'];
@@ -198,6 +203,8 @@ if(isset($_SESSION['insert'])){
     $mcare_note=$_SESSION['insert']['mcare_note'];
     //高橋20230610　後半タブinsert（SESSION）ここまで
     
+
+    // var_dump($_SESSION['insert']['med_care']);
 }
 
 

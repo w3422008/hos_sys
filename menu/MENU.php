@@ -42,7 +42,7 @@
 
 <?php
       //加藤20250527
-      if($user_adm === '1' || $user_adm === '3'){
+      if($user_adm == '1' || $user_adm == '3'){
 ?>
 
         <fieldset class="uk-fieldset uk-margin" id="search-area">
@@ -78,7 +78,7 @@
             </div>
 <?php
             //加藤20250527
-            if($user_adm === '3'){
+            if($user_adm == '3'){
 ?>
               <!--三宅-->
               <div>

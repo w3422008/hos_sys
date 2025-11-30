@@ -19,46 +19,11 @@
     <link rel="stylesheet" href="../css/tables.css" />
     <link rel="stylesheet" href="../css/all.min.css" />
 
+    <link rel="stylesheet" href="code_editor.css" />
+
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 
-    <style>
-        .card-button {
-            height: auto;
-            padding: 30px 20px;
-            border-radius: 15px;
-            border: 2px solid #ddd;
-            transition: all 0.3s ease;
-            text-align: left;
-            background: white;
-            cursor: pointer;
-        }
-
-        .card-button:hover {
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            border-color: #999;
-        }
-
-        .card-button h4 {
-            margin: 0 0 15px 0;
-            font-weight: bold;
-            font-size: 1.2rem;
-            word-break: break-word;
-        }
-
-        .card-button p {
-            margin: 5px 0;
-            color: #666;
-            font-size: 0.95rem;
-        }
-
-        .no-results {
-            text-align: center;
-            color: #999;
-            padding: 40px 20px;
-            font-size: 1.1rem;
-        }
-    </style>
 </head>
 
 <body>
@@ -75,7 +40,7 @@
 
     <!-- メインコンテンツ -->
     <main class="uk-container">
-        <h1>医療機関情報の引き継ぎ</h1>
+        <h1 class="main-title">医療機関情報の引き継ぎ</h1>
 
         <!-- 検索入力欄 -->
         <div class="uk-margin-large-bottom">
@@ -93,6 +58,49 @@
             <!-- JavaScriptで動的生成 -->
         </div>
     </main>
+
+    <!-- ★ 医療機関情報モーダル -->
+    <div id="hospital-modal" uk-modal>
+        <div class="uk-modal-dialog uk-modal-body">
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+
+            <div class="modal-content">
+                <h2 style="margin-bottom: 25px;">この医療機関情報を引き継ぎますか？</h2>
+
+                <div class="input-content">
+                    <p class="hospitalcode-modal-label">※ 新たな医療機関コードを右側に入力してください。</p>
+
+                    <div class="hospitalcode-modal-input">
+                        <!-- 医療機関コード -->
+                        <span class="hospitalcode-modal-value" id="modal-hos-cd"></span>
+                        <span class="text-arrow">▶▶▶</span>
+                        <input type="number"
+                                id="modal-hos-cd-input"
+                                placeholder="7/10桁で入力">
+                    </div>
+                </div>
+                        
+                <p class="modal-label">病院情報</p>
+
+                <p><i class="far fa-hospital fa-2x modal-icon"></i><span class="modal-value" id="modal-hos-name"></span></p>
+                <p><span class="modal-value" id="modal-hos-div"></span>　<span class="">病床数：</span><span class="modal-value" id="modal-hos-bed"></span></p>
+                <p><span class="modal-value" id="modal-hos-address"></span></p>
+
+                <!-- ボタン -->
+                <div class="modal-buttons">
+                    <button id="modal-cancel-btn"
+                            class="uk-button uk-button-default">
+                        戻る
+                    </button>
+                    <button id="modal-confirm-btn"
+                            class="uk-button uk-button-primary">
+                        他の情報を変更する
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="code_editor.js"></script>
 </body>
 </html>
