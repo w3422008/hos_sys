@@ -42,7 +42,7 @@ if(isset($_SESSION['insert'])){
         $tel=$_SESSION['insert']['tel'];
         $fax=$_SESSION['insert']['fax'];
         //櫻間20230317
-        $mail=$_SESSION['insert']['email'];
+        $mail=$_SESSION['insert']['mail'];
         $note=$_SESSION['insert']['note'];
     //診療科目
         $bed=$_SESSION['insert']['bed'];
@@ -202,9 +202,7 @@ if(isset($_SESSION['insert'])){
     $con_note=$_SESSION['insert']['con_note'];
     $mcare_note=$_SESSION['insert']['mcare_note'];
     //高橋20230610　後半タブinsert（SESSION）ここまで
-    
-
-    // var_dump($_SESSION['insert']['med_care']);
+       
 }
 
 

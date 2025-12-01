@@ -30,12 +30,12 @@ foreach ($data as $key =>$var):
             <i class="fas fa-exclamation-circle fa-lg uk-text-danger" uk-tooltip="title:入力は必須です ※閉院日は任意; pos: bottom-left" tabindex="-1"></i><!--高橋20230331追加　tabindex--></h5>
             <div uk-grid>
                 <div>
-                    <label><input type="radio" class="uk-radio" name="op_flg" value="1" onclick="entryChange1();" <?php if(($var['op_flg'])==='1'){ echo'checked=checked' ;}?>>開院</label>
+                    <label><input type="radio" class="uk-radio" name="op_flg" value="1" onclick="entryChange1();" <?php if(($var['op_flg'])=='1'){ echo'checked=checked' ;}?>>開院</label>
                     <!-- 表示非表示切り替え//櫻間java -->
                     <div id="firstBox"></div>
                 </div>
                 <div>
-                    <label><input type="radio" class="uk-radio" name="op_flg" value="0" onclick="entryChange1();" <?php if(($var['op_flg'])==='0'){ echo'checked=checked' ;}?>>閉院</label>
+                    <label><input type="radio" class="uk-radio" name="op_flg" value="0" onclick="entryChange1();" <?php if(($var['op_flg'])=='0'){ echo'checked=checked' ;}?>>閉院</label>
                     <!-- 表示非表示切り替え//櫻間java -->
                     <div class="uk-margin-left" id="secondBox">
                         <span><i class="fas fa-calendar-times fa-lg"></i> 閉院日：</span>

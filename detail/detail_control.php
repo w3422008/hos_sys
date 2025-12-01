@@ -36,11 +36,11 @@ $are_cds=get_area($dbh);
 
 //櫻間
 //ビューview.phpの読み出し
-if($user_adm === '1' || $user_adm === '3'){
+if($user_adm == '1' || $user_adm == '3'){
    include_once('header_detail.php');
-}elseif($user_adm === '2'){
+}elseif($user_adm == '2'){
    include_once('office_header_detail.php');
-}elseif($user_adm === '0'){
+}elseif($user_adm == '0'){
    include_once('user_header_detail.php');
 }
 
