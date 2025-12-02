@@ -125,13 +125,14 @@ function check_cPath(string $old_hospital_code) {
     // 連携パス有無を確認・取得
     $fuzoku_cPath_data = detail_cPath($pdo,$old_hospital_code,0); //附属病院
     $sogo_cPath_data = detail_cPath($pdo,$old_hospital_code,1); //総合医療センター
-
+    
+    $_SESSION['insert']['kurashiki_path'] = [];
+    $_SESSION['insert']['okayama_path'] = [];
+    
     if(!$fuzoku_cPath_data && !$sogo_cPath_data){
         return;
     }
-    // 
-    $_SESSION['insert']['kurashiki_path'] = [];
-    $_SESSION['insert']['okayama_path'] = [];
+
     if($fuzoku_cPath_data){
         // hos_cdは不要なため削除し、値をSESSIONへ保存
         unset($fuzoku_cPath_data['hos_cd']);

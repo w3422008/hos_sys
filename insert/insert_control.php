@@ -99,7 +99,7 @@ if(isset($_SESSION['insert'])){
         $gyn_med=$_SESSION['insert']['gyn_med'];
         $psy_med=$_SESSION['insert']['psy_med'];
         $den_med=$_SESSION['insert']['den_med'];
-        $etc_med=$_SESSION['etc_med']['den_med'];
+        $etc_med=$_SESSION['insert']['etc_med'];
 
 
         $int_int=$_SESSION['insert']['int_int'];
@@ -202,7 +202,6 @@ if(isset($_SESSION['insert'])){
     $con_note=$_SESSION['insert']['con_note'];
     $mcare_note=$_SESSION['insert']['mcare_note'];
     //高橋20230610　後半タブinsert（SESSION）ここまで
-       
 }
 
 

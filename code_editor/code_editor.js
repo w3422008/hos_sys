@@ -1,12 +1,15 @@
 // ★ グローバル変数
 let allData = [];
 let selectedHospital = null;
+let currentPage = 1;
+let currentKeyword = '';
+let totalPages = 1;
 
 /**
  * ページロード時に初期データを表示
  */
 document.addEventListener('DOMContentLoaded', () => {
-    loadData('');
+    loadData('', 1);
     attachSearchListener();
     setupModalHandlers();
 });
@@ -45,12 +48,6 @@ function setupModalHandlers() {
 
             // ★ 登録フォームへ遷移（パスは環境に合わせて調整）
             window.location.href = `../insert/insert_control.php?code_editor=1`;
-            
-            // モーダルを閉じてページをリロード（サーバー処理を少し待つ）
-            // UIkit.modal('#hospital-modal').hide();
-            // setTimeout(() => {
-            //     window.location.reload();
-            // }, 300);
         });
     }
 
@@ -64,19 +61,15 @@ function setupModalHandlers() {
 /**
  * データを取得してカードを表示
  */
-function loadData(keyword) {
-    const url = `code_editor.php?ajax=1&keyword=${encodeURIComponent(keyword)}`;
+function loadData(keyword, page = 1) {
+    currentKeyword = keyword;
+    currentPage = page;
+    
+    const url = `code_editor.php?ajax=1&keyword=${encodeURIComponent(keyword)}&page=${page}`;
     
     fetch(url)
-        .then(response => {
-
-            // ★ テキストで取得してからログに出力
-            return response.text();
-
-        })
+        .then(response => response.text())
         .then(text => {
-
-            // ★ JSONとしてパース
             try {
                 const result = JSON.parse(text);
                 
@@ -86,7 +79,10 @@ function loadData(keyword) {
                 }
 
                 allData = result.data;
+                totalPages = result.total_pages;
+                
                 renderCards(allData);
+                renderPagination(result.current_page, result.total_pages);
             } catch(e) {
                 console.error('JSON Parse Error:', e);
                 console.error('Failed text:', text);
@@ -106,15 +102,53 @@ function renderCards(data) {
 
     // ★ データが空の場合
     if(!data || data.length === 0) {
-        container.innerHTML = '<div class="no-results" style="grid-column: 1 / -1;">検索結果がありません</div>';
+        // ★ グリッドクラスを一時的に削除
+        container.classList.remove('uk-grid-match', 'uk-grid');
+        container.classList.add('uk-flex', 'uk-flex-center', 'uk-flex-middle');
+        container.style.minHeight = '300px';
+        
+        const emptyDiv = document.createElement('div');
+        emptyDiv.className = 'no-results';
+        emptyDiv.innerHTML = '<span>検索結果がありません</span>';
+        
+        container.appendChild(emptyDiv);
+        // ★ 両方をクリア
+        document.getElementById('pagination-container-top').innerHTML = '';
+        document.getElementById('pagination-container-bottom').innerHTML = '';
         return;
     }
+
+    // ★ グリッドクラスを復元
+    container.classList.add('uk-grid-match', 'uk-grid');
+    container.classList.remove('uk-flex', 'uk-flex-center', 'uk-flex-middle');
+    container.style.minHeight = '';
 
     // ★ カードを生成
     data.forEach(hospital => {
         const card = createCard(hospital);
         container.appendChild(card);
     });
+}
+/**
+ * ページネーションをレンダリング
+ */
+function renderPagination(currentPage, totalPages) {
+    // ★ 共通関数を呼び出し
+    renderPaginationCommon(
+        currentPage, 
+        totalPages, 
+        'pagination-container-top', 
+        'pagination-container-bottom', 
+        'goToPage'
+    );
+}
+
+/**
+ * ページ移動
+ */
+function goToPage(page) {
+    loadData(currentKeyword, page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 /**
@@ -165,16 +199,6 @@ function openHospitalModal(event) {
 }
 
 /**
- * 医療機関を選択
- */
-function selectHospital(hosCd) {
-    console.log('Selected:', hosCd);
-    // ★ ここに選択後の処理を記述
-    // 例：
-    // window.location.href = `edit.php?hos_cd=${hosCd}`;
-}
-
-/**
  * 検索入力のイベントリスナー設定
  */
 function attachSearchListener() {
@@ -182,7 +206,7 @@ function attachSearchListener() {
 
     searchInput.addEventListener('input', (e) => {
         const keyword = e.target.value;
-        loadData(keyword);
+        loadData(keyword, 1); // ★ 検索時は1ページ目に戻す
     });
 }
 

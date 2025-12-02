@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../css/uikit.min.css" />
     <script src="../js/uikit.min.js"></script>
     <script src="../js/uikit-icons.min.js"></script>
-    <link rel="stylesheet" href="../css/uk-custom.css">
+    <!-- <link rel="stylesheet" href="../css/uk-custom.css"> -->
 
     <!-- CSS -->
     <link rel="stylesheet" href="../css/style.css"/>
@@ -51,12 +51,23 @@
                    style="border-radius: 20px; padding: 15px 20px; font-size: 1.1rem;">
         </div>
 
+        <!-- ★ ページネーション（上） -->
+        <div id="pagination-container-top" style="text-align: center; margin-bottom: 30px;">
+            <!-- JavaScriptで動的生成 -->
+        </div>
+
         <!-- カード型グリッド -->
         <div class="uk-grid-match uk-child-width-1-3@m uk-child-width-1-2@s uk-grid"
              uk-grid
              id="cards-container">
             <!-- JavaScriptで動的生成 -->
         </div>
+
+        <!-- ★ ページネーション（下） -->
+        <div id="pagination-container-bottom" style="text-align: center; margin-top: 40px;">
+            <!-- JavaScriptで動的生成 -->
+        </div>
+
     </main>
 
     <!-- ★ 医療機関情報モーダル -->
@@ -101,6 +112,7 @@
         </div>
     </div>
 
+    <script src="../js/pagination/pagination.js"></script>
     <script src="code_editor.js"></script>
 </body>
 </html>

@@ -150,6 +150,7 @@
         </div>
     </main>
 
+    <script src="../js/pagination/pagination.js"></script>
     <script>
         // ★ グローバル変数
         let currentPage = 1;
@@ -323,49 +324,15 @@
          */
         function renderPagination(totalPages, currentPage) {
 
-            if(totalPages <= 1) {
-                document.getElementById('pagination-top').innerHTML = '';
-                document.getElementById('pagination-bottom').innerHTML = '';
-                return;
-            }
+            // ★ 共通関数を呼び出し
+            renderPaginationCommon(
+                currentPage, 
+                totalPages, 
+                'pagination-top', 
+                'pagination-bottom', 
+                'goToPage'
+            );
 
-            let paginationHtml = '<ul class="uk-pagination uk-flex-center">';
-
-            // 前へ
-            if(currentPage > 1) {
-                paginationHtml += `<li><a onclick="goToPage(${currentPage - 1}); return false;">前へ</a></li>`;
-            } else {
-                paginationHtml += '<li class="uk-disabled"><span>前へ</span></li>';
-            }
-
-            // ページ番号（シンプル版：全ページ表示）
-            for(let i = 1; i <= totalPages; i++) {
-                if(i === currentPage) {
-                    paginationHtml += `<li class="uk-active"><span>${i}</span></li>`;
-                } else {
-                    paginationHtml += `<li><a onclick="goToPage(${i}); return false;">${i}</a></li>`;
-                }
-            }
-
-            // 次へ
-            if(currentPage < totalPages) {
-                paginationHtml += `<li><a onclick="goToPage(${currentPage + 1}); return false;">次へ</a></li>`;
-            } else {
-                paginationHtml += '<li class="uk-disabled"><span>次へ</span></li>';
-            }
-
-            paginationHtml += '</ul>';
-
-            // ★ 両方の場所に表示
-            const paginationTop = document.getElementById('pagination-top');
-            const paginationBottom = document.getElementById('pagination-bottom');
-            
-            if(paginationTop) {
-                paginationTop.innerHTML = paginationHtml;
-            }
-            if(paginationBottom) {
-                paginationBottom.innerHTML = paginationHtml;
-            }
         }
 
         /**

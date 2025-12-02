@@ -85,7 +85,8 @@ require_once('../config.php');
       <ul class="uk-breadcrumb breadcrumb">
           <li><a href="../menu/MENU_control.php">MENU</a></li>
           <li><button class="uk-text-link" id="save" style="border:none; outline:none; background:none;">医療機関管理</button></li>
-          <li><span>医療機関 新規追加</span></li>
+          <?php echo isset($_GET['code_editor']) ? '<li><a href="../code_editor/code_editor.php">医療機関情報の引き継ぎ</a></li>' : ''; ?>
+          <li><span>医療機関 新規追加<?php echo isset($_GET['code_editor']) ? '(情報引き継ぎ)' : ''; ?></span></li>
       </ul>
       </form>
     </header>
@@ -101,8 +102,8 @@ require_once('../config.php');
     <main>
     <div class="uk-alert-success" uk-alert>
       <div class="uk-card-header">
-        <h2><i class="fas fa-plus fa-lg"></i> 医療機関 新規追加</h2>
-        <p>新しく登録する医療機関の情報を入力して下さい。</p>
+        <h2><i class="fas fa-plus fa-lg"></i> 医療機関 新規追加<?php echo isset($_GET['code_editor']) ? '(情報引き継ぎ)' : ''; ?></h2>
+        <p><?php echo isset($_GET['code_editor']) ? '医療機関コードを除き、以前の情報を表示しています。新たな' : '新しく登録する'; ?>医療機関の情報を入力して下さい。</p>
       </div>
     </div>
 
@@ -110,7 +111,7 @@ require_once('../config.php');
       <!--*main_header-->
       <!-- 高橋20230331追加　アラートアイコン　ここから -->
       <div class="uk-card-header">
-        <h3>医療機関 新規追加</h3>
+        <h3>医療機関 新規追加<?php echo isset($_GET['code_editor']) ? '(情報引き継ぎ)' : ''; ?></h3>
           <input type=text class="uk-input size-input-hosName" name="hos_name" placeholder="医療機関名を入力" value="<?php if(isset($hos_name)){echo $hos_name; } ?>" style="display:inline;">
           <i class="fas fa-exclamation-circle fa-lg uk-text-danger" uk-tooltip="title:入力は必須です; pos: bottom-left" tabindex="-1"></i><!--高橋20230331追加　tabindex-->
 
