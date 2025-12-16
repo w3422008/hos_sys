@@ -3385,3 +3385,19 @@ function get_users_by_status($dbh, $status = 'ALL') {
         return [];
     }
 }
+
+
+//  POST データをセッションに保存
+ function savePostToSession(array $postData) {
+    $_SESSION['insert'] = array_merge($_SESSION['insert'] ?? [], $postData);
+}
+
+// チェックボックスの値を取得
+function getCheckboxValue($value) {
+    return (isset($value) && ($value === 'on' || $value === '1')) ? '1' : '';
+}
+
+// 複数のチェックボックスから医療分類を判定
+function getMedicalCategory(array $values) {
+    return in_array('1', $values, true) ? '1' : '';
+}

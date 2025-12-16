@@ -223,6 +223,9 @@
         <div class="uk-flex-last">
           <input type="submit" class="uk-button uk-button-large uk-button-primary" value="登録">
         </div>
+        <!-- <button type="button" class="uk-button uk-button-large uk-button-primary" onclick="submitHospitalData();">
+            登録
+        </button> -->
 
         <div class="uk-flex-first">
           <!--櫻間20221104-->
@@ -231,8 +234,100 @@
         </div>
       </div>
 
+<!-- ★ ローディングモーダル -->
+<div id="loading-modal" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+        <div style="text-align: center; padding: 40px;">
+            <div uk-spinner="ratio: 2"></div>
+            <p style="margin-top: 20px; color: #999;">登録中...</p>
+        </div>
+    </div>
+</div>
+
+<!-- ★ 成功モーダル -->
+<div id="success-modal" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+        <h2 class="uk-modal-title">登録完了</h2>
+        <p>医療機関情報の登録が完了しました。</p>
+        <div class="uk-margin-top">
+            <button class="uk-button uk-button-primary" onclick="redirectToInsertedView();">
+                OK
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ★ エラーモーダル -->
+<div id="error-modal" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+        <h2 class="uk-modal-title">エラー</h2>
+        <p id="error-message"></p>
+        <div class="uk-margin-top">
+            <button class="uk-button uk-button-default" onclick="closeErrorModal();">
+                閉じる
+            </button>
+        </div>
+    </div>
+</div>
+
     <?php endif;?>
     </main>
   </form>
+  <script>
+    /**
+     * 医療機関データを登録
+     */
+    function submitHospitalData() {
+        // ★ ローディングモーダルを表示
+        UIkit.modal('#loading-modal').show();
+        
+        fetch('inserted_control.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                action: 'insert'
+            })
+        })
+        .then(response => response.json())
+        .then(result => {
+            // ★ ローディングモーダルを閉じる
+            UIkit.modal('#loading-modal').hide();
+            
+            if(result.success) {
+                // ★ 成功モーダルを表示
+                UIkit.modal('#success-modal').show();
+            } else {
+                // ★ エラーモーダルを表示
+                document.getElementById('error-message').textContent = result.error;
+                UIkit.modal('#error-modal').show();
+            }
+        })
+        .catch(error => {
+            // ★ ローディングモーダルを閉じる
+            UIkit.modal('#loading-modal').hide();
+            
+            // ★ エラーモーダルを表示
+            document.getElementById('error-message').textContent = '通信エラーが発生しました';
+            UIkit.modal('#error-modal').show();
+        });
+    }
+
+    /**
+     * 成功後にページ遷移
+     */
+    function redirectToInsertedView() {
+        UIkit.modal('#success-modal').hide();
+        window.location.href = 'inserted_view.php';
+    }
+
+    /**
+     * エラーモーダルを閉じる
+     */
+    function closeErrorModal() {
+        UIkit.modal('#error-modal').hide();
+    }
+  </script>
 </body>
 </html>

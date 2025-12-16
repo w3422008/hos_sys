@@ -14,7 +14,7 @@
 
 <!-- ★ 共通ページネーション JS を読み込み -->
 <script src="../js/pagination.js"></script>
-<script src="page_name.js"></script>
+
 ```
 
 ---

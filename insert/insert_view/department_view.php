@@ -150,77 +150,77 @@ include("./control/department_control.php");
                 <!-- 月 -->
                 <td>
                 <input type="hidden" name="mon_am">   
-                    <input type="checkbox" name="mon_am" value="●" class="uk-checkbox all diagnosis MONDAY" <?php if((isset($mon_am)&&$mon_am=="●")||(isset($mon_a)&&$mon_a=="●")){ echo'checked' ;}?>>
+                    <input type="checkbox" name="mon_am" value="●" class="uk-checkbox all diagnosis MONDAY" <?php if(isset($mon_am)&&$mon_am=="●"){ echo'checked' ;}?>>
                 </td>
                 <td>
                 <input type="hidden" name="mon_pm">
-                    <input type="checkbox" name="mon_pm" value="●" class="uk-checkbox all diagnosis MONDAY" <?php if((isset($mon_pm)&&$mon_pm=="●")||(isset($mon_p)&&$mon_p=="●")){ echo'checked' ;}?>>
+                    <input type="checkbox" name="mon_pm" value="●" class="uk-checkbox all diagnosis MONDAY" <?php if(isset($mon_pm)&&$mon_pm=="●"){ echo'checked' ;}?>>
                 </td>
 
                 <!-- 火 -->
                 <td>
                 <input type="hidden" name="tue_am">
-                    <input type="checkbox" name="tue_am" value="●" class="uk-checkbox all diagnosis TUESDAY" <?php if((isset($tue_am)&&$tue_am=="●")||(isset($tue_a)&&$tue_a=="●")){ echo'checked' ;}?>>
+                    <input type="checkbox" name="tue_am" value="●" class="uk-checkbox all diagnosis TUESDAY" <?php if(isset($tue_am)&&$tue_am=="●"){ echo'checked' ;}?>>
                 </td>
                 <td>
                 <input type="hidden" name="tue_pm">
-                    <input type="checkbox" name="tue_pm" value="●" class="uk-checkbox all diagnosis TUESDAY"<?php if((isset($tue_pm)&&$tue_pm=="●")||(isset($tue_p)&&$tue_p=="●")){ echo'checked' ;}?> >
+                    <input type="checkbox" name="tue_pm" value="●" class="uk-checkbox all diagnosis TUESDAY"<?php if(isset($tue_pm)&&$tue_pm=="●"){ echo'checked' ;}?> >
                 </td>
 
                 <!-- 水 -->
                 <td>
                 <input type="hidden" name="wed_am">
-                    <input type="checkbox" name="wed_am" value="●" class="uk-checkbox all diagnosis WEDNESDAY" <?php if((isset($wed_am)&&$wed_am=="●")||(isset($wed_a)&&$wed_a=="●")){ echo'checked' ;}?>>
+                    <input type="checkbox" name="wed_am" value="●" class="uk-checkbox all diagnosis WEDNESDAY" <?php if(isset($wed_am)&&$wed_am=="●"){ echo'checked' ;}?>>
                 </td>
                 <td>
                 <input type="hidden" name="wed_pm">
-                    <input type="checkbox" name="wed_pm" value="●" class="uk-checkbox all diagnosis WEDNESDAY" <?php if((isset($wed_pm)&&$wed_pm=="●")||(isset($wed_p)&&$wed_p=="●")){ echo'checked' ;}?>>
+                    <input type="checkbox" name="wed_pm" value="●" class="uk-checkbox all diagnosis WEDNESDAY" <?php if(isset($wed_pm)&&$wed_pm=="●"){ echo'checked' ;}?>>
                 </td>
 
                 <!-- 木 -->
                 <td>
                 <input type="hidden" name="thr_am">
-                    <input type="checkbox" name="thr_am" value="●" class="uk-checkbox all diagnosis THURSDAY" <?php if((isset($thr_am)&&$thr_am=="●")||(isset($thr_a)&&$thr_a=="●")){ echo'checked' ;}?>>
+                    <input type="checkbox" name="thr_am" value="●" class="uk-checkbox all diagnosis THURSDAY" <?php if(isset($thr_am)&&$thr_am=="●"){ echo'checked' ;}?>>
                 </td>
                 <td>
                 <input type="hidden" name="thr_pm">
-                    <input type="checkbox" name="thr_pm" value="●" class="uk-checkbox all diagnosis THURSDAY" <?php if((isset($thr_pm)&&$thr_pm=="●")||(isset($thr_p)&&$thr_p=="●")){ echo'checked' ;}?>>
+                    <input type="checkbox" name="thr_pm" value="●" class="uk-checkbox all diagnosis THURSDAY" <?php if(isset($thr_pm)&&$thr_pm=="●"){ echo'checked' ;}?>>
                 </td>
 
                 <!-- 金 -->
                 <td>
                 <input type="hidden" name="fri_am">
-                    <input type="checkbox" name="fri_am" value="●" class="uk-checkbox all diagnosis FRIDAY" <?php if((isset($fri_am)&&$fri_am=="●")||(isset($fri_a)&&$fri_a=="●")){ echo'checked' ;}?>>
+                    <input type="checkbox" name="fri_am" value="●" class="uk-checkbox all diagnosis FRIDAY" <?php if(isset($fri_am)&&$fri_am=="●"){ echo'checked' ;}?>>
                 </td>
                 <td>
                 <input type="hidden" name="fri_pm">
-                    <input type="checkbox" name="fri_pm" value="●" class="uk-checkbox all diagnosis FRIDAY" <?php if((isset($fri_pm)&&$fri_pm=="●")||(isset($fri_p)&&$fri_p=="●")){ echo'checked' ;}?>>
+                    <input type="checkbox" name="fri_pm" value="●" class="uk-checkbox all diagnosis FRIDAY" <?php if(isset($fri_pm)&&$fri_pm=="●"){ echo'checked' ;}?>>
                 </td>
 
                 <!-- 土 -->
                 <td>
                 <input type="hidden" name="sat_am">
-                    <input type="checkbox" name="sat_am" value="●" class="uk-checkbox all diagnosis SATURDAY" <?php if((isset($sat_am)&&$sat_am=="●")||(isset($sat_a)&&$sat_a=="●")){ echo'checked' ;}?>>
+                    <input type="checkbox" name="sat_am" value="●" class="uk-checkbox all diagnosis SATURDAY" <?php if(isset($sat_am)&&$sat_am=="●"){ echo'checked' ;}?>>
                 </td>
                 <td>
                 <input type="hidden" name="sat_pm">
-                    <input type="checkbox" name="sat_pm" value="●" class="uk-checkbox all diagnosis SATURDAY" <?php if((isset($sat_pm)&&$sat_pm=="●")||(isset($sat_p)&&$sat_p=="●")){ echo'checked' ;}?>>
+                    <input type="checkbox" name="sat_pm" value="●" class="uk-checkbox all diagnosis SATURDAY" <?php if(isset($sat_pm)&&$sat_pm=="●"){ echo'checked' ;}?>>
                 </td>
 
                 <!-- 日 -->
                 <td>
                 <input type="hidden" name="sun_am">
-                    <input type="checkbox" name="sun_am" value="●" class="uk-checkbox all diagnosis SUNDAY" <?php if((isset($sun_am)&&$sun_am=="●")||(isset($sun_a)&&$sun_a=="●")){ echo'checked' ;}?>>
+                    <input type="checkbox" name="sun_am" value="●" class="uk-checkbox all diagnosis SUNDAY" <?php if(isset($sun_am)&&$sun_am=="●"){ echo'checked' ;}?>>
                 </td>
                 <td>
                 <input type="hidden" name="sun_pm">
-                    <input type="checkbox" name="sun_pm" value="●" class="uk-checkbox all diagnosis SUNDAY" <?php if((isset($sun_pm)&&$sun_pm=="●")||(isset($sun_p)&&$sun_p=="●")){ echo'checked' ;}?>>
+                    <input type="checkbox" name="sun_pm" value="●" class="uk-checkbox all diagnosis SUNDAY" <?php if(isset($sun_pm)&&$sun_pm=="●"){ echo'checked' ;}?>>
                 </td>
 
                 <!-- 祝日 -->
                 <td>
                 <input type="hidden" name="holiday">
-                    <input type="checkbox" name="holiday" value="●"class="uk-checkbox all diagnosis HOLIDAY" <?php if((isset($holiday)&&$holiday=="●")||(isset($holida)&&$holida=="●")){ echo'checked' ;}?>>
+                    <input type="checkbox" name="holiday" value="●"class="uk-checkbox all diagnosis HOLIDAY" <?php if(isset($holiday)&&$holiday=="●"){ echo'checked' ;}?>>
                 </td>
             </tr>
 
