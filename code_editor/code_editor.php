@@ -20,12 +20,7 @@ if(isset($_GET['ajax']) && $_GET['ajax'] === '1') {
         $keyword = $_GET['keyword'] ?? '';
         $keyword = trim($keyword);
         $page = (int)($_GET['page'] ?? 1);
-        $per_page = 12; // ★ 1ページあたり12件
-        
-        // ページ番号の検証
-        if($page < 1) {
-            $page = 1;
-        }
+        $per_page = 12;
         
         // キーワード未入力時は全件取得
         if(empty($keyword)) {
@@ -49,26 +44,23 @@ if(isset($_GET['ajax']) && $_GET['ajax'] === '1') {
         }
         
         $all_results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $total = count($all_results);
         
-        // ★ ページネーション処理
-        $offset = ($page - 1) * $per_page;
-        $results = array_slice($all_results, $offset, $per_page);
-        $total_pages = ceil($total / $per_page);
+        // ★ paginate() 関数を使用してページネーション処理を実行
+        $pagination_result = paginate($all_results, $page, $per_page);
         
         // ★ 数値型のキャストを明示的に行う
-        foreach($results as &$row) {
+        foreach($pagination_result['data'] as &$row) {
             $row['bed'] = isset($row['bed']) ? (int)$row['bed'] : 0;
         }
         unset($row);
         
         echo json_encode([
             'success' => true,
-            'data' => $results,
-            'count' => count($results),
-            'total' => $total,
-            'current_page' => $page,
-            'total_pages' => $total_pages
+            'data' => $pagination_result['data'],
+            'count' => $pagination_result['count'],
+            'total' => $pagination_result['total'],
+            'current_page' => $pagination_result['current_page'],
+            'total_pages' => $pagination_result['total_pages']
         ], JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
         exit;
         

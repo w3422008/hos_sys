@@ -41,19 +41,24 @@ function printTabWithHosName(tabId, tabName, hosName) {
     printWindow.document.write('<link rel="stylesheet" href="../css/all.min.css" />');
     printWindow.document.write('<link rel="stylesheet" href="../css/cards.css"/>');
     printWindow.document.write('<link rel="stylesheet" href="../css/tab.css"/><!--：タブ-->');
-    printWindow.document.write('<link rel="stylesheet" href="../css/print-tab.css"/>');
+    // printWindow.document.write('<link rel="stylesheet" href="../css/print-tab.css"/>');
 
     printWindow.document.write(`
         <style>
+        @page {
+            size: A4;
+            margin: 5mm;
+        }
+
         @media print {
-            /* ※ここを消すと全体の縮小がおかしくなるので消さないでください。 */
-            body, main {
-                zoom: 0.5 !important;  /* 印刷時に縮小 */
+            * {
+                margin: 0 !important;
+                padding: 0 !important;
             }
 
             .uk-input {
                 border: none !important;
-                font-size: 30px !important; /* フォントサイズを30pxに設定 */
+                font-size: 10px !important; /* フォントサイズを10pxに設定 */
                 padding: 10px !important; /* パディングを10pxに設定 */
                 height: auto !important; /* 高さを自動に設定 */
             }
@@ -66,7 +71,7 @@ function printTabWithHosName(tabId, tabName, hosName) {
                 background: none !important; /* 背景を削除 */
                 border: none !important; /* 枠線を削除 */
 
-                font-size: 30px !important; /* フォントサイズを30pxに設定 */
+                font-size: 10px !important; /* フォントサイズを10pxに設定 */
                 padding: 10px !important; /* パディングを10pxに設定 */
                 height: auto !important; /* 高さを自動に設定 */
             }
@@ -90,7 +95,7 @@ function printTabWithHosName(tabId, tabName, hosName) {
             /* uk-grid内のuk-radioでcheckedがついている項目のラベルの文字サイズの変更 */
             .uk-form-controls label:has(input.uk-radio:checked),
             .uk-grid label:has(input.uk-radio:checked){
-                font-size: 30px !important;
+                font-size: 10px !important;
             }
 
             /* uk-inputのプレースホルダーを非表示にする */
@@ -234,6 +239,7 @@ function printTabWithHosName(tabId, tabName, hosName) {
                     border: 0.5px solid #70ad47;
                     page-break-inside: avoid !important; /* ページ内で途中で改行しないようにする */
                     }
+
                     .rowInsert-btn {
                         display: none !important; /* 行を追加ボタンを非表示にする */
                     }
@@ -241,7 +247,7 @@ function printTabWithHosName(tabId, tabName, hosName) {
                 }
             </style>
         `);
-    
+
     } else if (tabId === 'tab-content05') {
         printWindow.document.write(`
             <style>
@@ -351,6 +357,10 @@ function printTabWithHosName(tabId, tabName, hosName) {
     } else if (tabId === 'tab-content08') {
         printWindow.document.write(`
             <style>
+                @page {
+                    size: A4 landscape;
+                    margin: 5mm;
+                }
                 @media print {
                     table {
                         width: 100%; /* テーブルの幅を100%にする */

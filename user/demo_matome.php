@@ -370,6 +370,7 @@ $adm_user1 = '0';
                                     <i class="fas fa-exclamation-circle fa-lg uk-text-danger" 
                                        uk-tooltip="title:入力は必須です; pos: bottom-left" tabindex="-1"></i>
                                     ID：<span id="modal_user_id"></span>
+                                    <input type="hidden" id="hidden_user_id" name="user_id">
                                 </div>
 
                                 <table class="uk-table uk-table-divider">
@@ -377,19 +378,19 @@ $adm_user1 = '0';
                                         <th><i class="fas fa-exclamation-circle fa-lg uk-text-danger" 
                                                uk-tooltip="title:入力は必須です; pos: bottom-left" tabindex="-1"></i>
                                             氏名</th>
-                                        <td id="modal_user_name"></td>
+                                        <td id="modal_user_name"></td><input type="hidden" id="hidden_user_name" name="user_name">
                                     </tr>
                                     <tr>
                                         <th><i class="fas fa-exclamation-circle fa-lg uk-text-danger" 
                                                uk-tooltip="title:入力は必須です; pos: bottom-left" tabindex="-1"></i>
                                             施設</th>
-                                        <td id="modal_facility"></td>
+                                        <td id="modal_facility"></td><input type="hidden" id="hidden_ins" name="ins">
                                     </tr>
                                     <tr>
                                         <th><i class="fas fa-exclamation-circle fa-lg uk-text-danger" 
                                                uk-tooltip="title:入力は必須です; pos: bottom-left" tabindex="-1"></i>
                                             所属</th>
-                                        <td id="modal_affiliation"></td>
+                                        <td id="modal_affiliation"></td><input type="hidden" id="hidden_bel" name="bel">
                                     </tr>
                                     <tr>
                                         <th><i class="fas fa-exclamation-circle fa-lg uk-text-danger" 
@@ -401,27 +402,19 @@ $adm_user1 = '0';
                                             <button type="button" id="modal_password_toggle" class="password-toggle-btn" uk-tooltip="title:パスワードを表示/非表示; pos: bottom">
                                                 <i class="fas fa-eye"></i>
                                             </button>
-                                        </td>
+                                        </td><input type="hidden" id="hidden_pw" name="pw">
                                     </tr>
                                     <tr>
                                         <th><i class="fas fa-exclamation-circle fa-lg uk-text-danger" 
                                                uk-tooltip="title:入力は必須です; pos: bottom-left" tabindex="-1"></i>
                                             権限</th>
-                                        <td id="modal_authority"></td>
+                                        <td id="modal_authority"></td><input type="hidden" id="hidden_adm_user" name="adm_user">
                                     </tr>
                                 </table>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- ※隠しフィールド：確認画面から送信するデータ -->
-                <input type="hidden" id="hidden_user_id" name="user_id">
-                <input type="hidden" id="hidden_user_name" name="user_name">
-                <input type="hidden" id="hidden_ins" name="ins">
-                <input type="hidden" id="hidden_bel" name="bel">
-                <input type="hidden" id="hidden_pw" name="pw">
-                <input type="hidden" id="hidden_adm_user" name="adm_user">
 
                 <!-- モーダルボタン -->
                 <div class="uk-modal-footer uk-text-right">

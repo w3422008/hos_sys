@@ -3401,3 +3401,55 @@ function getCheckboxValue($value) {
 function getMedicalCategory(array $values) {
     return in_array('1', $values, true) ? '1' : '';
 }
+
+/**
+ * =====================================================
+ * ページネーション処理の汎用関数
+ * =====================================================
+ * 
+ * 配列データをページごとに分割し、ページネーション情報を返す
+ * 複数のコントローラから再利用可能
+ * 
+ * @param array $all_results 全データの配列
+ * @param int $current_page 現在のページ番号（デフォルト：1）
+ * @param int $per_page 1ページあたりの件数（デフォルト：12）
+ * @return array ページネーション結果
+ *         [
+ *           'data' => ページ内のデータ配列,
+ *           'count' => 現在のページのデータ件数,
+ *           'total' => 全体のデータ件数,
+ *           'current_page' => 現在のページ番号,
+ *           'total_pages' => 総ページ数
+ *         ]
+ */
+function paginate(array $all_results, int $current_page = 1, int $per_page = 12) {
+    // ページ番号の検証（1未満の場合は1に修正）
+    if ($current_page < 1) {
+        $current_page = 1;
+    }
+    
+    // 全体の件数を取得
+    $total = count($all_results);
+    
+    // 総ページ数を計算
+    $total_pages = ceil($total / $per_page);
+    
+    // 現在のページが総ページ数を超えている場合は最後のページに修正
+    if ($current_page > $total_pages && $total_pages > 0) {
+        $current_page = $total_pages;
+    }
+    
+    // オフセット（開始位置）を計算
+    $offset = ($current_page - 1) * $per_page;
+    
+    // ページ内のデータのみを取得
+    $paged_data = array_slice($all_results, $offset, $per_page);
+    
+    return [
+        'data' => $paged_data,
+        'count' => count($paged_data),
+        'total' => $total,
+        'current_page' => $current_page,
+        'total_pages' => $total_pages
+    ];
+}
