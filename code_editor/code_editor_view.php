@@ -47,7 +47,7 @@
             <input type="text"
                    id="search-input"
                    class="uk-input uk-form-large"
-                   placeholder="医療機関コード/医療機関名/住所を検索"
+                   placeholder="医療機関コード/医療機関名/住所を入力してください"
                    style="border-radius: 20px; padding: 15px 20px; font-size: 1.1rem;">
         </div>
 

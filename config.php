@@ -6,7 +6,7 @@ define('DSN','mysql:dbname=hosplistdb;host=localhost;charset=utf8mb4');
 define('DB_USER','root');
 define('DB_PASSWORD','');
 // define('SITE_URL','http://localhost:8080/hos_sys/'); 
-define('SITE_URL','http://localhost:8080/hos_sys/');
+define('SITE_URL','http://localhost/software_dev/hos_sys/');
 
 // サイト関連
 define('password_URL', SITE_URL.'password/password_control.php');

@@ -5,6 +5,11 @@ let currentPage = 1;
 let currentKeyword = '';
 let totalPages = 1;
 
+// ★ 医療機関コードの桁数（現在は7桁設定、桁数変更する場合はここを変更）
+const hosCdlength = 7;
+
+
+
 /**
  * ページロード時に初期データを表示
  */
@@ -13,50 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
     attachSearchListener();
     setupModalHandlers();
 });
-
-/**
- * モーダルイベントハンドラーの設定
- */
-function setupModalHandlers() {
-    const confirmBtn = document.getElementById('modal-confirm-btn');
-    const cancelBtn = document.getElementById('modal-cancel-btn');
-
-    if(confirmBtn) {
-        confirmBtn.addEventListener('click', () => {
-            const oldHosCd = selectedHospital ? selectedHospital.hos_cd : null;
-            const hosCd = document.getElementById('modal-hos-cd-input').value.trim();
-            
-            if(!hosCd) {
-                alert('医療機関コードを入力してください');
-                return;
-            }
-            
-            // ここで医療機関コードに紐づいたデータを取得・セッション保存を行う処理を追加
-            fetch(`data_to_session.php?old_hospital_code=${encodeURIComponent(oldHosCd)}&hospital_code=${encodeURIComponent(hosCd)}`)
-                .then(response => response.json())
-                .then(result => {
-                    if(!result.success) {
-                        alert('医療機関コードの保存に失敗しました: ' + result.error);
-                        return;
-                    }
-                })
-                .catch(error => {
-                    console.error('Error saving hospital code:', error);
-                    alert('通信エラーが発生しました');
-                    return;
-                });
-
-            // ★ 登録フォームへ遷移（パスは環境に合わせて調整）
-            window.location.href = `../insert/insert_control.php?code_editor=1`;
-        });
-    }
-
-    if(cancelBtn) {
-        cancelBtn.addEventListener('click', () => {
-            UIkit.modal('#hospital-modal').hide();
-        });
-    }
-}
 
 /**
  * データを取得してカードを表示
@@ -208,6 +169,59 @@ function attachSearchListener() {
         const keyword = e.target.value;
         loadData(keyword, 1); // ★ 検索時は1ページ目に戻す
     });
+}
+
+/**
+ * モーダルイベントハンドラーの設定
+ */
+function setupModalHandlers() {
+    const confirmBtn = document.getElementById('modal-confirm-btn');
+    const cancelBtn = document.getElementById('modal-cancel-btn');
+
+    if(confirmBtn) {
+        confirmBtn.addEventListener('click', () => {
+            // 旧医療機関コードと新医療機関コードを取得
+            const oldHosCd = selectedHospital ? selectedHospital.hos_cd : null;
+            const hosCd = document.getElementById('modal-hos-cd-input').value.trim();
+                        
+            // 医療機関コードが入力されていない場合
+            if(!hosCd) {
+                alert('医療機関コードを入力してください');
+                return;
+            }
+
+            // 医療機関コードの桁数チェック
+            if(hosCd.length !== hosCdlength) {
+                alert(`医療機関コードは${hosCdlength}桁以内にしてください。`);
+                return;
+            }
+            
+            // ここで医療機関コードに紐づいたデータを取得・セッション保存を行う処理を追加
+            fetch(`data_to_session.php?old_hospital_code=${encodeURIComponent(oldHosCd)}&hospital_code=${encodeURIComponent(hosCd)}`)
+                .then(response => response.json())
+                .then(result => {
+                    if(!result.success) {
+                        alert(result.error);
+                        return;
+                    }
+                    
+                    // ★ 登録フォームへ遷移（パスは環境に合わせて調整）
+                    window.location.href = `../insert/insert_control.php?code_editor=1`;
+
+                })
+                .catch(error => {
+                    console.error('Error saving hospital code:', error);
+                    alert('通信エラーが発生しました');
+                    return;
+                });
+        });
+    }
+
+    if(cancelBtn) {
+        cancelBtn.addEventListener('click', () => {
+            UIkit.modal('#hospital-modal').hide();
+        });
+    }
 }
 
 /**

@@ -16,6 +16,9 @@ $dbh = get_db_connect();
 // ユーザータイプを決定
 $user_type = ($user_adm == '1' || $user_adm == '3') ? 'admin' : (($user_adm == '2') ? 'office' : 'user');
 
+// 編集可能フラグ（admin のみ true）
+$is_editable = ($user_type === 'admin');
+
 // セッション処理
 if(isset($_SESSION['update'])){
    unset($_SESSION['update']);
@@ -47,7 +50,17 @@ $datalist_ass = get_ass($dbh);
 $contact_data = detail_contact($dbh, $hos_cd);
 
 // ===== 部門情報 (Department) =====
-// 実装予定
+$dept_data = get_Internal_medicine($dbh);
+$dept_data2 = get_pediatrics($dbh);
+$dept_data3 = get_surgery($dbh);
+$dept_data4 = get_orthopedics($dbh);
+$dept_data5 = get_ophthalmology($dbh);
+$dept_data6 =get_otolaryngology($dbh);
+$dept_data7 = get_dermatology_urology($dbh);
+$dept_data8 = get_gynecology($dbh);
+$dept_data9 = get_psychiatry($dbh);
+$dept_data10 = get_dentistry($dbh);
+$dept_data11 = get_etcetera($dbh);
 
 // ===== 診療科目情報 (Medical) =====
 $medical_data = detail_medCare($dbh, $hos_cd);
@@ -73,10 +86,40 @@ $med_depts = array(
 );
 
 // ===== 病床数情報 (Number) =====
-$number_data = detail_num($dbh, $hos_cd);
+$num_data = detail_num($dbh, $hos_cd);
 
-// ===== 管理者情報 (Director) =====
-// 実装予定
+// 区分リスト
+$list_fie_div = array(
+   '外来',
+   '連携',
+   'その他'
+);
+
+// ===== 理事長・病院長情報情報 (Director) =====
+$drct_data1 = detail_director($dbh, $hos_cd);  // 理事長・病院長情報
+$drct_data2 = detail_relative($dbh, $hos_cd);  // 親族情報
+
+//学校名
+$list_sch_name = array(
+    0 => '川崎医科大学',
+    1 => '医療福祉大学',
+    2 => '医療短期大学',
+    3 => '附属高校',
+    4 => 'リハビリテーション学院'
+);
+
+//続柄
+$list_conn = array(
+    0 => '親',
+    1 => '配偶者',
+    2 => '弟・姉妹',
+    3 => '子',
+    4 => '孫',
+    5 => 'その他'
+);
+    
+// 学校名リスト
+$datalist_dept=get_depa($dbh);
 
 // ===== 紹介・逆紹介情報 (Introduction) =====
 $intr_data = detail_intr($dbh, $hos_cd);
@@ -100,10 +143,15 @@ $socialMeeting_data3 = detail_socialMeeting($dbh, $hos_cd, 2);
 
 // 連携パス配列定義（固定値）
 $CorpPath = array(
-   '1' => '診療所',
-   '2' => '病院',
-   '3' => '福祉施設',
-   '4' => 'その他'
+   '入退院支援連携先病院',
+   '脳卒中パス',
+   '大腿骨パス',
+   '心筋梗塞・心不全パス',
+   '胃がんパス',
+   '大腸がんパス',
+   '乳がんパス',
+   '肺がんパス',
+   '肝がんパス',
 );
 
 // テンプレート読み込み

@@ -8,8 +8,17 @@ if (isset($_GET['old_hospital_code']) && isset($_GET['hospital_code'])) {
     $old_hospital_code = html_escape($_GET['old_hospital_code']);
     $hospital_code = html_escape($_GET['hospital_code']);
 
-    // 医療機関コードを基にデータを抽出し、セッションへ保存
+    // 新コードが既に存在する場合、その旨を返す
+    // 医療機関コード全件取得
+    $all_hospital_code = result1(get_db_connect());
+    foreach ($all_hospital_code as $row) {
+        if ($row['hos_cd'] === $hospital_code) {
+            echo json_encode(["success" => false, "error" => "入力した医療機関コードは既に存在します（該当医療機関：" . $row['hos_name'] . "）。再度、医療機関コードを入力してください。"]);
+            exit;
+        }
+    }
 
+    // 医療機関コードを基にデータを抽出し、セッションへ保存
     // 医療機関情報
     add_SESSION_info($old_hospital_code, $hospital_code);
     // 診療内容
@@ -28,7 +37,7 @@ if (isset($_GET['old_hospital_code']) && isset($_GET['hospital_code'])) {
 
 } else {
 
-    echo json_encode(["success" => false, "error" => "No data received."]);
+    echo json_encode(["success" => false, "error" => "例外：[No data received.]"]);
 
 }
 
