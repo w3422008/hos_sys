@@ -116,7 +116,7 @@ require_once('../config.php');
           <i class="fas fa-exclamation-circle fa-lg uk-text-danger" uk-tooltip="title:入力は必須です; pos: bottom-left" tabindex="-1"></i><!--高橋20230331追加　tabindex-->
 
           <span class="uk-margin-left">医療機関コード：
-            <input type=text class="uk-input size-input-hosCd pattern" name="hos_cd" maxlength="7" data-pattern="code" value="<?php if(isset($hos_cd)){echo $hos_cd; } ?>">
+            <input type=text class="uk-input size-input-hosCd pattern" name="hos_cd" maxlength="10" data-pattern="code" value="<?php if(isset($hos_cd)){echo $hos_cd; } ?>">
             <i class="fas fa-exclamation-circle fa-lg uk-text-danger" uk-tooltip="title:入力は必須です; pos: bottom-left" tabindex="-1"></i><!--高橋20230331追加　tabindex-->
           </span>
       </div>
@@ -325,7 +325,7 @@ const patternElems =  document.querySelectorAll('.pattern');
         //data-pattern 属性の値が code の場合
         case 'code' :
         //櫻間20230105
-          pattern = /^[0-9]{7}$/;
+          pattern = /^[0-9]{10}$/;
           errorMessage = '医療機関コードの形式が正しくありません。半角数字を入力してください。';
           break;
         //data-pattern 属性の値が上記以外の場合

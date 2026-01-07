@@ -87,7 +87,7 @@
                         <span class="text-arrow">▶▶▶</span>
                         <input type="number"
                                 id="modal-hos-cd-input"
-                                placeholder="7/10桁で入力">
+                                placeholder="10桁で入力">
                     </div>
                 </div>
                         

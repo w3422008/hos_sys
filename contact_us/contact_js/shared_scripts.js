@@ -506,6 +506,7 @@ for (var key in k_bel) {
 // 部署名判定
 function change_bel(bel, hos) {
     // 配列を一行ずつ探索し、キーとbelが一致していればその要素を表示
+    let bel_name = ''; // 初期化
     if (hos == '0') {
         k_u_bel.forEach(function (element) {
             if (element.key === bel) {
@@ -622,7 +623,7 @@ function supp_judge(adv, supp) {
 
 // 依頼内容の文字数制限
 function content_cut(content) {
-    content = content.replace(/\r?\n/g, ' ');
+    content = content.replace(/[&"'<>]/g, ' ');
     if ([...content].length > 27) {
         return content.substr(0, 27) + '...';
     } else {
@@ -632,10 +633,16 @@ function content_cut(content) {
 
 // 文字列の無害化
 function html_escape(text = '') {
-    return text.replace(/["&'<>]/g, function (match) {
+    // null や undefined を空文字に変換
+    if (text === null || text === undefined) {
+        return '';
+    }
+    // 数値も文字列に変換
+    text = String(text);
+    return text.replace(/[&"'<>]/g, function (match) {
         return {
             '&': '&amp;',
-            '\'': '&#39;',
+            "'": '&#39;',
             '"': '&quot;',
             '<': '&lt;',
             '>': '&gt;'

@@ -90,7 +90,6 @@ if (adm_id == 0 || adm_id == 1 || adm_id == 2) {
             });
 
             const responseText = await response.text();
-            console.log(responseText);
             UIkit.modal('#confirmationModal').hide();
             document.getElementById('loadingOverlay').style.display = 'none';
 
@@ -109,7 +108,7 @@ if (adm_id == 0 || adm_id == 1 || adm_id == 2) {
         }
     });
 
-// 依頼入力：完了モーダル「ホームへ戻る」処理
+    // 依頼入力：完了モーダル「ホームへ戻る」処理
     $('#goHomeButton').on('click', function () {
         window.location.href = '../menu/MENU_control.php'; // ホームページへのリンク
     });

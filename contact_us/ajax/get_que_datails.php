@@ -20,13 +20,14 @@ if(isset($_POST['user_id'])) {
     }else{
 
         // ユーザーの所属先を取得
-        $user_data = array();
-        $user_data = user_info($dbh,$user_id);
+        // $user_data = array();
+        // $user_data = user_info($dbh,$user_id);
 
-        // ユーザーからの依頼情報を取得
+        // // ユーザーからの依頼情報を取得
 
-        $result = get_request_data($dbh,$user_data[0]['ins'],$user_data[0]['bel']);
+        // $result = get_request_data($dbh,$user_data[0]['ins'],$user_data[0]['bel']);
 
+        $result = get_request_data($dbh,'0000','0000');
     }
 
     // JSON形式で出力

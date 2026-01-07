@@ -6,7 +6,7 @@ let currentKeyword = '';
 let totalPages = 1;
 
 // ★ 医療機関コードの桁数（現在は7桁設定、桁数変更する場合はここを変更）
-const hosCdlength = 7;
+const hosCdlength = 10;
 
 
 
@@ -192,7 +192,7 @@ function setupModalHandlers() {
 
             // 医療機関コードの桁数チェック
             if(hosCd.length !== hosCdlength) {
-                alert(`医療機関コードは${hosCdlength}桁以内にしてください。`);
+                alert(`医療機関コードは${hosCdlength}桁にしてください。現在${hosCd.length>hosCdlength ? (hosCd.length - hosCdlength) + '桁過剰' : (hosCdlength - hosCd.length) + '桁不足'}しています。`);
                 return;
             }
             
