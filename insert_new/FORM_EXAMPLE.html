@@ -1,0 +1,245 @@
+<!-- 
+   医療機関登録 - フォームテンプレート例
+   
+   このファイルは insert_new フォルダの使用方法を示すサンプルフォームです。
+   既存の insert フォルダ内のフォームをそのまま利用できますが、
+   アクション先を insert_new に変更してください。
+-->
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>医療機関新規追加 - 最適化版テスト</title>
+</head>
+<body>
+
+<h1>医療機関情報 新規追加フォーム</h1>
+
+<!-- 
+   フォームのアクション先を insert_new に変更
+   
+   変更前: action="insert/check_control.php"
+   変更後: action="insert_new/check_control.php"
+-->
+<form action="insert_new/check_control.php" method="POST" name="myform">
+    
+    <!-- 基本情報 -->
+    <fieldset>
+        <legend>基本情報</legend>
+        
+        <div>
+            <label>医療機関コード（必須）:</label>
+            <input type="text" name="hos_cd" required />
+        </div>
+        
+        <div>
+            <label>医療機関名（必須）:</label>
+            <input type="text" name="hos_name" required />
+        </div>
+        
+        <div>
+            <label>郵便番号（必須）:</label>
+            <input type="text" name="zipcode" maxlength="7" required />
+        </div>
+        
+        <div>
+            <label>都道府県（必須）:</label>
+            <select name="pre" required>
+                <option value="">選択してください</option>
+                <option value="岡山県">岡山県</option>
+                <option value="広島県">広島県</option>
+            </select>
+        </div>
+        
+        <div>
+            <label>地域:</label>
+            <input type="hidden" name="are_cd1" id="are_cd1" />
+            <input type="text" name="area1" id="area1" />
+        </div>
+        
+        <div>
+            <label>区分:</label>
+            <div>
+                <label><input type="radio" name="hos_div" value="病院" /> 病院</label>
+                <label><input type="radio" name="hos_div" value="診療所" /> 診療所</label>
+            </div>
+        </div>
+        
+        <div>
+            <label>開院状態:</label>
+            <div>
+                <label><input type="radio" name="op_flg" value="1" checked /> 開院</label>
+                <label><input type="radio" name="op_flg" value="0" /> 閉院</label>
+            </div>
+        </div>
+        
+        <div>
+            <label>閉院日（閉院選択時）:</label>
+            <input type="date" name="clo_day" />
+        </div>
+        
+        <div>
+            <label>医師会:</label>
+            <input type="text" name="med_ass" />
+        </div>
+        
+        <div>
+            <label>住所:</label>
+            <input type="text" name="city" />
+            <input type="text" name="zone" />
+            <input type="text" name="town" />
+            <input type="text" name="str_num" />
+        </div>
+        
+        <div>
+            <label>電話番号:</label>
+            <input type="tel" name="tel" />
+        </div>
+        
+        <div>
+            <label>FAX:</label>
+            <input type="tel" name="fax" />
+        </div>
+        
+        <div>
+            <label>メール:</label>
+            <input type="email" name="mail" />
+        </div>
+        
+        <div>
+            <label>備考:</label>
+            <textarea name="note" maxlength="1000"></textarea>
+        </div>
+    </fieldset>
+    
+    <!-- 診療時間 -->
+    <fieldset>
+        <legend>診療時間</legend>
+        
+        <div>
+            <label>診療時間（統一表記）:</label>
+            <textarea name="con_hour" placeholder="例) 9:00~12:00, 14:00~18:00"></textarea>
+        </div>
+        
+        <table border="1">
+            <tr>
+                <th>曜日</th>
+                <th>午前</th>
+                <th>午前1</th>
+                <th>午後</th>
+                <th>午後1</th>
+            </tr>
+            <tr>
+                <td>月（Mon）</td>
+                <td><input type="text" name="mon_am" /></td>
+                <td><input type="text" name="mon_am1" /></td>
+                <td><input type="text" name="mon_pm" /></td>
+                <td><input type="text" name="mon_pm1" /></td>
+            </tr>
+            <tr>
+                <td>火（Tue）</td>
+                <td><input type="text" name="tue_am" /></td>
+                <td><input type="text" name="tue_am1" /></td>
+                <td><input type="text" name="tue_pm" /></td>
+                <td><input type="text" name="tue_pm1" /></td>
+            </tr>
+            <!-- 他の曜日も同様 -->
+        </table>
+        
+        <div>
+            <label>休診日:</label>
+            <input type="text" name="holiday" />
+            <input type="text" name="holiday1" />
+        </div>
+    </fieldset>
+    
+    <!-- 医療内容 -->
+    <fieldset>
+        <legend>医療内容</legend>
+        
+        <div>
+            <label>内科:</label>
+            <input type="checkbox" name="int_med" value="1" />
+            <br />
+            <label><input type="checkbox" name="int_int" value="1" /> 一般内科</label>
+            <label><input type="checkbox" name="int_dig" value="1" /> 消化器内科</label>
+            <!-- その他のチェックボックス -->
+        </div>
+        
+        <div>
+            <label>外科:</label>
+            <input type="checkbox" name="sur_med" value="1" />
+            <br />
+            <label><input type="checkbox" name="sur_sur" value="1" /> 一般外科</label>
+            <!-- その他のチェックボックス -->
+        </div>
+        
+        <!-- その他の診療科 -->
+    </fieldset>
+    
+    <!-- 理事長・病院長情報 -->
+    <fieldset>
+        <legend>理事長・病院長情報</legend>
+        
+        <div>
+            <label>理事長名:</label>
+            <input type="text" name="chi_name" />
+        </div>
+        
+        <div>
+            <label>理事長 専門:</label>
+            <input type="text" name="chi_spe" />
+        </div>
+        
+        <div>
+            <label>病院長名:</label>
+            <input type="text" name="pre_name" />
+        </div>
+        
+        <div>
+            <label>病院長 専門:</label>
+            <input type="text" name="pre_spe" />
+        </div>
+    </fieldset>
+    
+    <!-- 医療連携情報 -->
+    <fieldset>
+        <legend>医療連携情報</legend>
+        
+        <div>
+            <label>紹介受診情報機関 について:</label>
+            <textarea name="intr_note"></textarea>
+        </div>
+        
+        <div>
+            <label>転院先:</label>
+            <textarea name="tra_note"></textarea>
+        </div>
+        
+        <div>
+            <label>医療について:</label>
+            <input type="checkbox" name="carna" value="1" /> カルナバル参加
+        </div>
+    </fieldset>
+    
+    <!-- ボタン -->
+    <div>
+        <button type="submit" name="action" value="confirm">確認</button>
+        <button type="reset">リセット</button>
+    </div>
+    
+</form>
+
+<hr />
+
+<h2>insert_new フォルダについて</h2>
+<ul>
+    <li>このフォームは、アクション先を <code>insert_new/check_control.php</code> に指定してください</li>
+    <li>既存の <code>insert</code> フォルダと並行して使用できます</li>
+    <li>ビューファイルは自動的に <code>insert</code> フォルダから参照されます</li>
+</ul>
+
+</body>
+</html>

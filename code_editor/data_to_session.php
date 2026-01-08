@@ -4,7 +4,7 @@ include_once("../functions.php");
 
 if (isset($_GET['old_hospital_code']) && isset($_GET['hospital_code'])) {
 
-    // GETパラメータの取得とエスケープ処理
+    // 新旧医療機関コードの取得・無害化
     $old_hospital_code = html_escape($_GET['old_hospital_code']);
     $hospital_code = html_escape($_GET['hospital_code']);
 
@@ -53,14 +53,17 @@ function add_SESSION_info($old_hospital_code,$new_hospital_code) {
         $_SESSION['insert']['hos_cd'] = $new_hospital_code;
 
         // email→mailへキー名変更
-
         $_SESSION['insert']['mail'] = $_SESSION['insert']['email'];
         unset($_SESSION['insert']['email']);
 
-        if (!isset($_SESSION['insert']['note'])) {
-            $_SESSION['insert']['note'] = "<br>";
+        // 既にnoteに内容がある場合、改行を追加
+        if (mb_strlen($_SESSION['insert']['note']) !== 0) {
+            $_SESSION['insert']['note'] .= "\n";
         }
+        
+        // noteに医療機関コード変更の旨を追記
         $_SESSION['insert']['note'] .= "医療機関コードが変更されました。変更前：".$old_hospital_code;
+
     }else{
         // エラーハンドリング（必要に応じて）
         error_log("Error: Could not retrieve hospital data for hos_cd " . $_SESSION['insert']['old_hos_cd']);
