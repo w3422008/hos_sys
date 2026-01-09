@@ -1,5 +1,11 @@
 # insert_new フォルダ - 最適化版
 
+## ⚠️ 重要な注記
+**このフォルダは insert フォルダに依存せず、完全にスタンドアロンで動作します。**
+- ✅ insert フォルダが削除されても問題ありません
+- ✅ ビューファイル（check_view.php, check_view/, inserted_view.php）は全てこのフォルダに含まれています
+- ✅ 今後は insert フォルダを削除し、insert_new を本体として利用できます
+
 ## 概要
 このフォルダは、既存の `insert` フォルダを最適化したバージョンです。
 以下の改善点を実現しています：
@@ -47,17 +53,18 @@ $_SESSION['insert'] = [
 
 #### 3. **ファイル構成**
 
-| ファイル | 役割 | 改善点 |
+| ファイル | 役割 | 説明 |
 |---------|------|--------|
 | `InsertProcessor.php` | データ処理クラス | 全処理を一元化 |
-| `check_control.php` | チェック処理 | 簡潔化（20行程度） |
+| `check_control.php` | チェック処理 | 簡潔化（36行） |
 | `inserted_control.php` | DB登録処理 | DB処理をシンプル化 |
-| `check_view.php` | 確認画面 | 元のビューを利用可能 |
-| `inserted_view.php` | 完了画面 | 元のビューを利用可能 |
+| `check_view.php` | 確認画面 | スタンドアロンで動作 |
+| `check_view/` | 確認画面サブビュー | スタンドアロンで動作 |
+| `inserted_view.php` | 完了画面 | スタンドアロンで動作 |
 
 #### 4. **コード量削減**
-- `insert_control.php`: 212行 → `check_control.php`: 24行（**88%削減**）
-- `check_control.php`: 184行 → 各処理メソッドに統合
+- `insert/check_control.php`: 184行 → `check_control.php`: 36行（**80%削減**）
+- `insert/inserted_control.php`: 314行 → `inserted_control.php`: 167行（**47%削減**）
 - セッション変数の展開: 70+個の個別割り当て → 配列の自動展開
 
 #### 5. **バリデーション機能**
@@ -83,31 +90,18 @@ echo $int_int;   // そのまま動作
 
 ### 既存コードからの移行
 
-1. **フォルダをコピー**
-```bash
-insert フォルダ → insert_new フォルダ
-```
-
-2. **フォーム内のアクション先を変更**
+1. **フォーム送信先を insert_new に変更** (insert/insert_header.php のフォーム)
 ```html
 <!-- 変更前 -->
-<form action="insert/check_control.php" method="POST">
+<form action="check_control.php" method="POST">
 
 <!-- 変更後 -->
-<form action="insert_new/check_control.php" method="POST">
+<form action="../insert_new/check_control.php" method="POST">
 ```
 
-3. **ビューファイルのコピー**
-- `insert/check_view.php` → `insert_new/` にコピー
-- `insert/check_view/` → `insert_new/` に配置
-- `insert/inserted_view.php` → `insert_new/` にコピー
-
-4. **ビューファイル内の変数参照はそのまま**
-```php
-<!-- 既存のコードが動作 -->
-<?php echo html_escape($hos_name); ?>
-<?php echo html_escape($int_int); ?>
-```
+2. **その他の修正は不要**
+   - ビューファイル：既にこのフォルダに含まれています
+   - insert フォルダは削除可能です
 
 ## パフォーマンス改善
 

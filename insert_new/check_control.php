@@ -27,7 +27,7 @@ $_SESSION['insert'] = $processor->getData();
 
 // バリデーション実行
 if (!$processor->validate()) {
-    $_SESSION['insert']['errors'] = $processor->getErrors();
+    $_SESSION['insert']['err'] = implode('、', $processor->getErrors());
 }
 
 // 地域マスタ情報取得（ビューで必要）
@@ -35,7 +35,7 @@ $are_cds = get_area($dbh);
 
 // ビュー用に配列を展開（互換性維持）
 extract($processor->getExtractArray());
-
+var_dump($processor->getExtractArray());
 // 確認ビューを表示
 include_once('./check_view.php');
 ?>

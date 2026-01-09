@@ -56,8 +56,8 @@
 
 .tab-switch:checked+.tab-label+.tab-content {
   height: auto;
-  overflow: auto;
-  padding: 30px 15px 0px 15px;
+  /* overflow: auto; */
+  padding: 30px 15px 40px 15px;
   opacity: 1;
   transition: .5s opacity;
   /* box-shadow: 0 0 3px rgba(0, 0, 0, 0.3); */

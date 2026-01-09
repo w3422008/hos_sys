@@ -45,10 +45,9 @@
     <!--button-->
     <div class="uk-margin-medium-top uk-child-width-1-1@m" uk-grid>
             <div>
-            <form action="../insert/insert_control.php">
-            <button class="button_3 uk-button uk-width-1-1"><span>新規追加</span></button>
-            
-            </form>
+              <form action="../insert/insert_control.php">
+                <button class="button_3 uk-button uk-width-1-1"><span>新規追加</span></button>         
+              </form>
             </div>
 
             <div>
