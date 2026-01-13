@@ -1,7 +1,8 @@
 <?php
 /**
- * 医療機関登録 - チェック処理
+ * 医療機関登録 - 確認画面処理
  * POSTデータを受け取り、セッションに保存して確認画面へ遷移
+ * ※登録処理はinsert_process.phpで実行
  */
 
 require_once('../functions.php');
@@ -16,10 +17,9 @@ if (empty($_SESSION['member'])) {
 }
 
 $dbh = get_db_connect();
-$user_adm = $_SESSION['member']['adm_user'];
 
 // POSTデータを処理
-$processor = new InsertProcessor($dbh, $user_adm);
+$processor = new InsertProcessor($dbh, $_SESSION['member']['adm_user']);
 $processor->parsePostData($_POST);
 
 // セッションに構造化されたデータを保存
@@ -35,7 +35,7 @@ $are_cds = get_area($dbh);
 
 // ビュー用に配列を展開（互換性維持）
 extract($processor->getExtractArray());
-var_dump($processor->getExtractArray());
+
 // 確認ビューを表示
 include_once('./check_view.php');
 ?>

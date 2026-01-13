@@ -42,9 +42,8 @@
         <li><span>登録確認</span></li>
     </ul>
   </header>
-
   <!-- *Forms -->
-  <form action="inserted_control.php" method="POST">
+  <form method="POST">
     <!-- **footer ページ下部固定 -->
     <footer uk-sticky="position: bottom">
     <?php include_once("../footer.php"); ?>
@@ -221,11 +220,12 @@
       <!--BUTTONS-->
       <div class="uk-container uk-width-expand uk-width-5-6@l uk-flex uk-flex-between">
         <div class="uk-flex-last">
-          <input type="submit" class="uk-button uk-button-large uk-button-primary" value="登録">
-        </div>
-        <!-- <button type="button" class="uk-button uk-button-large uk-button-primary" onclick="submitHospitalData();">
+          <!-- <input type="submit" class="uk-button uk-button-large uk-button-primary" value="登録"> -->
+          <button type="button" class="uk-button uk-button-large uk-button-primary" onclick="submitHospitalData();">
             登録
-        </button> -->
+        </button>
+        </div>
+        
 
         <div class="uk-flex-first">
           <!--櫻間20221104-->
@@ -250,8 +250,8 @@
         <h2 class="uk-modal-title">登録完了</h2>
         <p>医療機関情報の登録が完了しました。</p>
         <div class="uk-margin-top">
-            <button class="uk-button uk-button-primary" onclick="redirectToInsertedView();">
-                OK
+            <button class="uk-button uk-button-primary" onclick="redirectToManagement();">
+                医療機関管理に戻る
             </button>
         </div>
     </div>
@@ -281,14 +281,10 @@
         // ★ ローディングモーダルを表示
         UIkit.modal('#loading-modal').show();
         
-        fetch('inserted_control.php', {
+        // ★ insert_process.phpに登録処理を委譲
+        fetch('insert_process.php', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                action: 'insert'
-            })
+            body: new FormData(document.querySelector('form'))
         })
         .then(response => response.json())
         .then(result => {
@@ -307,7 +303,7 @@
         .catch(error => {
             // ★ ローディングモーダルを閉じる
             UIkit.modal('#loading-modal').hide();
-            
+            console.error('Error:', error);
             // ★ エラーモーダルを表示
             document.getElementById('error-message').textContent = '通信エラーが発生しました';
             UIkit.modal('#error-modal').show();
@@ -315,11 +311,11 @@
     }
 
     /**
-     * 成功後にページ遷移
+     * 成功後に医療機関管理ページへ遷移
      */
-    function redirectToInsertedView() {
+    function redirectToManagement() {
         UIkit.modal('#success-modal').hide();
-        window.location.href = 'inserted_view.php';
+        window.location.href = '../hos_management/manage_control.php';
     }
 
     /**

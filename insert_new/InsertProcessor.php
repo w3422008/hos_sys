@@ -27,16 +27,17 @@ class InsertProcessor {
      * POSTデータをセッション用にパース
      */
     public function parsePostData($postData) {
-        $this->data = [
-            'basic' => $this->parseBasicInfo($postData),
-            'schedule' => $this->parseScheduleInfo($postData),
-            'medical' => $this->parseMedicalInfo($postData),
-            'director' => $this->parseDirectorInfo($postData),
-            'relations' => $this->parseRelationsInfo($postData),
-            'fields' => $this->parseFieldsInfo($postData),
-            'cooperation' => $this->parseCooperationInfo($postData),
-            'social_meeting' => $this->parseSocialMeetingInfo($postData),
-        ];
+        // すべてのデータを同じ階層に保存
+        $this->data = array_merge(
+            $this->parseBasicInfo($postData),
+            $this->parseScheduleInfo($postData),
+            $this->parseMedicalInfo($postData),
+            $this->parseDirectorInfo($postData),
+            $this->parseRelationsInfo($postData),
+            $this->parseFieldsInfo($postData),
+            $this->parseCooperationInfo($postData),
+            $this->parseSocialMeetingInfo($postData)
+        );
         
         return $this->data;
     }
@@ -320,8 +321,6 @@ class InsertProcessor {
     public function validate() {
         $this->errors = [];
         
-        $basic = $this->data['basic'];
-        
         // 必須項目チェック
         $requiredFields = [
             'hos_cd' => '医療機関コード',
@@ -331,22 +330,22 @@ class InsertProcessor {
         ];
         
         foreach ($requiredFields as $field => $label) {
-            if (empty($basic[$field])) {
+            if (empty($this->data[$field])) {
                 $this->errors[] = $label . 'が未入力です';
             }
         }
         
         // 地域コード・地域チェック
-        if (empty($basic['are_cd'])) {
+        if (empty($this->data['are_cd'])) {
             $this->errors[] = '地区コードが未入力です';
         }
-        if (empty($basic['area'])) {
+        if (empty($this->data['area'])) {
             $this->errors[] = '地域が未入力です';
         }
         
         // 医療機関コード重複チェック
-        if (!empty($basic['hos_cd'])) {
-            if ($this->isDuplicateHosCd($basic['hos_cd'])) {
+        if (!empty($this->data['hos_cd'])) {
+            if ($this->isDuplicateHosCd($this->data['hos_cd'])) {
                 $this->errors[] = 'その医療機関コードはすでに登録されています。';
             }
         }
@@ -385,16 +384,7 @@ class InsertProcessor {
      * データを配列展開（ビュー互換性用）
      */
     public function getExtractArray() {
-        $extract = [];
-        
-        // 全カテゴリをフラット化
-        foreach ($this->data as $category => $items) {
-            if (is_array($items)) {
-                $extract = array_merge($extract, $items);
-            }
-        }
-        
-        return $extract;
+        return $this->data;
     }
 }
 ?>
