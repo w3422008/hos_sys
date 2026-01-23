@@ -1,0 +1,29 @@
+/* メインコンテンツのマージン調整 */
+main {
+  margin: 0 7em;
+}
+
+/* 画面幅1500px以下でmain要素のマージンを0に設定 */
+@media (max-width: 1500px) {
+  main {
+    margin: 0;
+  }
+}
+
+/* 停止中ユーザーの行をグレーアウト */
+.hide-tbl-bgd {
+  background: #f8f8f8;
+}
+
+/* 検索処理中の状態表示 */
+.search-loading {
+  opacity: 0.6;
+}
+
+/* 表示件数選択部分のスタイル */
+.per-page-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
