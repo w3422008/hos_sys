@@ -37,7 +37,7 @@
     <main>
         <div class="uk-container uk-width-expand">
             <!-- ヘッダー -->
-            <div class="uk-card-header uk-flex uk-flex-middle uk-flex-between">
+            <div class="uk-flex uk-flex-middle uk-flex-between uk-margin-top uk-margin-bottom">
                 <h2>ユーザー管理</h2>
                 <div>
                     <a href="registration.php" class="bubble_none">

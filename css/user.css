@@ -27,3 +27,23 @@ main {
   gap: 10px;
   margin-bottom: 15px;
 }
+
+/* ページタイトルの文字色 */
+.uk-container h2 {
+  color: #71b490;
+}
+
+/* タイトル・ボタン領域の垂直中央揃え */
+.uk-container > .uk-flex {
+  align-items: center;
+  min-height: auto;
+}
+
+.uk-container > .uk-flex h2 {
+  margin: 0;
+}
+
+/* ボタンの垂直中央揃え */
+.uk-container > .uk-flex a.bubble_none p {
+  margin: 0;
+}
